@@ -22,6 +22,8 @@ def main():
         building.block = mcpi.block.BEDROCK
         building.build()
 
+        Building(mc, building.end_position).build()
+
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
 

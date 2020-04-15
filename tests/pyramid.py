@@ -23,6 +23,11 @@ def main():
         pyramid.block = mcpi.block.SAND
         pyramid.build()
 
+        pyramid = Pyramid(mc, pyramid.end_position)
+        pyramid.block = mcpi.block.BEDROCK
+        pyramid.height = 2
+        pyramid.build()
+
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
 
