@@ -1,3 +1,6 @@
+from mcpi.vec3 import Vec3
+
+
 from .thing import Thing
 
 
@@ -17,3 +20,8 @@ class Pyramid(Thing):
                 self.position.y + level,
                 self.position.z + (width - 1) - level,
                 self.block)
+
+        self._end_position = Vec3(self.position.x + (length - 1),
+                                  self.position.y + self.height,
+                                  self.position.z + (width - 1)
+                                  )

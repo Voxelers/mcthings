@@ -3,6 +3,7 @@ import sys
 import mcpi.block
 import mcpi.minecraft
 
+from mcthings.building import Building
 from mcthings.blocks_gallery import BlocksGallery
 
 BUILDER_NAME = "ElasticExplorer"
@@ -20,6 +21,8 @@ def main():
 
         blocks = BlocksGallery(mc, pos)
         blocks.build()
+        Building(mc, blocks.end_position).build()
+
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
