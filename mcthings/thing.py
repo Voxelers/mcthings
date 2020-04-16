@@ -56,3 +56,15 @@ class Thing:
         self.block = self._block_empty
         self.build()
         self.block = block
+
+    def move(self, position):
+        """
+        Move the thing to a new position
+
+        :param position: new position
+        :return:
+        """
+
+        self.unbuild()
+        self._position = position
+        self.build()

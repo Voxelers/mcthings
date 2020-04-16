@@ -2,7 +2,7 @@ import sys
 
 import mcpi.block
 import mcpi.minecraft
-
+from mcpi.vec3 import Vec3
 
 from mcthings.pyramid import Pyramid
 
@@ -27,6 +27,9 @@ def main():
         pyramid.block = mcpi.block.BEDROCK
         pyramid.height = 2
         pyramid.build()
+
+        # Let's move the last pyramid to the ground
+        pyramid.move(Vec3(pyramid.position.x, 0, pyramid.position.z))
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
