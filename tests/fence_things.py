@@ -2,10 +2,9 @@ import sys
 
 import mcpi.block
 import mcpi.minecraft
-from mcpi.vec3 import Vec3
 
-
-from mcthings.town_wall import TownWall
+from mcthings.fence import Fence
+from mcthings.pyramid import Pyramid
 from mcthings.town import Town
 
 BUILDER_NAME = "ElasticExplorer"
@@ -31,15 +30,19 @@ def main():
         town.build()
 
         # Build the wall to round the town
-        town_wall = TownWall(mc)
-        town_wall.block = mcpi.block.GOLD_BLOCK
-        town_wall.town = town
-        town_wall.thick = 4
-        town_wall.height = 10
-        town_wall.build()
+        fence = Fence(mc)
+        fence.block = mcpi.block.GOLD_BLOCK
+        fence.thing = town
+        fence.thick = 4
+        fence.height = 10
+        fence.build()
 
-        # Rebuild the town because it is removed by the wall
-        town.build()
+        pos.x += 30
+        pyr = Pyramid(mc, pos)
+        pyr.build()
+        fence = Fence(mc)
+        fence.thing = pyr
+        fence.build()
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
