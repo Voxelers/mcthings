@@ -4,6 +4,8 @@ import mcpi.block
 import mcpi.minecraft
 
 from mcthings.house import House
+from mcthings.river import River
+
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -22,8 +24,13 @@ def main():
         house = House(mc, pos)
         house.build()
 
+        # Create a river between the houses
+        pos.x -= 5
+        river = River(mc, pos)
+        river.build()
+
         # Mirror house
-        pos.x -= 10  # space between both houses
+        pos.x -= 5 + river.width  # space between both houses
         house = House(mc, pos)
         house.mirror = True
         house.build()
