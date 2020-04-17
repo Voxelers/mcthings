@@ -27,11 +27,13 @@ def main():
         house_width = 5
 
         house = House(mc, pos)
+        house.mirror = True
         house.width = house_width
         house.build()
 
         # Create a river between the houses
-        pos.x -= (river_width + house_to_river)
+
+        pos.x += house_to_river + 1
         river = River(mc, pos)
         river.width = river_width
         river.build()
@@ -43,11 +45,9 @@ def main():
         bridge.block = mcpi.block.STONE
         bridge.build()
 
-        # Mirror house
-        pos.x = river.position.x - 1 - house_to_river - house_width
+        pos.x = river.end_position.x + 1 + house_to_river
         house = House(mc, pos)
         house.width = house_width
-        house.mirror = True
         house.build()
 
     except mcpi.connection.RequestError:
