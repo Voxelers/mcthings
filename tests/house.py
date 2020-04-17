@@ -22,6 +22,12 @@ def main():
         house = House(mc, pos)
         house.build()
 
+        # Mirror house
+        pos.x -= 10  # space between both houses
+        house = House(mc, pos)
+        house.mirror = True
+        house.build()
+
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
 

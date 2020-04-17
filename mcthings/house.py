@@ -12,6 +12,7 @@ class House(Thing):
     length = 5
     wall_width = 1
     door_size = 1
+    mirror = False
 
     def build(self):
         init_x = self.position.x
@@ -36,10 +37,16 @@ class House(Thing):
             mcpi.block.AIR)
 
         # Add a door
-        self.server.setBlocks(
-            init_x, init_y, init_z + self.wall_width,
-            init_x + 1, init_y + self.door_size, init_z + self.door_size,
-            mcpi.block.AIR)
+        if not self.mirror:
+            self.server.setBlocks(
+                init_x, init_y, init_z + self.wall_width,
+                init_x + 1, init_y + self.door_size, init_z + self.door_size,
+                mcpi.block.AIR)
+        else:
+            self.server.setBlocks(
+                end_x, init_y, end_z - self.wall_width,
+                end_x - 1, init_y + self.door_size, end_z - self.door_size,
+                mcpi.block.AIR)
 
         self._end_position = Vec3(end_x, end_y, end_z)
 
