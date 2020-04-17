@@ -15,9 +15,9 @@ class River(Thing):
         init_y = self.position.y - self.depth
         init_z = self.position.z
 
-        end_x = init_x + self.width
+        end_x = init_x + self.width - 1
         end_y = self.position.y - 1
-        end_z = init_z + self.length
+        end_z = init_z + self.length - 1
 
         self.server.setBlocks(
             init_x, init_y, init_z,
