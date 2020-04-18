@@ -16,7 +16,10 @@ class Fence(Thing):
     thing = None
 
     def build(self):
-
+        """
+        Create a fence around the configured thing
+        :return:
+        """
         if self.thing is None:
             raise RuntimeError("Thing to be fenced is not defined")
 

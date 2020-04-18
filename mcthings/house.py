@@ -15,6 +15,7 @@ class House(Thing):
     mirror = False
 
     def build(self):
+
         init_x = self.position.x
         init_y = self.position.y
         init_z = self.position.z

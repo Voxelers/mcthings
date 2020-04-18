@@ -9,6 +9,7 @@ class Pyramid(Thing):
     height = 10
 
     def build(self):
+
         length = 2 * self.height - 1
         width = length
 

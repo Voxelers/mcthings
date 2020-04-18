@@ -37,13 +37,17 @@ class Thing:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
         self._server = server
 
+        # Add then thing built to the creation thing
+        from .creation import Creation
+        Creation.things.append(self)
+
     def build(self):
         """
         Build the thing and show it in Minecraft at position coordinates
 
         :return:
         """
-        pass
+
 
     def unbuild(self):
         """

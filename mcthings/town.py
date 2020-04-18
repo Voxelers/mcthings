@@ -14,6 +14,7 @@ class Town(Thing):
     """space between the town houses"""
 
     def build(self):
+
         init_x = self.position.x
         init_y = self.position.y
         init_z = self.position.z

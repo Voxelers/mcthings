@@ -11,6 +11,7 @@ class River(Thing):
     depth = 1
 
     def build(self):
+
         init_x = self.position.x
         init_y = self.position.y - self.depth
         init_z = self.position.z
