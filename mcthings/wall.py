@@ -1,3 +1,4 @@
+from .creation import Creation
 from .thing import Thing
 
 
@@ -8,7 +9,7 @@ class Wall(Thing):
 
     def build(self):
 
-        self.server.setBlocks(
+        Creation.server.setBlocks(
             self.position.x, self.position.y, self.position.z,
             self.position.x+self.length-1,
             self.position.y+self.height-1,

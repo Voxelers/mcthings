@@ -1,6 +1,6 @@
 from mcpi.vec3 import Vec3
 
-
+from .creation import Creation
 from .thing import Thing
 
 
@@ -15,7 +15,7 @@ class Pyramid(Thing):
 
         for i in range(0, self.height):
             level = i
-            self.server.setBlocks(
+            Creation.server.setBlocks(
                 self.position.x + level, self.position.y + level, self.position.z + level,
                 self.position.x + (length - 1) - level,
                 self.position.y + level,

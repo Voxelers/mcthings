@@ -1,6 +1,7 @@
 import mcpi.block
 from mcpi.vec3 import Vec3
 
+from .creation import Creation
 from .thing import Thing
 
 
@@ -20,7 +21,7 @@ class River(Thing):
         end_y = self.position.y - 1
         end_z = init_z + self.length - 1
 
-        self.server.setBlocks(
+        Creation.server.setBlocks(
             init_x, init_y, init_z,
             end_x, end_y, end_z,
             mcpi.block.WATER_FLOWING)

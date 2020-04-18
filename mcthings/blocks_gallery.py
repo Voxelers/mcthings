@@ -2,6 +2,7 @@ import mcpi
 
 from mcpi.vec3 import Vec3
 
+from .creation import Creation
 from .thing import Thing
 
 
@@ -17,8 +18,8 @@ class BlocksGallery(Thing):
         """
 
         for i in range(1, self.MAX_BLOCK_NUMBER):
-            self.server.setBlock(self.position.x + i, self.position.y,
-                                 self.position.z, mcpi.block.Block(i))
+            Creation.server.setBlock(self.position.x + i, self.position.y,
+                                     self.position.z, mcpi.block.Block(i))
 
         self._end_position = Vec3(self.position.x + self.MAX_BLOCK_NUMBER - 1,
                                   self.position.y, self.position.z)

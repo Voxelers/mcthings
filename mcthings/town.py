@@ -22,7 +22,7 @@ class Town(Thing):
         house_pos = mcpi.vec3.Vec3(init_x, init_y, init_z)
 
         for i in range(0, self.houses):
-            house = House(self.server, house_pos)
+            house = House(house_pos)
             house.width = self.house_width
             house.length = self.house_length
             house.height = self.house_height

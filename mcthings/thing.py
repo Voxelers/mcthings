@@ -1,6 +1,8 @@
 import mcpi.block
 import mcpi.vec3
 
+from .creation import Creation
+
 
 class Thing:
     """ base class for all objects in mcthings library """
@@ -19,15 +21,9 @@ class Thing:
         """ end position of the thing """
         return self._end_position
 
-    @property
-    def server(self):
-        """ Minecraft Python server connection """
-        return self._server
-
-    def __init__(self, server=None, position=None):
+    def __init__(self, position=None):
         """
         Create a thing
-        :param server: Minecraft Python server in format host:port
         :param position: build position
         """
 
@@ -35,10 +31,8 @@ class Thing:
         self._position = None
         if position:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
-        self._server = server
 
         # Add then thing built to the creation thing
-        from .creation import Creation
         Creation.things.append(self)
 
     def build(self):

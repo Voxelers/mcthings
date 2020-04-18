@@ -3,8 +3,8 @@ import sys
 import mcpi.block
 import mcpi.minecraft
 
+from mcthings.creation import Creation
 from mcthings.house import House
-from mcthings.river import River
 
 
 BUILDER_NAME = "ElasticExplorer"
@@ -16,6 +16,7 @@ MC_SEVER_PORT = 4711
 def main():
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
+        Creation.server = mc
 
         mc.postToChat("Building a house")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
@@ -26,7 +27,7 @@ def main():
 
         # Mirror house
         pos.x -= 10   # space between both houses
-        house = House(mc, pos)
+        house = House(pos)
         house.mirror = True
         house.build()
 

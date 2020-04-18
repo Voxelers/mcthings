@@ -18,6 +18,7 @@ MC_SEVER_PORT = 4711
 def main():
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
+        Creation.server = mc
 
         mc.postToChat("Building a creation with several things")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
@@ -27,7 +28,7 @@ def main():
         house_to_river = 5
         house_width = 5
 
-        house = House(mc, pos)
+        house = House(pos)
         house.mirror = True
         house.width = house_width
         house.build()
@@ -35,19 +36,19 @@ def main():
         # Create a river between the houses
 
         pos.x += house_to_river + 1
-        river = River(mc, pos)
+        river = River(pos)
         river.width = river_width
         river.build()
 
         # Create a bridge over the river
         pos.x -= 1
-        bridge = Bridge(mc, pos)
+        bridge = Bridge(pos)
         bridge.large = river_width + 2
         bridge.block = mcpi.block.STONE
         bridge.build()
 
         pos.x = river.end_position.x + 1 + house_to_river
-        house = House(mc, pos)
+        house = House(pos)
         house.width = house_width
         house.build()
 
@@ -56,6 +57,14 @@ def main():
 
         # The full creation can be unbuilt
         Creation.unbuild()
+
+        # Let's persist the creation
+        import pickle
+        creation_shared = pickle.dumps(Creation.things)
+
+        # Let's load the creation and build it
+        creation_copy = pickle.loads(creation_shared)
+        Creation.things = creation_copy
 
         # The full creation can be rebuilt
         Creation.build()

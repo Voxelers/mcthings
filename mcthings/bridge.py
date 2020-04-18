@@ -2,6 +2,7 @@ from math import floor
 
 from mcpi.vec3 import Vec3
 
+from .creation import Creation
 from .thing import Thing
 
 
@@ -20,7 +21,7 @@ class Bridge(Thing):
                 y = x - 1
             else:
                 y = y - 1
-            self.server.setBlock(
+            Creation.server.setBlock(
                 self.position.x + x, self.position.y + y, self.position.z,
                 self.block)
 

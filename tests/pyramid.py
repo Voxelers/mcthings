@@ -5,6 +5,7 @@ import mcpi.minecraft
 from mcpi.vec3 import Vec3
 
 from mcthings.pyramid import Pyramid
+from mcthings.creation import Creation
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -15,15 +16,16 @@ MC_SEVER_PORT = 4711
 def main():
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
+        Creation.server = mc
 
         mc.postToChat("Building a pyramid")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
 
-        pyramid = Pyramid(mc, pos)
+        pyramid = Pyramid(pos)
         pyramid.block = mcpi.block.SAND
         pyramid.build()
 
-        pyramid = Pyramid(mc, pyramid.end_position)
+        pyramid = Pyramid(pyramid.end_position)
         pyramid.block = mcpi.block.BEDROCK
         pyramid.height = 2
         pyramid.build()
