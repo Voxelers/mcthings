@@ -7,12 +7,13 @@ from mcpi.vec3 import Vec3
 class Creation:
     """
     A creation is a container for all the things built using McThings.
-    It can be used to unbuild or build a complete creation. The things
-    data will be added during the construction, and it the future it will
-    be loaded from a file or other kind of data storage.
+    A creation can be built, unbuilt and moved. There is only one creation
+    in a program using McThings. Things built are added automatically to
+    the Creation. A Creation can also be loaded from a file, and
+    it cab be saved to a file.
 
     Before adding Things to the Creation, it must be connected to a
-    Minecrfat server (fill the Creation.server attribute)
+    Minecraft server (fill the Creation.server attribute)
     """
 
     things = []
