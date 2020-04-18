@@ -26,8 +26,8 @@ def main():
 
         # Let's load the creation and build it
         Creation.load("creation.p")
-        creation_pos = Creation.things[0].position
-        mc.postToChat("Initial position %s %s %s" % (creation_pos.x, creation_pos.y, creation_pos.z))
+        # Move the creation to the player position
+        Creation.move(pos)
         Creation.build()
 
     except mcpi.connection.RequestError:

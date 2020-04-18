@@ -20,10 +20,17 @@ def main():
 
         mc.postToChat("Building a block")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
-        pos.x += 1
 
+        pos.x += 1
         block = Block(pos)
         block.build()
+
+        pos.x += 3
+        block = Block(pos)
+        block.build()
+
+        pos.y = +1
+        Creation.move(pos)
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)

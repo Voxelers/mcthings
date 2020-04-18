@@ -1,8 +1,6 @@
 import mcpi.block
 import mcpi.vec3
 
-from .creation import Creation
-
 
 class Thing:
     """ base class for all objects in mcthings library """
@@ -33,7 +31,9 @@ class Thing:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
 
         # Add then thing built to the creation thing
-        Creation.things.append(self)
+        from .creation import Creation
+
+        Creation.add(self)
 
     def build(self):
         """
@@ -41,7 +41,6 @@ class Thing:
 
         :return:
         """
-
 
     def unbuild(self):
         """
