@@ -59,12 +59,10 @@ def main():
         Creation.unbuild()
 
         # Let's persist the creation
-        import pickle
-        creation_shared = pickle.dumps(Creation.things)
+        Creation.save("creation.p")
 
         # Let's load the creation and build it
-        creation_copy = pickle.loads(creation_shared)
-        Creation.things = creation_copy
+        Creation.load("creation.p")
 
         # The full creation can be rebuilt
         Creation.build()

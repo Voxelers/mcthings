@@ -1,4 +1,7 @@
 # TODO: at some point this must be a real Singleton
+import pickle
+
+
 class Creation:
     """
     A creation is a container for all the things built using McThings.
@@ -30,8 +33,11 @@ class Creation:
     @classmethod
     def load(cls, file_path):
         """ Load a creation from a file """
+        Creation.things = pickle.load(open(file_path, "rb"))
 
     @classmethod
     def save(cls, file_path):
-        """ Save a creation from a file """
+        """ Save a creation to a file """
+        pickle.dump(Creation.things, open(file_path, "wb"))
+
 
