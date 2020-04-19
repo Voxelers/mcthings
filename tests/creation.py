@@ -59,10 +59,10 @@ def main():
         Creation.unbuild()
 
         # Let's persist the creation
-        Creation.save("creation.p")
+        Creation.save("creation.mct")
 
         # Let's load the creation and build it
-        Creation.load("creation.p")
+        Creation.load("creation.mct")
 
         # The full creation can be rebuilt
         Creation.build()

@@ -25,7 +25,7 @@ def main():
         pos.x += 1
 
         # Let's load the creation and build it
-        Creation.load("creation.p")
+        Creation.load("creation.mct")
         # Move the creation to the player position
         Creation.move(pos)
         Creation.build()
