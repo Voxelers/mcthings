@@ -10,7 +10,7 @@ class Scene:
     A scene can be built, unbuilt and moved. There is only one scene
     in a program using McThings. Things built are added automatically to
     the Scene. A Scene can also be loaded from a file, and
-    it cab be saved to a file.
+    it can be saved to a file.
 
     Before adding Things to the Scene, it must be connected to a
     Minecraft server (fill the Scene.server attribute)
