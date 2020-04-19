@@ -5,7 +5,7 @@ import mcpi.minecraft
 
 
 from mcthings.block import Block
-from mcthings.creation import Creation
+from mcthings.scene import Scene
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -18,7 +18,7 @@ def main():
 
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Creation.server = mc
+        Scene.server = mc
 
         mc.postToChat("Building straight lines in the three axis")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))

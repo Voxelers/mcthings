@@ -1,4 +1,4 @@
-from .creation import Creation
+from .scene import Scene
 from .thing import Thing
 
 
@@ -9,7 +9,7 @@ class Wall(Thing):
 
     def build(self):
 
-        Creation.server.setBlocks(
+        Scene.server.setBlocks(
             self.position.x, self.position.y, self.position.z,
             self.position.x+self.length-1,
             self.position.y+self.height-1,

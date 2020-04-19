@@ -5,7 +5,7 @@ import mcpi.minecraft
 
 
 from mcthings.bridge import Bridge
-from mcthings.creation import Creation
+from mcthings.scene import Scene
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -16,7 +16,7 @@ MC_SEVER_PORT = 4711
 def main():
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Creation.server = mc
+        Scene.server = mc
 
         mc.postToChat("Building a bridges")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))

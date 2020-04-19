@@ -4,7 +4,7 @@ import mcpi.block
 import mcpi.minecraft
 
 from mcthings.bridge import Bridge
-from mcthings.creation import Creation
+from mcthings.scene import Scene
 from mcthings.house import House
 from mcthings.river import River
 
@@ -18,9 +18,9 @@ MC_SEVER_PORT = 4711
 def main():
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Creation.server = mc
+        Scene.server = mc
 
-        mc.postToChat("Building a creation with several things")
+        mc.postToChat("Building a scene with several things")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
         pos.x += 1
 
@@ -52,20 +52,20 @@ def main():
         house.width = house_width
         house.build()
 
-        # List of things in the creation
-        mc.postToChat(Creation.things)
+        # List of things in the scene
+        mc.postToChat(Scene.things)
 
-        # The full creation can be unbuilt
-        Creation.unbuild()
+        # The full scene can be unbuilt
+        Scene.unbuild()
 
-        # Let's persist the creation
-        Creation.save("creation.mct")
+        # Let's persist the scene
+        Scene.save("scene.mct")
 
-        # Let's load the creation and build it
-        Creation.load("creation.mct")
+        # Let's load the scene and build it
+        Scene.load("scene.mct")
 
-        # The full creation can be rebuilt
-        Creation.build()
+        # The full scene can be rebuilt
+        Scene.build()
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)

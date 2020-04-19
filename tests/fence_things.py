@@ -3,7 +3,7 @@ import sys
 import mcpi.block
 import mcpi.minecraft
 
-from mcthings.creation import Creation
+from mcthings.scene import Scene
 from mcthings.fence import Fence
 from mcthings.pyramid import Pyramid
 from mcthings.town import Town
@@ -17,7 +17,7 @@ MC_SEVER_PORT = 4711
 def main():
     try:
         mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Creation.server = mc
+        Scene.server = mc
 
         mc.postToChat("Building a walled town")
         pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
@@ -32,7 +32,7 @@ def main():
         town.build()
 
         # Build the wall to round the town
-        fence = Fence(mc)
+        fence = Fence()
         fence.block = mcpi.block.GOLD_BLOCK
         fence.thing = town
         fence.thick = 4
@@ -42,7 +42,7 @@ def main():
         pos.x += 30
         pyr = Pyramid(pos)
         pyr.build()
-        fence = Fence(mc)
+        fence = Fence()
         fence.thing = pyr
         fence.build()
 

@@ -1,6 +1,6 @@
 import mcpi
 
-from .creation import Creation
+from .scene import Scene
 from .thing import Thing
 
 
@@ -34,13 +34,13 @@ class Fence(Thing):
         end_y = self.thing.end_position.y
         end_z = self.thing.end_position.z + self.fence_space + self.thick
 
-        Creation.server.setBlocks(
+        Scene.server.setBlocks(
             init_x, init_y, init_z,
             end_x, end_y, end_z,
             self.block)
 
         # Fill the prism with air to became a rectangular wall
-        Creation.server.setBlocks(
+        Scene.server.setBlocks(
             init_x + self.thick, init_y, init_z + self.thick,
             end_x - self.thick,
             end_y,

@@ -30,10 +30,10 @@ class Thing:
         if position:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
 
-        # Add then thing built to the creation thing
-        from .creation import Creation
+        # Add then thing built to the scene
+        from .scene import Scene
 
-        Creation.add(self)
+        Scene.add(self)
 
     def build(self):
         """
