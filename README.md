@@ -10,5 +10,7 @@ A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcth
 and may others. All the Things share the [Thing API](mcthings/thing.py).
 
 A [Creation is a list](mcthings/creation.py) of Things built in a specific position. Creations can be shared
-loading and saving them to files. All the [tests](tests) are creations. [This one](tests/creation.py) includes
-a river, a house in each side of the river and a bridge for crossing the river.  
+loading and saving them to a [files](tests/creation.mct). All the [tests](tests) are creations. [This one](tests/creation.py) includes
+a river, a house in each side of the river and a bridge for crossing the river.
+
+![A Creation in Minecraft](creation.png)
