@@ -6,6 +6,8 @@ import mcpi.minecraft
 
 from mcthings.block import Block
 from mcthings.scene import Scene
+from mcthings.server import Server
+
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -15,11 +17,10 @@ MC_SEVER_PORT = 4711
 
 def main():
     try:
-        mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Scene.server = mc
+        server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
 
-        mc.postToChat("Building a block")
-        pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
+        server.mc.postToChat("Building a block")
+        pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
 
         pos.x += 1
         block = Block(pos)

@@ -7,7 +7,7 @@ from mcthings.bridge import Bridge
 from mcthings.scene import Scene
 from mcthings.house import House
 from mcthings.river import River
-
+from mcthings.server import Server
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -17,11 +17,10 @@ MC_SEVER_PORT = 4711
 
 def main():
     try:
-        mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Scene.server = mc
+        server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
 
-        mc.postToChat("Building a scene with several things")
-        pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
+        server.mc.postToChat("Building a Scene with several Things")
+        pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
         pos.x += 1
 
         river_width = 10

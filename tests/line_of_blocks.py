@@ -5,7 +5,7 @@ import mcpi.minecraft
 
 
 from mcthings.block import Block
-from mcthings.scene import Scene
+from mcthings.server import Server
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -17,11 +17,10 @@ def main():
     blocks_number = 5
 
     try:
-        mc = mcpi.minecraft.Minecraft.create(address=MC_SEVER_HOST, port=MC_SEVER_PORT)
-        Scene.server = mc
+        server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
 
-        mc.postToChat("Building straight lines in the three axis")
-        pos = mc.entity.getTilePos(mc.getPlayerEntityId(BUILDER_NAME))
+        server.mc.postToChat("Building lines of blocks")
+        pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
 
         # Creamos una línea en x crecientes
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)

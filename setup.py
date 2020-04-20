@@ -39,7 +39,8 @@ setup(
         'Topic :: Software Development'
     ],
     install_requires=[
-        'mcpi'
+        'mcpi',
+        'minecraftstuff'
     ],
     python_requires='>=3.4'
 )
