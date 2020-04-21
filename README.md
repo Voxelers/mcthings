@@ -10,7 +10,13 @@ A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcth
 and may others. All the Things share the [Thing API](mcthings/thing.py).
 
 A [Scene is a list](mcthings/scene.py) of Things built in a specific position. Scenes can be shared
-loading and saving them to a [files](tests/scene.mct). All the [tests](tests) are scenes. [This one](tests/scene.py) includes
+loading and saving them to a [files](scenes/scene.mct). All the [tests](tests) are scenes. [This one](scenes/scene.py) includes
 a river, a house in each side of the river and a bridge for crossing the river.
 
 ![A Scene in Minecraft](scene.png)
+
+Things can be built using [MinecraftDrawing](https://minecraft-stuff.readthedocs.io/en/latest/index.html). 
+[Sphere](mcthings/sphere.py) and [Circle](mcthings/circle.py) Things are used with Pyramids in the next 
+[scene](scenes/scene_sphere_circle_pyramid.py):
+
+![Pyramids with Spheres](scene-spheres.png)

@@ -3,28 +3,32 @@ import sys
 import mcpi.block
 import mcpi.minecraft
 
-from mcthings.scene import Scene
 from mcthings.server import Server
+
+from mcthings.circle import Circle
 
 BUILDER_NAME = "ElasticExplorer"
 
 MC_SEVER_HOST = "localhost"
 MC_SEVER_PORT = 4711
 
+# In this scene Things from McThings and McThings-Drawing are mixed
+
 
 def main():
     try:
         server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
 
-        server.mc.postToChat("Building a scene from a file")
+        server.mc.postToChat("Building a circle")
         pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
-        pos.x += 1
 
-        # Let's load the scene and build it
-        Scene.load("scene.mct")
-        # Move the scene to the player position
-        Scene.move(pos)
-        Scene.build()
+        radius = 10
+        pos.z += 20
+
+        circle = Circle(pos)
+        circle.radius = radius
+        circle.block = mcpi.block.BEDROCK
+        circle.build()
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
