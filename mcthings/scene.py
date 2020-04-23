@@ -44,9 +44,9 @@ class Scene:
             thing.unbuild()
 
     @classmethod
-    def move(cls, position):
+    def reposition(cls, position):
         """
-        Move the scene to a new position
+        Move all the things in the scene to a new position
 
         :param position: new position
         :return:
@@ -62,7 +62,21 @@ class Scene:
             move_y = thing.position.y + diff_y
             move_z = thing.position.z + diff_z
 
-            thing.move(Vec3(move_x, move_y, move_z))
+            thing._position = Vec3(move_x, move_y, move_z)
+
+    @classmethod
+    def move(cls, position):
+        """
+        Move the scene to a new position
+
+        :param position: new position
+        :return:
+        """
+
+        cls.reposition(position)
+
+        for thing in Scene.things:
+            thing.move(thing.position)
 
     @classmethod
     def load(cls, file_path):
