@@ -31,7 +31,7 @@ def main():
         town.build()
 
         # Build the wall to round the town
-        fence = Fence()
+        fence = Fence(None)
         fence.block = mcpi.block.GOLD_BLOCK
         fence.thing = town
         fence.thick = 4
@@ -41,7 +41,7 @@ def main():
         pos.x += 30
         pyr = Pyramid(pos)
         pyr.build()
-        fence = Fence()
+        fence = Fence(None)
         fence.thing = pyr
         fence.build()
 
