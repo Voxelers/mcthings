@@ -22,7 +22,7 @@ class Thing:
     def reposition(self, pos):
         """
         Reposition the thing
-        In things like line additional logic is needed to reposition
+        In things like "Line" additional logic is needed to reposition
 
         :param pos: new position
         :return:
@@ -31,9 +31,7 @@ class Thing:
         self._position = pos
         self._end_position = None
 
-
-
-    def __init__(self, position=None):
+    def __init__(self, position):
         """
         Create a thing
         :param position: build position
