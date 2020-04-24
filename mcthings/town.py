@@ -10,6 +10,7 @@ class Town(Thing):
     house_width = 5
     house_length = 5
     house_height = 3
+    house_mirror = False
     space = 3
     """space between the town houses"""
 
@@ -27,6 +28,7 @@ class Town(Thing):
             house.length = self.house_length
             house.height = self.house_height
             house.block = self.block
+            house.mirror = self.house_mirror
             house.build()
             house_pos.z += self.house_width + self.space
 

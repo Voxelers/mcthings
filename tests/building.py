@@ -21,6 +21,7 @@ def main():
 
         building = Building(pos)
         building.block = mcpi.block.BEDROCK
+        building.house_mirror = True
         building.build()
 
         Building(building.end_position).build()
