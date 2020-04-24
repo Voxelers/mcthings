@@ -20,6 +20,10 @@ class Line(Thing):
             end_x = self.end_point[0]
             end_z = self.end_point[1]
 
+        # Find the type of land block destroyed with the line
+        self._block_empty = \
+            Scene.server.getBlock(self.position.x, self.position.y-1, self.position.z)
+
         Scene.server.setBlocks(self.position.x, self.position.y-1, self.position.z,
                                end_x, end_y, end_z, self.block)
 

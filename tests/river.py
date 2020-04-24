@@ -24,12 +24,11 @@ def main():
         river.width = 3
         river.depth = 3
         river.build()
+        river.unbuild()
 
         river = River(river.end_position)
         river.depth = 3
         river.build()
-
-
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)

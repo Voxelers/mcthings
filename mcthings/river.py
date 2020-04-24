@@ -10,6 +10,7 @@ class River(Thing):
     length = 100
     width = 2
     depth = 1
+    block = mcpi.block.WATER_FLOWING
 
     def build(self):
 
@@ -21,9 +22,13 @@ class River(Thing):
         end_y = self.position.y - 1
         end_z = init_z + self.length - 1
 
+        # Find the type of land block destroyed with the river
+        self._block_empty = \
+            Scene.server.getBlock(init_x, self.position.y - 1, init_z)
+
         Scene.server.setBlocks(
             init_x, init_y, init_z,
             end_x, end_y, end_z,
-            mcpi.block.WATER_FLOWING)
+            self.block)
 
         self._end_position = Vec3(end_x, end_y + self.depth, end_z)
