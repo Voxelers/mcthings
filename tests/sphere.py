@@ -6,6 +6,7 @@ import mcpi.minecraft
 from mcthings.server import Server
 
 from mcthings.sphere import Sphere
+from mcthings.sphere import SphereHollow
 
 BUILDER_NAME = "ElasticExplorer"
 
@@ -25,10 +26,17 @@ def main():
         radius = 10
         pos.z += 20
 
-        pos.y += round(radius/2) - 1
+        pos.y += radius - 1
         sphere = Sphere(pos)
-        sphere.radius = round(radius/2)
+        sphere.radius = radius
         sphere.block = mcpi.block.IRON_BLOCK
+        sphere.build()
+
+        server.mc.postToChat("Building a hollow sphere")
+        pos.x += 20
+        sphere = SphereHollow(pos)
+        sphere.radius = radius
+        sphere.block = mcpi.block.WOOD
         sphere.build()
 
     except mcpi.connection.RequestError:
