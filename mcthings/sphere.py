@@ -4,14 +4,14 @@ from mcthings.thing import Thing
 
 class Sphere(Thing):
 
-    radius = None
+    radius = 5
     """ radius of the Sphere """
     height = 0
 
     def build(self):
         Scene.drawing.drawSphere(
             self.position.x,
-            self.position.y + self.height,
+            self.position.y + self.height - 1,
             self.position.z,
             self.radius,
             self.block)
@@ -27,7 +27,7 @@ class SphereHollow(Thing):
     def build(self):
         Scene.drawing.drawHollowSphere(
             self.position.x,
-            self.position.y + self.height,
+            self.position.y + self.height - 1,
             self.position.z,
             self.radius,
             self.block)
