@@ -19,6 +19,20 @@ class Thing:
         """ end position of the thing """
         return self._end_position
 
+    def reposition(self, pos):
+        """
+        Reposition the thing
+        In things like line additional logic is needed to reposition
+
+        :param pos: new position
+        :return:
+        """
+
+        self._position = pos
+        self._end_position = None
+
+
+
     def __init__(self, position=None):
         """
         Create a thing

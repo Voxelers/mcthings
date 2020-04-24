@@ -58,11 +58,11 @@ class Scene:
         diff_z = position.z - cls._position.z
 
         for thing in Scene.things:
-            move_x = thing.position.x + diff_x
-            move_y = thing.position.y + diff_y
-            move_z = thing.position.z + diff_z
+            repos_x = thing.position.x + diff_x
+            repos_y = thing.position.y + diff_y
+            repos_z = thing.position.z + diff_z
 
-            thing._position = Vec3(move_x, move_y, move_z)
+            thing.reposition(Vec3(repos_x, repos_y, repos_z))
 
     @classmethod
     def move(cls, position):

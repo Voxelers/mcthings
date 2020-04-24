@@ -28,3 +28,17 @@ class Line(Thing):
                                end_x, end_y, end_z, self.block)
 
         self._end_position = Vec3(end_x, end_y + 1, end_z)
+
+    # endpoint must be repositioned also
+    def reposition(self, position):
+
+        diff_x = position.x - self._position.x
+        diff_z = position.z - self._position.z
+
+        self._position = position
+        self._end_position = None
+
+        endpoint_x = self.end_point[0] + diff_x
+        endpoint_z = self.end_point[1] + diff_z
+
+        self.end_point = [endpoint_x, endpoint_z]
