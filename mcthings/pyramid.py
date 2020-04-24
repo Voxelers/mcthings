@@ -1,3 +1,4 @@
+import mcpi.block
 from mcpi.vec3 import Vec3
 
 from .scene import Scene
@@ -26,3 +27,23 @@ class Pyramid(Thing):
                                   self.position.y + self.height,
                                   self.position.z + (width - 1)
                                   )
+
+
+class PyramidHollow(Thing):
+
+    height = 10
+    thick = 2
+
+    def build(self):
+        outer = Pyramid(self.position)
+        outer.height = self.height
+        outer.block = self.block
+        outer.build()
+        inner_x = self.position.x + self.thick
+        inner_y = self.position.y
+        inner_z = self.position.z + self.thick
+        inner = Pyramid(Vec3(inner_x, inner_y, inner_z))
+        inner.block = mcpi.block.AIR
+        inner.height = self.height - self.thick
+        inner.build()
+
