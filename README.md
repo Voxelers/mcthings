@@ -1,4 +1,4 @@
-# McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest)
+# McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings)
 
 A framework for building a Scene with Things implemented using the
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
