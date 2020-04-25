@@ -19,7 +19,7 @@ def main():
     try:
         server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
 
-        server.mc.postToChat("Building a block")
+        server.mc.postToChat("Building two blocks")
         pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
 
         pos.x += 1
@@ -29,9 +29,6 @@ def main():
         pos.x += 3
         block = Block(pos)
         block.build()
-
-        pos.y = +1
-        Scene.move(pos)
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)

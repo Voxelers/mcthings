@@ -33,7 +33,6 @@ def main():
         house.build()
 
         # Create a river between the houses
-
         pos.x += house_to_river + 1
         river = River(pos)
         river.width = river_width
@@ -52,7 +51,7 @@ def main():
         house.build()
 
         # List of things in the scene
-        mc.postToChat(Scene.things)
+        Scene.server.postToChat(Scene.things)
 
         # The full scene can be unbuilt
         Scene.unbuild()

@@ -46,9 +46,9 @@ class Scene:
     @classmethod
     def reposition(cls, position):
         """
-        Move all the things in the scene to a new position
+        Move all the things in the scene to a new relative position
 
-        :param position: new position
+        :param position: new position for the Scene
         :return:
         """
 
@@ -62,7 +62,7 @@ class Scene:
             repos_y = thing.position.y + diff_y
             repos_z = thing.position.z + diff_z
 
-            thing.reposition(Vec3(repos_x, repos_y, repos_z))
+            thing._position = (Vec3(repos_x, repos_y, repos_z))
 
     @classmethod
     def move(cls, position):
@@ -73,14 +73,13 @@ class Scene:
         :return:
         """
 
+        cls.unbuild()
         cls.reposition(position)
-
-        for thing in Scene.things:
-            thing.move(thing.position)
+        cls.build()
 
     @classmethod
     def load(cls, file_path):
-        """ Load a scene from a file """
+        """ Load a scene from a file (but no build it yet) """
         Scene.things = pickle.load(open(file_path, "rb"))
         Scene._position = Scene.things[0].position
 
