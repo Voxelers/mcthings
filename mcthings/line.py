@@ -10,9 +10,9 @@ class Line(Thing):
     length = 10
 
     def build(self):
-        end_x = self.position.x + self.length - 1
+        end_x = self.position.x + self.width - 1
         end_y = self.position.y - 1
-        end_z = self.position.z + self.width - 1
+        end_z = self.position.z + self.length - 1
 
         # Find the type of land block destroyed with the line
         self._block_empty = \
