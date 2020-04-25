@@ -25,18 +25,18 @@ def main():
         line = Line(pos)
         line.width = 2
         line.block = mcpi.block.SAND
-        line.end_point = [pos.x, pos.z + 10]
+        line.length = 10
+        line.width = 1
         line.build()
 
         line = Line(line.end_position)
         line.width = 2
-        line.block = mcpi.block.SAND
+        line.block = mcpi.block.STONE
         line.build()
 
-        pos = line.end_position
         line = Line(line.end_position)
+        line.length = 10
         line.width = 2
-        line.end_point = [pos.x, pos.z + 10]
         line.block = mcpi.block.SAND
         line.build()
 

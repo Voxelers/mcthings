@@ -9,28 +9,6 @@ class Thing:
     """ block type used by the thing. Default to BRICK_BLOCK"""
     _block_empty = mcpi.block.AIR
 
-    @property
-    def position(self):
-        """ initial position of the thing """
-        return self._position
-
-    @property
-    def end_position(self):
-        """ end position of the thing """
-        return self._end_position
-
-    def reposition(self, pos):
-        """
-        Reposition the thing
-        In things like "Line" additional logic is needed to reposition
-
-        :param pos: new position
-        :return:
-        """
-
-        self._position = pos
-        self._end_position = None
-
     def __init__(self, position):
         """
         Create a thing
@@ -46,6 +24,16 @@ class Thing:
         from .scene import Scene
 
         Scene.add(self)
+
+    @property
+    def position(self):
+        """ initial position of the thing """
+        return self._position
+
+    @property
+    def end_position(self):
+        """ end position of the thing """
+        return self._end_position
 
     def build(self):
         """
