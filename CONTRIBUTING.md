@@ -1,13 +1,7 @@
 # Contributing to McThings
 
 We'd love for you to contribute to our source code and to make McThings better!
-Here are the guidelines we'd like you to follow:
-
-* [Code of Conduct](#coc)
-* [Questions and Problems](#question)
-* [Scenes and Things](#scenes)
-* [Issues and Bugs](#issue)
-* [Feature Requests](#feature)
+Here are the guidelines we'd like you to follow
 
 ## <a name="coc"></a> Code of Conduct
 
