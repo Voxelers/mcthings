@@ -3,7 +3,9 @@
 A framework for building a Scene with Things implemented using the
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
 [API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html). It is based
-on [mcpi library](https://github.com/martinohanlon/mcpi).
+on [mcpi library](https://github.com/martinohanlon/mcpi). 
+[This is the reference notebook](https://github.com/juntosdesdecasa/minecraft/blob/develop/server/data/python/scene0_10.ipynb)
+with a complete sample.
 
 A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcthings/river.py),
 [House](mcthings/house.py), [Fence](mcthings/fence.py)
