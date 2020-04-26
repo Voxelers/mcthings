@@ -50,20 +50,8 @@ def main():
         house.width = house_width
         house.build()
 
-        # List of things in the scene
-        Scene.server.postToChat(Scene.things)
-
-        # The full scene can be unbuilt
-        Scene.unbuild()
-
         # Let's persist the scene
-        Scene.save("scene.mct")
-
-        # Let's load the scene and build it
-        Scene.load("scene.mct")
-
-        # The full scene can be rebuilt
-        Scene.build()
+        Scene.save("scene_basic.mct")
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)
