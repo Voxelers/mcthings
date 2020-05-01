@@ -1,67 +1,58 @@
-import sys
+import logging
+import unittest
 
-import mcpi.block
-import mcpi.minecraft
-
+import mcpi
 
 from mcthings.block import Block
-from mcthings.server import Server
-
-BUILDER_NAME = "ElasticExplorer"
-
-MC_SEVER_HOST = "localhost"
-MC_SEVER_PORT = 4711
+from tests.base import TestBaseThing
 
 
-def main():
-    blocks_number = 5
+class TestLines(TestBaseThing):
+    """Test Lines Thing"""
 
-    try:
-        server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
+    def test_build(self):
+        self.server.mc.postToChat("Building lines of blocks")
 
-        server.mc.postToChat("Building lines of blocks")
-        pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
+        pos = self.pos
+        blocks_number = 5
 
-        # Creamos una línea en x crecientes
+        # Line in incresing x
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)
         for x in range(0, blocks_number):
             block_pos.x += 1
             Block(block_pos).build()
 
-        # Creamos una línea en x decrecientes
+        # Line in decresing x
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)
         for x in range(1, blocks_number):
             block_pos.x -= 1
             Block(block_pos).build()
 
-        # Creamos una línea en y crecientes
+        # Line in incresing y
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)
         for y in range(1, blocks_number):
             block_pos.y += 1
             Block(block_pos).build()
 
-        # Creamos una línea en y decrecientes
+        # Line in decresing y
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)
         for y in range(1, blocks_number):
             block_pos.y -= 1
             Block(block_pos).build()
 
-        # Creamos una línea en z crecientes
+        # Line in incresing z
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)
         for z in range(1, blocks_number):
             block_pos.z += 1
             Block(block_pos).build()
 
-        # Creamos una línea en z decrecientes
+        # Line in decresing z
         block_pos = mcpi.vec3.Vec3(pos.x+1, pos.y, pos.z)
         for z in range(1, blocks_number):
             block_pos.z -= 1
             Block(block_pos).build()
 
-    except mcpi.connection.RequestError:
-        print("Can't connect to Minecraft server " + MC_SEVER_HOST)
-
 
 if __name__ == "__main__":
-    main()
-    sys.exit(0)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+    unittest.main(warnings='ignore')

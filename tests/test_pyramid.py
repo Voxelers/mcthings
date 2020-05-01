@@ -1,27 +1,22 @@
-import sys
+import logging
+import unittest
 
-import mcpi.block
-import mcpi.minecraft
+import mcpi
 from mcpi.vec3 import Vec3
 
-from mcthings.pyramid import Pyramid
-from mcthings.pyramid import PyramidHollow
-from mcthings.server import Server
-
-BUILDER_NAME = "ElasticExplorer"
+from mcthings.pyramid import Pyramid, PyramidHollow
+from tests.base import TestBaseThing
 
 FLAT_WORLD_GROUND_HEIGHT = 4
 
-MC_SEVER_HOST = "localhost"
-MC_SEVER_PORT = 4711
 
+class TestPyramid(TestBaseThing):
+    """Test Pyramid Thing"""
 
-def main():
-    try:
-        server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
+    def test_build(self):
+        self.server.mc.postToChat("Building a pyramid")
 
-        server.mc.postToChat("Building a pyramid")
-        pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
+        pos = self.pos
 
         pyramid = Pyramid(pos)
         pyramid.height = 5
@@ -40,10 +35,7 @@ def main():
         pyramid.block = mcpi.block.WOOD
         pyramid.build()
 
-    except mcpi.connection.RequestError:
-        print("Can't connect to Minecraft server " + MC_SEVER_HOST)
-
 
 if __name__ == "__main__":
-    main()
-    sys.exit(0)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+    unittest.main(warnings='ignore')

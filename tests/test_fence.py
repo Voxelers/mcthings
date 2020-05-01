@@ -1,25 +1,21 @@
-import sys
+import logging
+import unittest
 
-import mcpi.block
-import mcpi.minecraft
+import mcpi
 
 from mcthings.fence import Fence
 from mcthings.pyramid import Pyramid
-from mcthings.server import Server
 from mcthings.town import Town
-
-BUILDER_NAME = "ElasticExplorer"
-
-MC_SEVER_HOST = "localhost"
-MC_SEVER_PORT = 4711
+from tests.base import TestBaseThing
 
 
-def main():
-    try:
-        server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
+class TestFence(TestBaseThing):
+    """Test Fence Thing"""
 
-        server.mc.postToChat("Building a walled town")
-        pos = server.mc.entity.getTilePos(server.mc.getPlayerEntityId(BUILDER_NAME))
+    def test_build(self):
+        self.server.mc.postToChat("Building a walled town")
+
+        pos = self.pos
         pos.x += 10
 
         town = Town(pos)
@@ -45,10 +41,7 @@ def main():
         fence.thing = pyr
         fence.build()
 
-    except mcpi.connection.RequestError:
-        print("Can't connect to Minecraft server " + MC_SEVER_HOST)
-
 
 if __name__ == "__main__":
-    main()
-    sys.exit(0)
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
+    unittest.main(warnings='ignore')

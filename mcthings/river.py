@@ -31,4 +31,4 @@ class River(Thing):
             end_x, end_y, end_z,
             self.block)
 
-        self._end_position = Vec3(end_x, end_y + self.depth, end_z)
+        self._end_position = Vec3(end_x, self.position.y, end_z)
