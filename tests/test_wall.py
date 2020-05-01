@@ -2,7 +2,7 @@ import logging
 import unittest
 
 from mcthings.wall import Wall
-from tests.base import TestBaseThingwwwwwwwww
+from tests.base import TestBaseThing
 
 
 class TestWall(TestBaseThing):
