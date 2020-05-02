@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+# Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
+# Author (©): Alvaro del Castillo
+
 import sys
 import time
 

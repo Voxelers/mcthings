@@ -1,3 +1,6 @@
+# Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
+# Author (©): Alvaro del Castillo
+
 # TODO: at some point this must be a real Singleton
 import pickle
 
