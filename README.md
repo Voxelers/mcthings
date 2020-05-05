@@ -2,7 +2,7 @@
 
 A framework for building a Scene with Things implemented using the
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
-[API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html). It is based
+[API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html) (which also works in [Minetest](https://github.com/arpruss/raspberryjammod-minetest)). It is based
 on [mcpi library](https://github.com/martinohanlon/mcpi). 
 [This is the reference notebook](https://github.com/juntosdesdecasa/minecraft/blob/develop/server/data/python/scene0_10.ipynb)
 with a complete sample. And there is a [intro video tutorial](https://www.youtube.com/watch?v=p6NUFdUbcYk&t=2s) and [a more complete one](https://www.youtube.com/watch?v=teGjAXomBVs&t=4s).
