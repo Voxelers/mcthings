@@ -41,7 +41,8 @@ setup(
     ],
     install_requires=[
         'mcpi',
-        'minecraftstuff'
+        'minecraftstuff',
+        'nbt'
     ],
     python_requires='>=3.4'
 )
