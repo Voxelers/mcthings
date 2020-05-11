@@ -23,3 +23,8 @@ Things can be built using [MinecraftDrawing](https://minecraft-stuff.readthedocs
 [scene](scenes/scene_sphere_circle_pyramid.ipynb):
 
 ![Pyramids with Spheres](scene-spheres.png)
+
+And Things can also be built from [Schematics](https://www.minecraft-schematics.com/) (there are thousands!). 
+There is a [sample notebook](scenes/Schematics.ipynb).
+
+![Schematic inside McThings](scenes/img/schematic.png)
