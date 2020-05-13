@@ -37,6 +37,9 @@ class Schematic(Thing):
                     i = x + size_x * z + (size_x * size_z) * y
                     b = blocks[i]
                     if b != 0:
+                        if self.block == self._block_empty:
+                            # Cleaning the schematic
+                            b = 0
                         d = data[i] & 0b00001111  # lower 4 bits
                         mc.setBlock(init_x + x, init_y + y, init_z + z, b, d)
 
