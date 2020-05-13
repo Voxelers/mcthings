@@ -4,6 +4,8 @@
 import mcpi.block
 import mcpi.vec3
 
+from ._version import __version__
+
 
 class Thing:
     """ base class for all objects in mcthings library """
@@ -27,6 +29,9 @@ class Thing:
         from .scene import Scene
 
         Scene.add(self)
+
+        # McThing version which created this Thing
+        self._version = __version__
 
     @property
     def position(self):

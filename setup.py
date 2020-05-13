@@ -5,10 +5,16 @@
 
 import codecs
 import os
+import re
 from setuptools import setup
 
 here = os.path.abspath(os.path.dirname(__file__))
 readme_md = os.path.join(here, 'README.md')
+
+version_py = os.path.join(here, 'mcthings', '_version.py')
+with codecs.open(version_py, 'r', encoding='utf-8') as fd:
+    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]',
+                        fd.read(), re.MULTILINE).group(1)
 
 # Get the package description from the README.md file
 with codecs.open(readme_md, encoding='utf-8') as f:
@@ -19,7 +25,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='mcthings',
-    version='0.12.1',
+    version=version,
     packages=['mcthings'],
     include_package_data=True,
     license='ASL',
