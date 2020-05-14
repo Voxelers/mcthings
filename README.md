@@ -1,6 +1,6 @@
 # McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings)
 
-A framework for building a Scene with Things implemented using the
+A Python programming framework for building Scenes in Minecraft. Scenes are compositions of Things (Python objects) implemented
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
 [API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html) (which also works in [Minetest](https://github.com/arpruss/raspberryjammod-minetest)). It is based
 on [mcpi library](https://github.com/martinohanlon/mcpi). 
