@@ -22,7 +22,7 @@ This option works with the latest release of Minecraft at this moment: 1.15.2. I
 In this case you don't need to run a server. Just start the Minecraft Forge client with 
 [this plugin](https://github.com/arpruss/raspberryjammod) installed and in Single Player mode. 
 Tested with the version **1.12.2**. The plugin does not work with newer versions. 
-[Install process](https://github.com/juntosdesdecasa/mcthings/issues/38)
+[Install process](https://github.com/juntosdesdecasa/mcthings/issues/65)
 
 Probably the Forge server option will work also. 
 
