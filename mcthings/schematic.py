@@ -9,8 +9,10 @@ from mcthings.thing import Thing
 
 
 class Schematic(Thing):
-    blocks_field = 'Blocks'
-    data_field = 'Data'
+    _blocks_field = 'Blocks'
+    _data_field = 'Data'
+    file_path = None
+    """ file path for the schematic file """
 
     def build(self):
         mc = Scene.server
@@ -28,8 +30,8 @@ class Schematic(Thing):
         init_y = self.position.y
         init_z = self.position.z
 
-        blocks = schematic[self.blocks_field]
-        data = schematic[self.data_field]
+        blocks = schematic[self._blocks_field]
+        data = schematic[self._data_field]
 
         for y in range(0, size_y):
             for z in range(0, size_z):
