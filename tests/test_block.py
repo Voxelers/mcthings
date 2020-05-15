@@ -24,8 +24,6 @@ class TestBlock(TestBaseThing):
         block = Block(pos)
         block.build()
 
-        block_schematic = block.to_schematic()
-
         pos.x += 3
         block = Block(pos)
         block.build()

@@ -22,8 +22,6 @@ class TestBlocks(TestBaseThing):
         blocks = Blocks(self.pos)
         blocks.build()
 
-        schematic = blocks.to_schematic()
-
         self.pos.z += 10
         blocks = Blocks(self.pos)
         blocks.build()
