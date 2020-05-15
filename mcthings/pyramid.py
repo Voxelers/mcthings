@@ -42,6 +42,7 @@ class PyramidHollow(Thing):
         outer.height = self.height
         outer.block = self.block
         outer.build()
+        self._end_position = outer.end_position
         inner_x = self.position.x + self.thick
         inner_y = self.position.y
         inner_z = self.position.z + self.thick

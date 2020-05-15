@@ -36,13 +36,13 @@ class Scene:
 
     @classmethod
     def build(cls):
-        """ Recover all the map building the things"""
+        """ Build all the things inside the Scene """
         for thing in cls.things:
             thing.build()
 
     @classmethod
     def unbuild(cls):
-        """ Recover all the map unbuilding the things """
+        """ Unbuild all the things inside the Scene """
         for thing in cls.things:
             thing.unbuild()
 

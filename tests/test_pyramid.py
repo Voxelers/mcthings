@@ -40,6 +40,8 @@ class TestPyramid(TestBaseThing):
         pyramid.block = mcpi.block.WOOD
         pyramid.build()
 
+        pyramid.to_schematic("schematics/pyramid_hollow.schematic")
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')

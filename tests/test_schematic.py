@@ -24,7 +24,9 @@ class TestSchematic(TestBaseThing):
         # 2017: https://www.minecraft-schematics.com/schematic/9676/
         # schematic.file_path = "schematics/chateau-fairmont.schematic"
         # schematic.file_path = "schematics/palace-of-khalduun.schematic"
+        # schematic.file_path = "schematics/pyramid_hollow.schematic"
         schematic.build()
+        schematic.to_schematic("schematics/pirate-boat-exported.schematic")
 
 
 if __name__ == "__main__":
