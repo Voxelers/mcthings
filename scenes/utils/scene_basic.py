@@ -61,11 +61,11 @@ def main():
         Scene.save("scene_basic.mct")
 
         # Save as Schematic
-        Scene.to_schematic("scene_basic.schematic")
+        Scene.to_schematic("../schematics/scene_basic.schematic")
 
         # Load the Schematic to test it
         s = Schematic(Vec3(pos.x+20, pos.y, pos.z))
-        s.file_path = "scene_basic.schematic"
+        s.file_path = "../schematics/scene_basic.schematic"
         s.build()
 
     except mcpi.connection.RequestError:
