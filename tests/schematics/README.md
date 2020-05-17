@@ -6,3 +6,5 @@ for reusing them in your own creations:
 
 * [Pirate Boat](https://www.minecraft-schematics.com/schematic/68/)
 * [Chateau Fairmont](https://www.minecraft-schematics.com/schematic/9676/)
+* [Sphinix](https://www.planetminecraft.com/project/sphinx/)
+* Zanabot: Created in Juntos desde Casa workshops
