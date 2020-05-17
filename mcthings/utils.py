@@ -1,8 +1,55 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
 
+import logging
+from datetime import datetime
+
 import mcpi
 from nbt.nbt import NBTFile, TAG_List, TAG_Int, TAG_Short, TAG_Byte_Array, TAG_String
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
+
+
+def extract_region(init_pos, end_pos):
+    """
+    Extract a Minecraft world region with the id of the blocks
+
+    :return: bytearrays for blocks ids and block data
+    """
+    from mcthings.scene import Scene
+
+    size_x = end_pos.x - init_pos.x
+    size_z = end_pos.z - init_pos.z
+    size_y = end_pos.y - init_pos.y
+
+    blocks = Scene.server.getBlocks(init_pos.x, init_pos.y, init_pos.z,
+                                    end_pos.x-1, end_pos.y-1, end_pos.z-1)
+    blocks_list = list(blocks)
+
+    # The order in getBlocks is z, x, y and for a Schematic it must be x, z, y
+    block_list_ordered = []
+
+    for y in range(0, size_y):
+        x_by_z = []  # x, z plane for y
+
+        for x in range(0, size_x):
+            z_row = []
+            for z in range(0, size_z):
+                z_row.append(blocks_list[(x * size_z + z) + (size_x * size_z) * y])
+            x_by_z.append(z_row)
+
+        for z in range(0, size_z):
+            for x in range(0, size_x):
+                block_list_ordered.append(x_by_z[x][z])
+
+    # Create the data_bytes
+    data_bytes = bytearray()
+    blocks_bytes = bytearray()
+    for i in range(0, len(block_list_ordered)):
+        blocks_bytes.append(block_list_ordered[i])
+        data_bytes.append(0)
+
+    return blocks_bytes, data_bytes
 
 
 def extract_region_with_data(init_pos, end_pos):
@@ -13,9 +60,9 @@ def extract_region_with_data(init_pos, end_pos):
     """
     from mcthings.scene import Scene
 
-    size_x = end_pos.x - init_pos.x + 1
-    size_z = end_pos.z - init_pos.z + 1
-    size_y = end_pos.y - init_pos.y + 1
+    size_x = end_pos.x - init_pos.x
+    size_z = end_pos.z - init_pos.z
+    size_y = end_pos.y - init_pos.y
 
     blocks_bytes = bytearray()
     data_bytes = bytearray()
@@ -32,15 +79,23 @@ def extract_region_with_data(init_pos, end_pos):
     return blocks_bytes, data_bytes
 
 
-def build_schematic_nbt(init_pos, end_pos):
+def build_schematic_nbt(init_pos, end_pos, block_data=False):
     """
     Creates a NBT Object with the schematic data
 
+    :param init_pos: initial position for extracting the Schematic
+    :param end_pos: end position for extracting the Schematic
+    :param block_data: extract blocks ids and data (much slower)
+
     :return: The NBT object with the Schematic
     """
-    size_x = end_pos.x - init_pos.x + 1
-    size_z = end_pos.z - init_pos.z + 1
-    size_y = end_pos.y - init_pos.y + 1
+    size_x = end_pos.x - init_pos.x
+    size_z = end_pos.z - init_pos.z
+    size_y = end_pos.y - init_pos.y
+
+    # Profiling of Schematics export
+    app_init = datetime.now()
+    logging.info("Schematic: Exporting blocks: %i" % (size_x * size_y * size_z))
 
     # Prepare the NBT Object
     nbtfile = NBTFile()
@@ -66,10 +121,16 @@ def build_schematic_nbt(init_pos, end_pos):
     tile_entities_list = TAG_List(name="TileEntities", type=TAG_Int)
     nbtfile.tags.append(tile_entities_list)
 
-    # Collect all blocks ids and data
-    (blocks_bytes, data_bytes) = extract_region_with_data(init_pos, end_pos)
+    # Collect all blocks
+    if block_data:
+        (blocks_bytes, data_bytes) = extract_region_with_data(init_pos, end_pos)
+    else:
+        (blocks_bytes, data_bytes) = extract_region(init_pos, end_pos)
 
     nbt_blocks.value = blocks_bytes
     nbt_data.value = data_bytes
+
+    total_time_min = (datetime.now() - app_init).total_seconds()
+    logging.info("Schematic export finished in %.2f secs" % total_time_min)
 
     return nbtfile

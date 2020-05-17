@@ -20,13 +20,13 @@ class TestSchematic(TestBaseThing):
 
         schematic = Schematic(pos)
         # 2012: https://www.minecraft-schematics.com/schematic/68/
-        schematic.file_path = "schematics/pirate-boat.schematic"
+        # schematic.file_path = "schematics/pirate-boat.schematic"
         # 2017: https://www.minecraft-schematics.com/schematic/9676/
         # schematic.file_path = "schematics/chateau-fairmont.schematic"
-        # schematic.file_path = "schematics/palace-of-khalduun.schematic"
         # schematic.file_path = "schematics/pyramid_hollow.schematic"
+        schematic.file_path = "schematics/zanabot.schematic"
         schematic.build()
-        schematic.to_schematic("schematics/pirate-boat-exported.schematic")
+        schematic.to_schematic("schematics/zanabot-exported.schematic", blocks_data=False)
 
 
 if __name__ == "__main__":

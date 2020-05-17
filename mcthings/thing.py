@@ -76,12 +76,13 @@ class Thing:
         self._position = position
         self.build()
 
-    def to_schematic(self, file_path):
+    def to_schematic(self, file_path, blocks_data=False):
         """
         Convert the Thing to a Schematic Object
 
         :file_path: file in which to export the Thing in Schematic format
+        :blocks_data: include blocks data (much slower)
         :return: the Schematic object
         """
 
-        build_schematic_nbt(self.position, self.end_position).write_file(file_path)
+        build_schematic_nbt(self.position, self.end_position, blocks_data).write_file(file_path)
