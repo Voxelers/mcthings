@@ -7,11 +7,13 @@ import sys
 
 import mcpi.block
 import mcpi.minecraft
+from mcpi.vec3 import Vec3
 
 from mcthings.bridge import Bridge
 from mcthings.scene import Scene
 from mcthings.house import House
 from mcthings.river import River
+from mcthings.schematic import Schematic
 from mcthings.server import Server
 
 BUILDER_NAME = "ElasticExplorer"
@@ -50,13 +52,21 @@ def main():
         bridge.block = mcpi.block.STONE
         bridge.build()
 
-        pos.x = river.end_position.x + 1 + house_to_river
+        pos.x = bridge.end_position.x + house_to_river
         house = House(pos)
         house.width = house_width
         house.build()
 
         # Let's persist the scene
         Scene.save("scene_basic.mct")
+
+        # Save as Schematic
+        Scene.to_schematic("scene_basic.schematic")
+
+        # Load the Schematic to test it
+        s = Schematic(Vec3(pos.x+20, pos.y, pos.z))
+        s.file_path = "scene_basic.schematic"
+        s.build()
 
     except mcpi.connection.RequestError:
         print("Can't connect to Minecraft server " + MC_SEVER_HOST)

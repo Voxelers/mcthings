@@ -16,13 +16,13 @@ loading and saving them to a [files](scenes/utils/scene_basic.mct). You [can sha
 here](scenes). [This one](scenes/utils/scene_basic.py) includes
 a river, a house in each side of the river and a bridge for crossing the river.
 
-![A Scene in Minecraft](scene.png)
+![A Scene in Minecraft](scenes/img/scene_basic.png)
 
 Things can be built using [MinecraftDrawing](https://minecraft-stuff.readthedocs.io/en/latest/index.html). 
 [Sphere](mcthings/sphere.py) and [Circle](mcthings/circle.py) Things are used with Pyramids in the next 
 [scene](scenes/scene_sphere_circle_pyramid.ipynb):
 
-![Pyramids with Spheres](scene-spheres.png)
+![Pyramids with Spheres](scenes/img/scene_sphere_circle_pyramid.png)
 
 And Things can also be built from [Schematics](https://www.minecraft-schematics.com/) (there are thousands!). 
 There is a [sample notebook](scenes/Schematics.ipynb).
