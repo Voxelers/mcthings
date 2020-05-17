@@ -6,6 +6,8 @@ import pickle
 
 from mcpi.vec3 import Vec3
 
+from mcthings.utils import build_schematic_nbt
+
 
 class Scene:
     """
@@ -60,7 +62,7 @@ class Scene:
         diff_y = position.y - cls._position.y
         diff_z = position.z - cls._position.z
 
-        for thing in Scene.things:
+        for thing in cls.things:
             repos_x = thing.position.x + diff_x
             repos_y = thing.position.y + diff_y
             repos_z = thing.position.z + diff_z
@@ -92,4 +94,31 @@ class Scene:
         """ Save a scene to a file """
         pickle.dump(Scene.things, open(file_path, "wb"))
 
+    @classmethod
+    def to_schematic(cls, file_path):
+        """
+        Save the Scene into a Schematic file
 
+        :file_path: file in which to export the Scene in Schematic format
+        :return: the Schematic object
+        """
+
+        # Default init values
+        init_pos = Vec3(cls._position.x, cls._position.y, cls._position.z)
+        end_pos = Vec3(cls._position.x, cls._position.y, cls._position.z)
+
+        for thing in cls.things:
+            ip = thing.position
+            ep = thing.end_position
+
+            # Update init position
+            init_pos.x = ip.x if ip.x < init_pos.x else init_pos.x
+            init_pos.y = ip.y if ip.y < init_pos.y else init_pos.y
+            init_pos.z = ip.z if ip.z < init_pos.z else init_pos.z
+
+            # Update end position
+            end_pos.x = ep.x if ep.x > end_pos.x else end_pos.x
+            end_pos.y = ep.y if ep.y > end_pos.y else end_pos.y
+            end_pos.z = ep.z if ep.z > end_pos.z else end_pos.z
+
+            build_schematic_nbt(init_pos, end_pos).write_file(file_path)
