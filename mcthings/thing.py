@@ -76,17 +76,41 @@ class Thing:
         self._position = position
         self.build()
 
-    def to_schematic(self, file_path):
+    @classmethod
+    def extract_region_with_data(cls, init_pos, end_pos):
         """
-        Convert the Thing to a Schematic Object
+        Extract a Minecraft world region with the id and data of the blocks
 
-        :file_path: file in which to export the Thing in Schematic format
-        :return: the Schematic object
+        :return: bytearrays for blocks ids and block data
         """
+        size_x = end_pos.x - init_pos.x + 1
+        size_z = end_pos.z - init_pos.z + 1
+        size_y = end_pos.y - init_pos.y + 1
 
-        size_x = self.end_position.x - self.position.x + 1
-        size_z = self.end_position.z - self.position.z + 1
-        size_y = self.end_position.y - self.position.y + 1
+        blocks_bytes = bytearray()
+        data_bytes = bytearray()
+
+        # Use the same loop than reading Schematic format: x -> z -> y
+        for y in range(0, size_y):
+            for z in range(0, size_z):
+                for x in range(0, size_x):
+                    block_pos = mcpi.vec3.Vec3(init_pos.x + x, init_pos.y + y, init_pos.z + z)
+                    block = Scene.server.getBlockWithData(block_pos.x, block_pos.y, block_pos.z)
+                    blocks_bytes.append(block.id)
+                    data_bytes.append(block.data)
+
+        return blocks_bytes, data_bytes
+
+    @classmethod
+    def build_schematic_nbt(cls, init_pos, end_pos):
+        """
+        Creates a NBT Object with the schematic data
+
+        :return: The NBT object with the Schematic
+        """
+        size_x = end_pos.x - init_pos.x + 1
+        size_z = end_pos.z - init_pos.z + 1
+        size_y = end_pos.y - init_pos.y + 1
 
         # Prepare the NBT Object
         nbtfile = NBTFile()
@@ -112,21 +136,20 @@ class Thing:
         tile_entities_list = TAG_List(name="TileEntities", type=TAG_Int)
         nbtfile.tags.append(tile_entities_list)
 
-        # Collect all blocks information a fill the NBT Data
-        # Use the same loop than in Schematic format: x -> z -> y
-
-        blocks_bytes = bytearray()
-        data_bytes = bytearray()
-
-        for y in range(0, size_y):
-            for z in range(0, size_z):
-                for x in range(0, size_x):
-                    block_pos = mcpi.vec3.Vec3(self.position.x + x, self.position.y + y, self.position.z + z)
-                    block = Scene.server.getBlockWithData(block_pos.x, block_pos.y, block_pos.z)
-                    blocks_bytes.append(block.id)
-                    data_bytes.append(block.data)
+        # Collect all blocks ids and data
+        (blocks_bytes, data_bytes) = cls.extract_region_with_data(init_pos, end_pos)
 
         nbt_blocks.value = blocks_bytes
         nbt_data.value = data_bytes
 
-        nbtfile.write_file(file_path)
+        return nbtfile
+
+    def to_schematic(self, file_path):
+        """
+        Convert the Thing to a Schematic Object
+
+        :file_path: file in which to export the Thing in Schematic format
+        :return: the Schematic object
+        """
+
+        self.build_schematic_nbt(self.position, self.end_position).write_file(file_path)

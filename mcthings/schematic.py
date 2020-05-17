@@ -45,6 +45,6 @@ class Schematic(Thing):
                         d = data[i] & 0b00001111  # lower 4 bits
                         mc.setBlock(init_x + x, init_y + y, init_z + z, b, d)
 
-        self._end_position = Vec3(init_x + size_z,
+        self._end_position = Vec3(init_x + size_x,
                                   init_y + size_y,
                                   init_z + size_z)
