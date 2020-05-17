@@ -20,13 +20,15 @@ class Bridge(Thing):
             self.build_row(z)
 
         self._end_position = Vec3(self.position.x + self.large - 1,
-                                  self.position.y,
+                                  self.position.y + self.height,
                                   self.position.z + self.width - 1
                                   )
 
     def build_row(self, z):
         # large = 2 * height - 1
         max_height = floor((self.large + 1) / 2)
+        if self.height is None:
+            self.height = max_height
 
         for x in range(0, self.large):
             if x < max_height:
