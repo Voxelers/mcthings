@@ -27,7 +27,7 @@ class Pyramid(Thing):
                 self.block)
 
         self._end_position = Vec3(self.position.x + (length - 1),
-                                  self.position.y + self.height,
+                                  self.position.y + self.height - 1,
                                   self.position.z + (width - 1)
                                   )
 
