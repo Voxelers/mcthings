@@ -10,6 +10,21 @@ from nbt.nbt import NBTFile, TAG_List, TAG_Int, TAG_Short, TAG_Byte_Array, TAG_S
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
+def size_region(init_pos, end_pos):
+    """
+    Measure (size) the cuboid between init_pos and end_pos
+    :param init_pos:
+    :param end_pos:
+    :return:
+    """
+
+    size_x = end_pos.x - init_pos.x + 1
+    size_z = end_pos.z - init_pos.z + 1
+    size_y = end_pos.y - init_pos.y + 1
+
+    return size_x, size_y, size_z
+
+
 def extract_region(init_pos, end_pos):
     """
     Extract a Minecraft world region with the id of the blocks
@@ -18,12 +33,10 @@ def extract_region(init_pos, end_pos):
     """
     from mcthings.scene import Scene
 
-    size_x = end_pos.x - init_pos.x
-    size_z = end_pos.z - init_pos.z
-    size_y = end_pos.y - init_pos.y
+    (size_x, size_y, size_z) = size_region(init_pos, end_pos)
 
     blocks = Scene.server.getBlocks(init_pos.x, init_pos.y, init_pos.z,
-                                    end_pos.x-1, end_pos.y-1, end_pos.z-1)
+                                    end_pos.x, end_pos.y, end_pos.z)
     blocks_list = list(blocks)
 
     # The order in getBlocks is z, x, y and for a Schematic it must be x, z, y
@@ -60,9 +73,7 @@ def extract_region_with_data(init_pos, end_pos):
     """
     from mcthings.scene import Scene
 
-    size_x = end_pos.x - init_pos.x
-    size_z = end_pos.z - init_pos.z
-    size_y = end_pos.y - init_pos.y
+    (size_x, size_y, size_z) = size_region(init_pos, end_pos)
 
     blocks_bytes = bytearray()
     data_bytes = bytearray()
@@ -89,9 +100,7 @@ def build_schematic_nbt(init_pos, end_pos, block_data=False):
 
     :return: The NBT object with the Schematic
     """
-    size_x = end_pos.x - init_pos.x
-    size_z = end_pos.z - init_pos.z
-    size_y = end_pos.y - init_pos.y
+    (size_x, size_y, size_z) = size_region(init_pos, end_pos)
 
     # Profiling of Schematics export
     app_init = datetime.now()
