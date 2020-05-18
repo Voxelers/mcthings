@@ -95,11 +95,12 @@ class Scene:
         pickle.dump(Scene.things, open(file_path, "wb"))
 
     @classmethod
-    def to_schematic(cls, file_path):
+    def to_schematic(cls, file_path, block_data=False):
         """
         Save the Scene into a Schematic file
 
-        :file_path: file in which to export the Scene in Schematic format
+        :param file_path: file in which to export the Scene in Schematic format
+        :param block_data: extract blocks ids and data (much slower)
         :return: the Schematic object
         """
 
@@ -124,4 +125,4 @@ class Scene:
             if thing.end_position:
                 min_pos, max_pos = update_box(min_pos, max_pos, thing.end_position)
 
-        build_schematic_nbt(min_pos, max_pos).write_file(file_path)
+        build_schematic_nbt(min_pos, max_pos, block_data).write_file(file_path)
