@@ -1,0 +1,60 @@
+# Minecraft world: scene_0_30.schematic
+# Terrain file name: Z:\home\adelcastillo\devel\minecraft\terrainExt.png
+# Color scheme: Standard
+# Tue May 19 11:22:40 2020
+
+# Selection location min to max: 0, 0, 0 to 143, 255, 128
+#   Non-empty selection location min to max: 0, 0, 0 to 143, 29, 128
+
+# Set 3D print type: Binary STL iMaterialise
+
+# Cost estimate for this model:
+#   if made using the white, strong & flexible material: $ 40.56
+#   if made using the full color sandstone material:     $ 107.63 *** WARNING, thin wall ***
+#   if made using the custom printer material:     4.19
+# For custom printer printer, minimum wall is 1.5 mm, maximum size is 20 x 20 x 20 cm
+# Units for the model vertex data itself: millimeters
+
+# world dimensions: 21.60 x 4.50 x 19.35 cm *** WARNING, too large for custom printer printer
+#   in inches: 8.50 x 1.77 x 7.62 inches *** WARNING, too large for custom printer printer
+# each block is 1.50 mm on a side, and has a volume of 3.375 mm^3
+# sum of dimensions: 454.5 mm
+# volume is 139.512 cm^3
+# surface area is 1140.21 cm^2
+# block density: 7% of volume
+
+# 50673 vertices, 50676 faces (101352 triangles), 41337 blocks
+# block dimensions: X=144 by Y=30 (height) by Z=129 blocks
+# File type: Export solid material colors only (no textures)
+# Texture output RGB: YES
+# Texture output A: no
+# Texture output RGBA: no
+# Make Z the up direction instead of Y: YES
+# Center model: YES
+# Export lesser blocks: no
+# Use biomes: no
+# Rotate model 0.000000 degrees
+# Scale model by making each block 1.5 mm high
+# Data operation options:
+#   Fill air bubbles: YES; Seal off entrances: no; Fill in isolated tunnels in base of model: no
+#   Connect parts sharing an edge: YES; Connect corner tips: YES; Weld all shared edges: no
+#   Delete floating objects: trees and parts smaller than 16 blocks: YES
+#   Hollow out bottom of model, making the walls 1.5 mm thick: no; Superhollow: no
+# Melt snow blocks: no
+#   Debug: show separate parts as colors: no
+#   Debug: show weld blocks in bright colors: no
+
+# Cleanup processing summary:
+#   Solid parts: 1
+#   Air bubbles found and filled (with glass): 2
+#   Total solid parts merged: 36
+#   Number of edge passes made: 2
+#     Edges found to fix: 16
+#     Weld blocks added: 15
+#     Tip blocks added: 0
+#   Floating parts removed: 0
+#     In these floaters, total blocks removed: 0
+
+# Full world path: Z:\home\adelcastillo\devel\minecraft\mcthings\scenes\schematics\scene_0_30.schematic
+# Full terrainExt.png path: Z:\home\adelcastillo\devel\minecraft\terrainExt.png
+# Full current path: Z:\home\adelcastillo\devel\minecraft
