@@ -1,5 +1,6 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
+from mcpi.vec3 import Vec3
 
 from mcthings.scene import Scene
 from mcthings.thing import Thing
@@ -9,16 +10,20 @@ class Sphere(Thing):
 
     radius = 5
     """ radius of the Sphere """
-    height = 0
 
     def build(self):
         Scene.drawing.drawSphere(
-            self.position.x,
-            self.position.y + self.height - 1,
-            self.position.z,
+            self.position.x + self.radius,
+            self.position.y + self.radius - 1,
+            self.position.z + self.radius,
             self.radius,
             self.block)
-        self._end_position = self.position
+
+        end_x = self.position.x + 2 * self.radius
+        end_y = self.position.y + 2 * self.radius
+        end_z = self.position.z + 2 * self.radius
+
+        self._end_position = Vec3(end_x, end_y, end_z)
 
 
 class SphereHollow(Thing):
@@ -29,9 +34,9 @@ class SphereHollow(Thing):
 
     def build(self):
         Scene.drawing.drawHollowSphere(
-            self.position.x,
-            self.position.y + self.height - 1,
-            self.position.z,
+            self.position.x + self.radius,
+            self.position.y + self.radius - 1,
+            self.position.z + self.radius,
             self.radius,
             self.block)
         self._end_position = self.position

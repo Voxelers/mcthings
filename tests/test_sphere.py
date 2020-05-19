@@ -24,7 +24,6 @@ class TestSphere(TestBaseThing):
         radius = 10
         pos.z += 20
 
-        pos.y += radius - 1
         sphere = Sphere(pos)
         sphere.radius = radius
         sphere.block = mcpi.block.IRON_BLOCK
