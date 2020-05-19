@@ -39,5 +39,10 @@ class SphereHollow(Thing):
             self.position.z + self.radius,
             self.radius,
             self.block)
-        self._end_position = self.position
+
+        end_x = self.position.x + 2 * self.radius
+        end_y = self.position.y + 2 * self.radius
+        end_z = self.position.z + 2 * self.radius
+
+        self._end_position = Vec3(end_x, end_y, end_z)
 
