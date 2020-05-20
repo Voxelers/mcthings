@@ -12,7 +12,8 @@ A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcth
 and may others. All the Things share the [Thing API](mcthings/thing.py).
 
 A [Scene is a list](mcthings/scene.py) of Things built in a specific position. Scenes can be shared
-loading and saving them to a [files](scenes/utils/scene_basic.mct). You [can share scenes adding them
+loading and saving them to [files](scenes/utils/scene_basic.mct). Scenes can be also saved as Schematics
+and converted with [Mineways](http://www.realtimerendering.com/erich/minecraft/public/mineways/) to be used for [3D rendering and printing](https://twitter.com/acstw/status/1262944914234540032). You [can share scenes adding them
 here](scenes). [This one](scenes/utils/scene_basic.py) includes
 a river, a house in each side of the river and a bridge for crossing the river.
 
