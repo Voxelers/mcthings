@@ -8,7 +8,7 @@
 # Push branch with tags
 # Generate pip packages and upload to pip repository
 cd tests
-./run_tests.py
+PYTHONPATH=.. ./run_tests.py
 cd ..
 rm dist/*
 python setup.py sdist
