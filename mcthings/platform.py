@@ -8,7 +8,7 @@ from .thing import Thing
 from .scene import Scene
 
 
-class Tower(Thing):
+class Platform(Thing):
     top_size = 4  # square platform at the top
     height = 20  # tower height
 
