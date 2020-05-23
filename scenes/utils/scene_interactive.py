@@ -47,6 +47,7 @@ class SceneInteractive:
     house_length = None
     line_left = None
     line_right = None
+    line_width = 2
     pos = None
     river = None
     bridge_start = None
@@ -111,19 +112,18 @@ class SceneInteractive:
         pos = cls.pos
         river = cls.river
 
-        line_width = 2
-        line_right = Line(Vec3(pos.x - (3 + line_width), pos.y, pos.z))
+        line_right = Line(Vec3(pos.x - (3 + cls.line_width), pos.y, pos.z))
         cls.line_right = line_right
         line_right.block = mcpi.block.SAND
         line_right.length = river.length
-        line_right.width = line_width
+        line_right.width = cls.line_width
         line_right.build()
 
         line_left = Line(Vec3(pos.x + river.width + 3, pos.y, pos.z))
         cls.line_left = line_left
         line_left.block = mcpi.block.SAND
         line_left.length = river.length
-        line_left.width = line_width
+        line_left.width = cls.line_width
         line_left.build()
 
     @classmethod
@@ -136,8 +136,7 @@ class SceneInteractive:
         houses = 4 * 3 + 1
 
         p = cls.line_right.position
-        # 2 line width
-        town_right = Town(Vec3(p.x - 2, p.y, p.z))
+        town_right = Town(Vec3(p.x - cls.line_width, p.y, p.z))
         town_right.house_width = house_width
         town_right.house_length = house_length
         town_right.house_mirror = True
@@ -145,8 +144,7 @@ class SceneInteractive:
         town_right.build()
 
         p = cls.line_left.position
-        # 2 line width
-        town_left = Town(Vec3(p.x + (2 + 1), p.y, p.z))
+        town_left = Town(Vec3(p.x + (cls.line_width + 1), p.y, p.z))
         town_left.house_width = house_width
         town_left.house_length = house_length
         town_left.houses = houses
@@ -162,7 +160,7 @@ class SceneInteractive:
         # First the path from the town to the temple
         p = cls.line_right.position
         p_z = p.z + cls.house_length + 1
-        line_temple = Line(Vec3(p.x, p.y, p_z))
+        line_temple = Line(Vec3(p.x - (cls.line_width - 1), p.y, p_z))
         line_temple.block = mcpi.block.SAND
         line_temple.width = -temple_far
         line_temple.length = 2
@@ -188,7 +186,7 @@ class SceneInteractive:
         # First the path from the town to the jail
         p = cls.line_left.position
         p_z = p.z + cls.house_length + 1
-        line_jail = Line(Vec3(p.x, p.y, p_z))
+        line_jail = Line(Vec3(p.x + cls.line_width, p.y, p_z))
         line_jail.block = mcpi.block.SAND
         line_jail.width = +jail_far
         line_jail.length = 2
@@ -221,7 +219,7 @@ class SceneInteractive:
         # First the path from the town to the buildings
         p = cls.line_right.end_position
         p_z = p.z - (cls.house_length + 1)
-        line_building = Line(Vec3(p.x, p.y, p_z))
+        line_building = Line(Vec3(p.x - cls.line_width, p.y, p_z))
         line_building.block = mcpi.block.SAND
         line_building.width = -building_far
         line_building.length = 2
@@ -249,7 +247,7 @@ class SceneInteractive:
         # First the path from the town to the stadium
         p = cls.line_left.end_position
         p_z = p.z - (cls.house_length + 1)
-        line_stadium = Line(Vec3(p.x, p.y, p_z))
+        line_stadium = Line(Vec3(p.x + (cls.line_width - 1), p.y, p_z))
         line_stadium.block = mcpi.block.SAND
         line_stadium.width =+ stadium_far
         line_stadium.length = 2
@@ -290,7 +288,7 @@ class SceneInteractive:
             mc.entity.getPos(entity_id)
 
             top_size = 5
-            platform = Platform(Vec3(cls.pos.x, cls.pos.y, cls.pos.z-15))
+            platform = Platform(Vec3(cls.pos.x, cls.pos.y, cls.pos.z-25))
             platform.block = mcpi.block.GLASS
             platform.height = 10
             platform.top_size = top_size
@@ -303,12 +301,20 @@ class SceneInteractive:
             p = platform.end_position
             player_pos = Vec3(p.x, p.y + 1, p.z - 4)
             server.mc.entity.setTilePos(server.mc.getPlayerEntityId(BUILDER_NAME), player_pos)
+
             # Put a blocks over the platform to change the block type to be used
             block = Block(Vec3(player_pos.x - (top_size - 1),
                                player_pos.y,
                                player_pos.z + (top_size - 1))
                           )
             block.block = mcpi.block.BEDROCK
+            block.build()
+
+            block = Block(Vec3(player_pos.x - (top_size/2 - 1),
+                               player_pos.y,
+                               player_pos.z + (top_size - 1))
+                          )
+            block.block = mcpi.block.GLASS
             block.build()
 
             block = Block(Vec3(player_pos.x,
@@ -346,9 +352,6 @@ class SceneInteractive:
                     thing = Scene.things[cls.active_thing]
                     logging.info("No actions. In " + str(thing))
                 time.sleep(CHECK_EVENTS_TIME)
-
-            # Save as Schematic
-            # Scene.to_schematic("../schematics/scene_0_30.schematic")
 
         except mcpi.connection.RequestError:
             print("Can't connect to Minecraft server " + MC_SEVER_HOST)
