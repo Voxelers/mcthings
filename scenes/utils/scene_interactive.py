@@ -10,32 +10,37 @@ import mcpi.block
 import mcpi.minecraft
 from mcpi.vec3 import Vec3
 
+from mcthings.block import Block
 from mcthings.bridge import Bridge
 from mcthings.building import Building
 from mcthings.fence import Fence
 from mcthings.line import Line
+from mcthings.platform import Platform
 from mcthings.pyramid import PyramidHollow
 from mcthings.scene import Scene
 from mcthings.river import River
-from mcthings.schematic import Schematic
 from mcthings.server import Server
 from mcthings.sphere import SphereHollow
+from mcthings.thing import Thing
 from mcthings.town import Town
 
 BUILDER_NAME = "ElasticExplorer"
 
 MC_SEVER_HOST = "localhost"
 MC_SEVER_PORT = 4711
+EVENTS_PER_CLICK = 3
+CHECK_EVENTS_TIME = 2
 
 
 class SceneInteractive:
-
     """
     Scene Interactive
 
     The player will build the complete Scene interacting with the build command HQ.
     In this HQ the player can build the next Thing in scene, unbuilt the current one
     and go to the previous one, or she can modify the properties of the active Thing.
+
+    The full scene is built complete hidden and then we play with it interacting.
     """
 
     # Common data for the Scene for relative positioning
@@ -44,24 +49,27 @@ class SceneInteractive:
     line_right = None
     pos = None
     river = None
-    active_step = 0
+    bridge_start = None
+    bridge_end = None
+    paths = None
+    houses = None
+    temple = None
+    jail = None
+    buildings = None
+    stadium = None
+    active_thing = 0
 
     @classmethod
     def move_step(cls, forward=True):
-        steps = [cls.build_river, cls.build_bridges, cls.build_paths,
-                 cls.build_houses, cls.build_temple, cls.build_jail,
-                 cls.build_buildings, cls.build_stadium]
-        step = steps[cls.active_step]
 
         if forward:
-            if cls.active_step + 1 < len(steps):
-                cls.active_step += 1
-
+            if cls.active_thing + 1 < len(Scene.things):
+                cls.active_thing += 1
         else:
-            if cls.active_step > 0:
-                cls.active_step -= 1
+            if cls.active_thing > 0:
+                cls.active_thing -= 1
 
-        return step
+        return Scene.things[cls.active_thing]
 
     @classmethod
     def build_river(cls):
@@ -81,6 +89,7 @@ class SceneInteractive:
         river = cls.river
 
         bridge_start = Bridge(Vec3(pos.x - 1, pos.y, pos.z + (river.length * (1 / 4))))
+        cls.bridge_start = bridge_start
         bridge_start.height = 3
         bridge_start.large = river.width + 2
         bridge_start.width = 2
@@ -88,6 +97,7 @@ class SceneInteractive:
         bridge_start.build()
 
         bridge_end = Bridge(Vec3(pos.x - 1, pos.y, pos.z + (river.length * (3 / 4))))
+        cls.bridge_end = bridge_end
         bridge_end.height = 3
         bridge_end.large = river.width + 2
         bridge_end.width = 2
@@ -241,7 +251,7 @@ class SceneInteractive:
         p_z = p.z - (cls.house_length + 1)
         line_stadium = Line(Vec3(p.x, p.y, p_z))
         line_stadium.block = mcpi.block.SAND
-        line_stadium.width = +stadium_far
+        line_stadium.width =+ stadium_far
         line_stadium.length = 2
         line_stadium.build()
 
@@ -253,6 +263,20 @@ class SceneInteractive:
         stadium.build()
 
     @classmethod
+    def prepare_scene(cls):
+        cls.build_river()
+        cls.build_bridges()
+        cls.build_paths()
+        cls.build_houses()
+        cls.build_temple()
+        cls.build_jail()
+        cls.build_buildings()
+        cls.build_stadium()
+
+        # Hide the scene to show it with the interactive tools
+        Scene.unbuild()
+
+    @classmethod
     def main(cls):
         try:
             server = Server(MC_SEVER_HOST, MC_SEVER_PORT)
@@ -262,16 +286,66 @@ class SceneInteractive:
             cls.pos.x += 1
 
             mc = server.mc
-            entity_id = mc.getPlayerEntityId("ElasticExplorer")
+            entity_id = mc.getPlayerEntityId(BUILDER_NAME)
             mc.entity.getPos(entity_id)
-            # mc.entity.getName(entity_id)
+
+            top_size = 5
+            platform = Platform(Vec3(cls.pos.x, cls.pos.y, cls.pos.z-15))
+            platform.block = mcpi.block.GLASS
+            platform.height = 10
+            platform.top_size = top_size
+
+            cls.prepare_scene()
+
+            platform.build()
+
+            # Put the player in the platform
+            p = platform.end_position
+            player_pos = Vec3(p.x, p.y + 1, p.z - 4)
+            server.mc.entity.setTilePos(server.mc.getPlayerEntityId(BUILDER_NAME), player_pos)
+            # Put a blocks over the platform to change the block type to be used
+            block = Block(Vec3(player_pos.x - (top_size - 1),
+                               player_pos.y,
+                               player_pos.z + (top_size - 1))
+                          )
+            block.block = mcpi.block.BEDROCK
+            block.build()
+
+            block = Block(Vec3(player_pos.x,
+                               player_pos.y,
+                               player_pos.z + (top_size - 1))
+                          )
+            block.block = mcpi.block.BRICK_BLOCK
+            block.build()
+
             while True:
                 hits = mc.events.pollBlockHits()
-                if len(hits) > 0:
-                    step = cls.move_step()
-                    logging.info("Next step " + str(step))
-                    step()
-                time.sleep(0.1)
+                if len(hits) > EVENTS_PER_CLICK:
+                    # Unbuild the current step and select the previous one
+                    # Except the platform
+                    if cls.active_thing > 0:
+                        thing = Scene.things[cls.active_thing]
+                        logging.info("Unbuilt" + str(thing))
+                        thing.unbuild()
+                    cls.move_step(forward=False)
+                elif len(hits) > 0:
+                    thing = cls.move_step()
+                    logging.info("Moved to thing and build" + str(thing))
+                    #  Get the block hit
+                    hit = hits[0]
+                    block_hit = server.mc.getBlock(hit.pos.x, hit.pos.y, hit.pos.z)
+                    if block_hit != mcpi.block.GLASS.id:
+                        build_block = thing.block
+                        thing.block = block_hit
+                        thing.build()
+                        # Preserve the original block to restore it
+                        thing.block = build_block
+                    else:
+                        thing.build()
+                else:
+                    thing = Scene.things[cls.active_thing]
+                    logging.info("No actions. In " + str(thing))
+                time.sleep(CHECK_EVENTS_TIME)
 
             # Save as Schematic
             # Scene.to_schematic("../schematics/scene_0_30.schematic")
