@@ -23,7 +23,7 @@ class Building(Thing):
         init_height = init_y
 
         for i in range(0, self.floors):
-            house = House(house_pos)
+            house = House(house_pos, self)
             house_pos.y = house.height * i + init_height
             house.width = self.width
             house.block = self.block

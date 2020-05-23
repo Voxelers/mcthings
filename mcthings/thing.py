@@ -18,22 +18,30 @@ class Thing:
     """ block type used by the thing. Default to BRICK_BLOCK"""
     _block_empty = mcpi.block.AIR
 
-    def __init__(self, position):
+    def __init__(self, position, parent=None):
         """
         Create a thing
         :param position: build position
+        :param parent: parent Thing in which this one is included
         """
 
         self._end_position = None
+        self._parent = parent
         self._position = None
         if position:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
 
         # Add then thing built to the scene
-        Scene.add(self)
+        if parent is None:
+            Scene.add(self)
 
         # McThing version which created this Thing
         self._version = __version__
+
+    @property
+    def end_position(self):
+        """ end position of the thing """
+        return self._end_position
 
     @property
     def position(self):
@@ -41,9 +49,9 @@ class Thing:
         return self._position
 
     @property
-    def end_position(self):
-        """ end position of the thing """
-        return self._end_position
+    def parent(self):
+        """ parent Thing in which this one is included """
+        return self._position
 
     def build(self):
         """
