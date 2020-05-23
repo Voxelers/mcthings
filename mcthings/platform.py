@@ -9,8 +9,8 @@ from .scene import Scene
 
 
 class Platform(Thing):
-    top_size = 4  # square platform at the top
-    height = 20  # tower height
+    top_size = 3  # square platform at the top
+    height = 10  # tower height
 
     def build(self):
         p = self.position
