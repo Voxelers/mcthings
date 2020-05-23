@@ -14,7 +14,7 @@ class Fence(Thing):
     """
 
     fence_space = 5
-    """Space between the fence and the thing fenced"""
+    """ Space between the fence and the thing fenced """
     thick = 1
     thing = None
 
@@ -52,4 +52,6 @@ class Fence(Thing):
             mcpi.block.AIR)
 
         # Rebuild the thing because it is destroyed when emptying the fence
-        self.thing.build()
+        # if we are not removing the fence
+        if self.block != mcpi.block.AIR:
+            self.thing.build()
