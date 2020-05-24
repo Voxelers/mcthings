@@ -11,11 +11,13 @@ A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcth
 [House](mcthings/house.py), [Fence](mcthings/fence.py)
 and may others. All the Things share the [Thing API](mcthings/thing.py).
 
-A [Scene is a list](mcthings/scene.py) of Things built in a specific position. Scenes can be shared
+A [Scene is a list](mcthings/scene.py) of Things built in a specific position and order. Scenes can be shared
 loading and saving them to [files](scenes/utils/scene_basic.mct). Scenes can be also saved as Schematics
 and converted with [Mineways](http://www.realtimerendering.com/erich/minecraft/public/mineways/) to be used for [3D rendering and printing](https://twitter.com/acstw/status/1262944914234540032). You [can share scenes adding them
-here](scenes). [This one](scenes/utils/scene_basic.py) includes
-a river, a house in each side of the river and a bridge for crossing the river.
+here](scenes). And they can be [interactive](https://www.youtube.com/watch?v=TjHqt3WO-o0).
+
+
+[This scene](scenes/utils/scene_basic.py) includes a river, a house in each side of the river and a bridge for crossing the river.
 
 ![A Scene in Minecraft](scenes/img/scene_basic.png)
 
