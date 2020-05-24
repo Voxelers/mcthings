@@ -46,7 +46,7 @@ setup(
         'Topic :: Software Development'
     ],
     install_requires=[
-        'mcpi>=1.2',
+        'mcpi',
         'minecraftstuff',
         'nbt'
     ],
