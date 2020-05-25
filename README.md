@@ -11,6 +11,9 @@ A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcth
 [House](mcthings/house.py), [Fence](mcthings/fence.py)
 and may others. All the Things share the [Thing API](mcthings/thing.py).
 
+There is also a repository for experimental, incubating or with extra dependencies Things
+at [McThings Extra](https://github.com/juntosdesdecasa/mcthings_extra).
+
 A [Scene is a list](mcthings/scene.py) of Things built in a specific position and order. Scenes can be shared
 loading and saving them to files. Scenes can be also saved as Schematics
 and converted with [Mineways](http://www.realtimerendering.com/erich/minecraft/public/mineways/) 
