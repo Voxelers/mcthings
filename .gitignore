@@ -133,3 +133,6 @@ dmypy.json
 
 # Local scripts
 sync-scenes
+
+# Legacy folder
+scenes
