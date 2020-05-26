@@ -20,20 +20,21 @@ and converted with [Mineways](http://www.realtimerendering.com/erich/minecraft/p
 to be used for [3D rendering and printing](https://twitter.com/acstw/status/1262944914234540032). 
 You [can share scenes adding them
 to this repository](https://github.com/juntosdesdecasa/mcthings_scenes). 
-And they can be [interactive](https://www.youtube.com/watch?v=TjHqt3WO-o0).
+And they can be [interactive](https://www.youtube.com/watch?v=TjHqt3WO-o0) 
+as [in this app](https://github.com/juntosdesdecasa/mcthings_scenes/blob/develop/apps/scene_interactive.py).
 
-[This scene](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/scenes/utils/scene_basic.py) includes 
+[This scene](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/notebooks/scene_basic.ipynb) includes 
 a river, a house in each side of the river and a bridge for crossing the river.
 
-![A Scene in Minecraft](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/scenes/img/scene_basic.png)
+![A Scene in Minecraft](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/notebooks/img/scene_basic.png)
 
 Things can be built using [MinecraftDrawing](https://minecraft-stuff.readthedocs.io/en/latest/index.html). 
 [Sphere](mcthings/sphere.py) and [Circle](mcthings/circle.py) Things are used with Pyramids in the next 
-[scene](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/scenes/scene_sphere_circle_pyramid.ipynb):
+[scene](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/notebooks/scene_sphere_circle_pyramid.ipynb):
 
-![Pyramids with Spheres](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/scenes/img/scene_sphere_circle_pyramid.png)
+![Pyramids with Spheres](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/notebooks/img/scene_sphere_circle_pyramid.png)
 
 And Things can also be built from [Schematics](https://www.minecraft-schematics.com/) (there are thousands!). 
-There is a [sample notebook](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/scenes/Schematics.ipynb).
+There is a [sample notebook](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/notebooks/Schematics.ipynb).
 
-![Schematic inside McThings](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/scenes/img/schematic.png)
+![Schematic inside McThings](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/notebooks/img/schematic.png)
