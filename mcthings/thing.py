@@ -28,6 +28,8 @@ class Thing:
         self._end_position = None
         self._parent = parent
         self._position = None
+        self._decorators = []
+
         if position:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
 
@@ -94,3 +96,21 @@ class Thing:
         """
 
         build_schematic_nbt(self.position, self.end_position, blocks_data).write_file(file_path)
+
+    def add_decorator(self, decorator):
+        """
+        Add a new Decorator to be called once the Thing is decorated
+
+        :param decorator: a Decorator to be called
+        :return:
+        """
+        self._decorators.append(decorator)
+
+    def decorate(self):
+        """
+        Call all decorators for the current Thing
+
+        :return:
+        """
+        for decorator in self._decorators:
+            decorator.decorate(self)

@@ -8,6 +8,7 @@ import unittest
 
 
 from mcthings.house import House
+from mcthings.decorators.light_decorator import LightDecorator
 from tests.base import TestBaseThing
 
 
@@ -29,6 +30,9 @@ class TestHouse(TestBaseThing):
         house = House(pos)
         house.mirror = True
         house.build()
+        # Add lights
+        house.add_decorator(LightDecorator)
+        house.decorate()
 
 
 if __name__ == "__main__":
