@@ -9,7 +9,10 @@ with a complete sample. And there is a [intro video tutorial](https://www.youtub
 
 A Thing is a built based on blocks: [Pyramid](mcthings/pyramid.py), [River](mcthings/river.py),
 [House](mcthings/house.py), [Fence](mcthings/fence.py)
-and may others. All the Things share the [Thing API](mcthings/thing.py).
+and may others. All the Things share the [Thing API](mcthings/thing.py). 
+A Thing can be [decorated](https://twitter.com/acstw/status/1265510248892239873)
+using existing decorators like [LightDecorator](mcthings/decorators/light_decorator.py) 
+or you can create your own one. A [decorated house](https://github.com/juntosdesdecasa/mcthings_extra/blob/develop/tests/test_entity.py#L40).
 
 There is also a repository for experimental, incubating or with extra dependencies Things
 at [McThings Extra](https://github.com/juntosdesdecasa/mcthings_extra).
