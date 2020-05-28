@@ -27,6 +27,7 @@ class Town(Thing):
 
         for i in range(0, self.houses):
             house = House(house_pos, self)
+            self.add_child(house)
             house.width = self.house_width
             house.length = self.house_length
             house.height = self.house_height

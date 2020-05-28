@@ -26,6 +26,8 @@ class Fence(Thing):
         if self.thing is None:
             raise RuntimeError("Thing to be fenced is not defined")
 
+        self.add_child(self.thing)
+
         init_x = self.thing.position.x - self.fence_space - self.thick
         init_y = self.thing.position.y
         init_z = self.thing.position.z - self.fence_space - self.thick

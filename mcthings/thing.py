@@ -27,6 +27,7 @@ class Thing:
 
         self._end_position = None
         self._parent = parent
+        self._children = []
         self._position = None
         self._decorators = []
 
@@ -54,6 +55,10 @@ class Thing:
     def parent(self):
         """ parent Thing in which this one is included """
         return self._position
+
+    def add_child(self, child):
+        """ Add a children to this Thing  """
+        self._children.append(child)
 
     def build(self):
         """
@@ -114,3 +119,5 @@ class Thing:
         """
         for decorator in self._decorators:
             decorator.decorate(self)
+            for child in self._children:
+                decorator.decorate(child)
