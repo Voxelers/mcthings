@@ -7,9 +7,13 @@ import logging
 import unittest
 
 import mcpi
+import mcpi.block
 
+from mcthings.block import Block
 from mcthings.fence import Fence
+from mcthings.house import House
 from mcthings.pyramid import Pyramid
+from mcthings.scene import Scene
 from mcthings.town import Town
 from mcthings.world import World
 from tests.base import TestBaseThing
@@ -22,7 +26,23 @@ class TestFence(TestBaseThing):
         World.server.postToChat("Building a walled town")
 
         pos = self.pos
-        pos.x += 10
+        pos.x += 2
+
+        # Add a Fence around an scene
+        Block(pos)
+        p = Pyramid(pos)
+        p.height = 5
+        House(pos)
+        init_scene = World.scenes[0]
+        init_scene.build()
+
+        # The fence for the Scene but must in a different Scene
+        fence = Fence(None, scene=Scene())
+        fence.thing = init_scene
+        fence.block = mcpi.block.RAIL
+        fence.build()
+
+        pos.x += 50
 
         town = Town(pos)
         town.houses = 3

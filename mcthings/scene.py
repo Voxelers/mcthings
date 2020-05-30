@@ -7,6 +7,7 @@ import pickle
 from mcpi.vec3 import Vec3
 
 from mcthings.utils import build_schematic_nbt
+from mcthings.world import World
 
 
 class Scene:
@@ -26,6 +27,20 @@ class Scene:
         """ map with the things in the scene """
         self._position = None
         """ position in the world of the scene """
+        self._end_position = None
+        """ end position in the world of the scene """
+
+        World.add_scene(self)
+
+    @property
+    def end_position(self):
+        """ end position of the thing """
+        return self._end_position
+
+    @property
+    def position(self):
+        """ initial position of the thing """
+        return self._position
 
     def add(self, thing):
         """ Add a new thing to the scene """
@@ -39,6 +54,9 @@ class Scene:
         """ Build all the things inside the Scene """
         for thing in self.things:
             thing.build()
+
+        (min_pos, max_pos) = self.find_bounding_box()
+        self._end_position = max_pos
 
     def unbuild(self):
         """ Unbuild all the things inside the Scene """

@@ -40,7 +40,7 @@ class Thing:
         if scene is None:
             # If no Scenes exists yet, create a new one
             if not World.scenes:
-                World.add_scene(Scene())
+                Scene()  # Scene add itself to the World
 
             """ Use the default  Scene """
             self._scene = World.scenes[0]
