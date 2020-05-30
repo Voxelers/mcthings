@@ -8,6 +8,7 @@ import unittest
 
 from mcthings.block import Block
 from mcthings.scene import Scene
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -15,7 +16,7 @@ class TestScene(TestBaseThing):
     """Test Scene Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a scene")
+        World.server.postToChat("Building a scene")
 
         pos = self.pos
 
@@ -28,7 +29,7 @@ class TestScene(TestBaseThing):
         block.build()
 
         pos.y += 1
-        Scene.move(pos)
+        World.scenes[0].move(pos)
 
 
 if __name__ == "__main__":

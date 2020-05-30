@@ -5,7 +5,7 @@ import mcpi
 
 from mcpi.vec3 import Vec3
 
-from .scene import Scene
+from .world import World
 from .thing import Thing
 
 
@@ -30,7 +30,7 @@ class House(Thing):
         end_y = init_y + self.height - 1
         end_z = init_z + self.width - 1
 
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             init_x, init_y, init_z,
             end_x, end_y, end_z,
             self.block)
@@ -41,14 +41,14 @@ class House(Thing):
         if self.mirror:
             init_x_empty = init_x - self.wall_width
             end_x_empty = end_x + self.wall_width
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             init_x_empty, init_y, init_z + self.wall_width,
             end_x_empty,
             end_y - self.wall_width,
             end_z - self.wall_width,
             mcpi.block.AIR)
 
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             init_x, init_y, init_z + self.wall_width,
             init_x + 1, init_y + self.door_size, init_z + self.door_size,
             mcpi.block.AIR)

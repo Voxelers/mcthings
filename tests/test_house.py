@@ -9,6 +9,7 @@ import unittest
 
 from mcthings.house import House
 from mcthings.decorators.light_decorator import LightDecorator
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -16,7 +17,7 @@ class TestHouse(TestBaseThing):
     """Test House Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a house")
+        World.server.postToChat("Building a house")
 
         pos = self.pos
 

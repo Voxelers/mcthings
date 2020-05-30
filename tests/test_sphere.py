@@ -10,6 +10,7 @@ import mcpi
 
 from mcthings.sphere import Sphere
 from mcthings.sphere import SphereHollow
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -17,7 +18,7 @@ class TestSphere(TestBaseThing):
     """Test Sphere Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a sphere")
+        World.server.postToChat("Building a sphere")
 
         pos = self.pos
 
@@ -29,7 +30,7 @@ class TestSphere(TestBaseThing):
         sphere.block = mcpi.block.IRON_BLOCK
         sphere.build()
 
-        self.server.mc.postToChat("Building a hollow sphere")
+        World.server.postToChat("Building a hollow sphere")
         pos.x += 20
         sphere = SphereHollow(pos)
         sphere.radius = radius

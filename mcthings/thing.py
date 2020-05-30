@@ -5,24 +5,26 @@ import mcpi.block
 import mcpi.vec3
 
 from ._version import __version__
-
 from .scene import Scene
 
 from .utils import build_schematic_nbt
+from .world import World
 
 
 class Thing:
     """ base class for all objects in mcthings library """
 
     block = mcpi.block.BRICK_BLOCK
-    """ block type used by the thing. Default to BRICK_BLOCK"""
+    """ block type used by the thing. Default to BRICK_BLOCK """
     _block_empty = mcpi.block.AIR
+    """ block type used to remove blocks in this Thing """
 
-    def __init__(self, position, parent=None):
+    def __init__(self, position, parent=None, scene=None):
         """
         Create a thing
         :param position: build position
         :param parent: parent Thing in which this one is included
+        :param scene: scene in which this Thing is included
         """
 
         self._end_position = None
@@ -30,13 +32,22 @@ class Thing:
         self._children = []
         self._position = None
         self._decorators = []
+        self._scene = scene
 
         if position:
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
 
+        if scene is None:
+            # If no Scenes exists yet, create a new one
+            if not World.scenes:
+                World.add_scene(Scene())
+
+            """ Use the default  Scene """
+            self._scene = World.scenes[0]
+
         # Add then thing built to the scene
         if parent is None:
-            Scene.add(self)
+            self._scene.add(self)
 
         # McThing version which created this Thing
         self._version = __version__
@@ -55,6 +66,11 @@ class Thing:
     def parent(self):
         """ parent Thing in which this one is included """
         return self._position
+
+    @property
+    def scene(self):
+        """ scene which this thing is included """
+        return self._scene
 
     def add_child(self, child):
         """ Add a children to this Thing  """

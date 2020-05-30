@@ -4,8 +4,8 @@
 import mcpi.block
 from mcpi.vec3 import Vec3
 
-from .scene import Scene
 from .thing import Thing
+from .world import World
 
 
 class Pyramid(Thing):
@@ -19,7 +19,7 @@ class Pyramid(Thing):
 
         for i in range(0, self.height):
             level = i
-            Scene.server.setBlocks(
+            World.server.setBlocks(
                 self.position.x + level, self.position.y + level, self.position.z + level,
                 self.position.x + (length - 1) - level,
                 self.position.y + level,

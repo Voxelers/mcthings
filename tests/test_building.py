@@ -9,6 +9,7 @@ import unittest
 import mcpi
 
 from mcthings.building import Building
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -16,7 +17,7 @@ class TestBuilding(TestBaseThing):
     """Test Building Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a building")
+        World.server.postToChat("Building a building")
 
         pos = self.pos
 

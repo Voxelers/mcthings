@@ -7,6 +7,8 @@ from datetime import datetime
 import mcpi
 from nbt.nbt import NBTFile, TAG_List, TAG_Int, TAG_Short, TAG_Byte_Array, TAG_String
 
+from mcthings.world import World
+
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 
 
@@ -31,11 +33,10 @@ def extract_region(init_pos, end_pos):
 
     :return: bytearrays for blocks ids and block data
     """
-    from mcthings.scene import Scene
 
     (size_x, size_y, size_z) = size_region(init_pos, end_pos)
 
-    blocks = Scene.server.getBlocks(init_pos.x, init_pos.y, init_pos.z,
+    blocks = World.server.getBlocks(init_pos.x, init_pos.y, init_pos.z,
                                     end_pos.x, end_pos.y, end_pos.z)
     blocks_list = list(blocks)
 
@@ -71,8 +72,6 @@ def extract_region_with_data(init_pos, end_pos):
 
     :return: bytearrays for blocks ids and block data
     """
-    from mcthings.scene import Scene
-
     (size_x, size_y, size_z) = size_region(init_pos, end_pos)
 
     blocks_bytes = bytearray()
@@ -83,7 +82,7 @@ def extract_region_with_data(init_pos, end_pos):
         for z in range(0, size_z):
             for x in range(0, size_x):
                 block_pos = mcpi.vec3.Vec3(init_pos.x + x, init_pos.y + y, init_pos.z + z)
-                block = Scene.server.getBlockWithData(block_pos.x, block_pos.y, block_pos.z)
+                block = World.server.getBlockWithData(block_pos.x, block_pos.y, block_pos.z)
                 blocks_bytes.append(block.id)
                 data_bytes.append(block.data)
 

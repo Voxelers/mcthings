@@ -3,8 +3,8 @@
 
 from mcpi.vec3 import Vec3
 
-from .scene import Scene
 from .thing import Thing
+from .world import World
 
 
 class Line(Thing):
@@ -19,9 +19,9 @@ class Line(Thing):
 
         # Find the type of land block destroyed with the line
         self._block_empty = \
-            Scene.server.getBlock(self.position.x, self.position.y-1, self.position.z)
+            World.server.getBlock(self.position.x, self.position.y-1, self.position.z)
 
-        Scene.server.setBlocks(self.position.x, self.position.y-1, self.position.z,
+        World.server.setBlocks(self.position.x, self.position.y-1, self.position.z,
                                end_x, end_y, end_z, self.block)
 
         self._end_position = Vec3(end_x, end_y + 1, end_z)

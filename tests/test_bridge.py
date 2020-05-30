@@ -9,6 +9,7 @@ import unittest
 import mcpi
 
 from mcthings.bridge import Bridge
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -16,7 +17,7 @@ class TestBridge(TestBaseThing):
     """Test Bridge Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building bridges")
+        World.server.postToChat("Building bridges")
 
         pos = self.pos
 

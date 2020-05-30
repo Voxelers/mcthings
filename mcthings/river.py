@@ -4,8 +4,8 @@
 import mcpi.block
 from mcpi.vec3 import Vec3
 
-from .scene import Scene
 from .thing import Thing
+from .world import World
 
 
 class River(Thing):
@@ -27,9 +27,9 @@ class River(Thing):
 
         # Find the type of land block destroyed with the river
         self._block_empty = \
-            Scene.server.getBlock(init_x, self.position.y - 1, init_z)
+            World.server.getBlock(init_x, self.position.y - 1, init_z)
 
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             init_x, init_y, init_z,
             end_x, end_y, end_z,
             self.block)

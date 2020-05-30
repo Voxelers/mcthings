@@ -7,6 +7,7 @@ import logging
 import unittest
 
 from mcthings.schematic import Schematic
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -14,8 +15,7 @@ class TestSchematic(TestBaseThing):
     """Test Schematic Thing"""
 
     def test_build(self):
-
-        self.server.mc.postToChat("Building a schematic")
+        World.server.postToChat("Building a schematic")
         pos = self.pos
 
         schematic = Schematic(pos)

@@ -1,7 +1,7 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
 
-from .scene import Scene
+from .world import World
 from .thing import Thing
 
 
@@ -12,7 +12,7 @@ class Wall(Thing):
 
     def build(self):
 
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             self.position.x, self.position.y, self.position.z,
             self.position.x+self.length-1,
             self.position.y+self.height-1,

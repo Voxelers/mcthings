@@ -10,6 +10,7 @@ import mcpi
 from mcpi.vec3 import Vec3
 
 from mcthings.pyramid import Pyramid, PyramidHollow
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 FLAT_WORLD_GROUND_HEIGHT = 4
@@ -19,7 +20,7 @@ class TestPyramid(TestBaseThing):
     """Test Pyramid Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a pyramid")
+        World.server.postToChat("Building a pyramid")
 
         pos = self.pos
 

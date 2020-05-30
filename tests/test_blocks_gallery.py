@@ -7,6 +7,7 @@ import logging
 import unittest
 
 from mcthings.blocks_gallery import BlocksGallery
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -14,7 +15,7 @@ class TestBlocksGallery(TestBaseThing):
     """Test  Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a blocks gallery with all available blocks")
+        World.server.postToChat("Building a blocks gallery with all available blocks")
 
         pos = self.pos
 

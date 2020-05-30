@@ -7,6 +7,7 @@ import logging
 import unittest
 
 from mcthings.wall import Wall
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -14,7 +15,7 @@ class TestWall(TestBaseThing):
     """Test Wall Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a wall")
+        World.server.postToChat("Building a wall")
 
         pos = self.pos
 

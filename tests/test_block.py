@@ -9,6 +9,7 @@ import unittest
 from mcpi.vec3 import Vec3
 
 from mcthings.block import Block
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -16,7 +17,7 @@ class TestBlock(TestBaseThing):
     """Test Block Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building two blocks")
+        World.server.postToChat("Building two blocks")
 
         pos = self.pos
 

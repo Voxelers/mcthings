@@ -11,6 +11,7 @@ from mcpi.vec3 import Vec3
 
 from mcthings.block import Block
 from mcthings.platform import Platform
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -18,7 +19,7 @@ class TestPlatform(TestBaseThing):
     """Test Platform Thing"""
 
     def test_build(self):
-        self.server.mc. postToChat("Building a platform")
+        World.server.postToChat("Building a platform")
 
         self.pos.z += 1
         platform = Platform(self.pos)
@@ -31,8 +32,8 @@ class TestPlatform(TestBaseThing):
         block.build()
 
         p = Vec3(platform.end_position.x, platform.end_position.y + 1, platform.end_position.z)
-        self.server.mc.entity.setTilePos(
-            self.server.mc.getPlayerEntityId(self.BUILDER_NAME),
+        World.server.entity.setTilePos(
+            World.server.getPlayerEntityId(self.BUILDER_NAME),
             p)
 
 

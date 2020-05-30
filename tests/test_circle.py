@@ -9,6 +9,7 @@ import unittest
 import mcpi
 
 from mcthings.circle import Circle
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -16,7 +17,7 @@ class TestCircle(TestBaseThing):
     """Test Circle Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a circle")
+        World.server.postToChat("Building a circle")
 
         pos = self.pos
 

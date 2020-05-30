@@ -8,8 +8,10 @@ import unittest
 
 import mcpi
 from mcpi.vec3 import Vec3
+from mcthings.decorators.light_decorator import LightDecorator
 
 from mcthings.town import Town
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -17,7 +19,7 @@ class TestTown(TestBaseThing):
     """Test Town Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a town")
+        World.server.postToChat("Building a town")
 
         pos = self.pos
 
@@ -31,6 +33,9 @@ class TestTown(TestBaseThing):
         town.block = mcpi.block.BEDROCK
         town.house_mirror = True
         town.build()
+
+        town.add_decorator(LightDecorator)
+        town.decorate()
 
 
 if __name__ == "__main__":

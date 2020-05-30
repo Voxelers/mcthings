@@ -4,7 +4,7 @@
 import mcpi
 from mcpi.vec3 import Vec3
 
-from .scene import Scene
+from .world import World
 from .thing import Thing
 
 
@@ -40,13 +40,13 @@ class Fence(Thing):
 
         self._end_position = Vec3(end_x, end_y, end_z)
 
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             init_x, init_y, init_z,
             end_x, end_y, end_z,
             self.block)
 
         # Fill the prism with air to became a rectangular wall
-        Scene.server.setBlocks(
+        World.server.setBlocks(
             init_x + self.thick, init_y, init_z + self.thick,
             end_x - self.thick,
             end_y,

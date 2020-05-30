@@ -11,6 +11,7 @@ import mcpi
 from mcthings.fence import Fence
 from mcthings.pyramid import Pyramid
 from mcthings.town import Town
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -18,7 +19,7 @@ class TestFence(TestBaseThing):
     """Test Fence Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a walled town")
+        World.server.postToChat("Building a walled town")
 
         pos = self.pos
         pos.x += 10

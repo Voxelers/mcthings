@@ -4,8 +4,9 @@
 from nbt import nbt
 
 from mcpi.vec3 import Vec3
-from mcthings.scene import Scene
+
 from mcthings.thing import Thing
+from mcthings.world import World
 
 
 class Schematic(Thing):
@@ -15,7 +16,7 @@ class Schematic(Thing):
     """ file path for the schematic file """
 
     def build(self):
-        mc = Scene.server
+        mc = World.server
 
         if not self.file_path:
             RuntimeError("Missing file_path param")

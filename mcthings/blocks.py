@@ -4,7 +4,7 @@
 from mcpi.vec3 import Vec3
 
 from .thing import Thing
-from .scene import Scene
+from .world import World
 
 
 class Blocks(Thing):
@@ -14,7 +14,7 @@ class Blocks(Thing):
 
     def build(self):
         p = self.position
-        Scene.server.setBlocks(p.x, p.y, p.z,
+        World.server.setBlocks(p.x, p.y, p.z,
                                p.x + self.width - 1, p.y + self.height - 1, p.z + self.length - 1,
                                self.block)
 

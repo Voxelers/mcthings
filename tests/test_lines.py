@@ -9,6 +9,7 @@ import unittest
 import mcpi
 
 from mcthings.block import Block
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -16,7 +17,7 @@ class TestLines(TestBaseThing):
     """Test Lines Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building lines of blocks")
+        World.server.postToChat("Building lines of blocks")
 
         pos = self.pos
         blocks_number = 5

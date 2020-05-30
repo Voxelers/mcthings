@@ -5,7 +5,7 @@ from math import floor
 
 from mcpi.vec3 import Vec3
 
-from .scene import Scene
+from .world import World
 from .thing import Thing
 
 
@@ -43,7 +43,7 @@ class Bridge(Thing):
             if self.height and y >= self.height-1:
                 final_y = self.height-1
 
-            Scene.server.setBlock(
+            World.server.setBlock(
                 self.position.x + x, self.position.y + final_y, self.position.z + z,
                 self.block)
 

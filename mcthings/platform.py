@@ -5,7 +5,7 @@ import math
 from mcpi.vec3 import Vec3
 
 from .thing import Thing
-from .scene import Scene
+from .world import World
 
 
 class Platform(Thing):
@@ -18,12 +18,12 @@ class Platform(Thing):
         # base of the tower
         base_x = p.x + math.floor(self.top_size/2)
         base_z = p.z + math.floor(self.top_size/2)
-        Scene.server.setBlocks(base_x, p.y, base_z,
+        World.server.setBlocks(base_x, p.y, base_z,
                                base_x, p.y + self.height - 1, base_z,
                                self.block)
 
         # Top
-        Scene.server.setBlocks(p.x, p.y + self.height, p.z,
+        World.server.setBlocks(p.x, p.y + self.height, p.z,
                                p.x + self.top_size - 1, p.y + self.height, p.z + self.top_size - 1,
                                self.block)
 

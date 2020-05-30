@@ -8,6 +8,7 @@ import unittest
 import mcpi
 
 from mcthings.server import Server
+from mcthings.world import World
 
 
 class TestBaseThing(unittest.TestCase):
@@ -18,16 +19,17 @@ class TestBaseThing(unittest.TestCase):
     MC_SEVER_HOST = "localhost"
     MC_SEVER_PORT = 4711
 
+    MC_SEVER_HOST = "javierete.com"
+    MC_SEVER_PORT = 9711
+
     @classmethod
     def setUpClass(cls):
         try:
-            cls.server = Server(cls.MC_SEVER_HOST, cls.MC_SEVER_PORT)
-            cls.pos = cls.server.mc.entity.getTilePos(cls.server.mc.getPlayerEntityId(cls.BUILDER_NAME))
-
+            World.connect(Server(cls.MC_SEVER_HOST, cls.MC_SEVER_PORT))
         except mcpi.connection.RequestError:
             logging.error("Can't connect to Minecraft server " + cls.MC_SEVER_HOST)
             sys.exit(1)
 
     def setUp(self):
-        self.pos = self.server.mc.entity.getTilePos(self.server.mc.getPlayerEntityId(self.BUILDER_NAME))
+        self.pos = World.server.entity.getTilePos(World.server.getPlayerEntityId(self.BUILDER_NAME))
 

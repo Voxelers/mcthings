@@ -7,6 +7,7 @@ import logging
 import unittest
 
 from mcthings.river import River
+from mcthings.world import World
 from tests.base import TestBaseThing
 
 
@@ -14,7 +15,7 @@ class TestRiver(TestBaseThing):
     """Test River Thing"""
 
     def test_build(self):
-        self.server.mc.postToChat("Building a river")
+        World.server.postToChat("Building a river")
 
         pos = self.pos
 

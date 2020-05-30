@@ -2,7 +2,7 @@
 # Author (©): Alvaro del Castillo
 from mcpi.vec3 import Vec3
 
-from mcthings.scene import Scene
+from mcthings.world import World
 from mcthings.thing import Thing
 
 
@@ -12,7 +12,7 @@ class Sphere(Thing):
     """ radius of the Sphere """
 
     def build(self):
-        Scene.drawing.drawSphere(
+        World.drawing.drawSphere(
             self.position.x + self.radius,
             self.position.y + self.radius - 1,
             self.position.z + self.radius,
@@ -33,7 +33,7 @@ class SphereHollow(Thing):
     height = 0
 
     def build(self):
-        Scene.drawing.drawHollowSphere(
+        World.drawing.drawHollowSphere(
             self.position.x + self.radius,
             self.position.y + self.radius - 1,
             self.position.z + self.radius,
@@ -45,4 +45,3 @@ class SphereHollow(Thing):
         end_z = self.position.z + 2 * self.radius
 
         self._end_position = Vec3(end_x, end_y, end_z)
-
