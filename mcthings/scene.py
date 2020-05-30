@@ -87,14 +87,8 @@ class Scene:
         """ Save a scene to a file """
         pickle.dump(self.things, open(file_path, "wb"))
 
-    def to_schematic(self, file_path, block_data=False):
-        """
-        Save the Scene into a Schematic file
-
-        :param file_path: file in which to export the Scene in Schematic format
-        :param block_data: extract blocks ids and data (much slower)
-        :return: the Schematic object
-        """
+    def find_bounding_box(self):
+        """ Compute the bounding box of the Scene """
 
         def update_box(box_pos_min, box_pos_max, pos):
             # Update box_pos_min and box_pos_max checking pos
@@ -116,5 +110,18 @@ class Scene:
             min_pos, max_pos = update_box(min_pos, max_pos, thing.position)
             if thing.end_position:
                 min_pos, max_pos = update_box(min_pos, max_pos, thing.end_position)
+
+        return min_pos, max_pos
+
+    def to_schematic(self, file_path, block_data=False):
+        """
+        Save the Scene into a Schematic file
+
+        :param file_path: file in which to export the Scene in Schematic format
+        :param block_data: extract blocks ids and data (much slower)
+        :return: the Schematic object
+        """
+
+        (min_pos, max_pos) = self.find_bounding_box()
 
         build_schematic_nbt(min_pos, max_pos, block_data).write_file(file_path)
