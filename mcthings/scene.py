@@ -113,8 +113,8 @@ class Scene:
     def load(self, file_path):
         """ Load a scene from a file (but no build it yet) """
         self.things = pickle.load(open(file_path, "rb"))
-        if Scene.things:
-            Scene._position = Scene.things[0].position
+        if self.things:
+            self._position = self.things[0].position
 
     def save(self, file_path):
         """ Save a scene to a file """
