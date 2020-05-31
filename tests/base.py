@@ -19,9 +19,6 @@ class TestBaseThing(unittest.TestCase):
     MC_SEVER_HOST = "localhost"
     MC_SEVER_PORT = 4711
 
-    MC_SEVER_HOST = "javierete.com"
-    MC_SEVER_PORT = 9711
-
     @classmethod
     def setUpClass(cls):
         try:
