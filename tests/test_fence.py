@@ -10,6 +10,7 @@ import mcpi
 import mcpi.block
 
 from mcthings.block import Block
+from mcthings.decorators.border_decorator import BorderDecorator
 from mcthings.fence import Fence
 from mcthings.house import House
 from mcthings.pyramid import Pyramid
@@ -36,11 +37,18 @@ class TestFence(TestBaseThing):
         init_scene = World.scenes[0]
         init_scene.build()
 
-        # The fence for the Scene but must in a different Scene
+        # The fence for the Scene must be in a different Scene
         fence = Fence(None, scene=Scene())
         fence.thing = init_scene
         fence.block = mcpi.block.RAIL
+        fence.fence_space = 1
+        fence.height = 1
+        # Fix the railway with a decorator
+        border = BorderDecorator
+        border.block = mcpi.block.RAIL
+        fence.add_decorator(border)
         fence.build()
+        fence.decorate()
 
         pos.x += 50
 

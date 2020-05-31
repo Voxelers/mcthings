@@ -4,9 +4,7 @@ from mcpi.minecraft import Minecraft
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
 
-from minecraftstuff import MinecraftDrawing
-
-from mcthings.scene import Scene
+import mcpi.block
 
 
 class Decorator:
@@ -15,6 +13,9 @@ class Decorator:
 
     If a Thing has decorators, they will be called after the build of the Thing.
     """
+
+    block = mcpi.block.AIR
+    """ Base block for the decorator """
 
     @classmethod
     def decorate(cls, thing):

@@ -25,6 +25,8 @@ class Scene:
     def __init__(self):
         self.things = []
         """ map with the things in the scene """
+        self._decorators = []
+        """ decorators for the scene """
         self._position = None
         """ position in the world of the scene """
         self._end_position = None
@@ -49,6 +51,19 @@ class Scene:
             # of its first thing added
             self._position = thing.position
         self.things.append(thing)
+
+    def add_decorator(self, thing):
+        """ Add a new decorator to the scene """
+        self._decorators.append(thing)
+
+    def decorate(self):
+        """
+        Call all decorators for the current Scene
+
+        :return:
+        """
+        for decorator in self._decorators:
+            decorator.decorate(self)
 
     def build(self):
         """ Build all the things inside the Scene """

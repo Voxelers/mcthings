@@ -16,6 +16,7 @@ class Fence(Thing):
     fence_space = 5
     """ Space between the fence and the thing fenced """
     thick = 1
+    height = None
     thing = None
 
     def build(self):
@@ -36,6 +37,8 @@ class Fence(Thing):
 
         end_x = self.thing.end_position.x + self.fence_space + self.thick
         end_y = self.thing.end_position.y
+        if self.height:
+            end_y = self.thing.position.y + (self.height - 1)
         end_z = self.thing.end_position.z + self.fence_space + self.thick
 
         self._end_position = Vec3(end_x, end_y, end_z)
