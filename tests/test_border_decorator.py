@@ -8,6 +8,7 @@ import unittest
 
 import mcpi
 import mcpi.block
+from mcpi.vec3 import Vec3
 
 from mcthings.block import Block
 from mcthings.decorators.border_decorator import BorderDecorator
@@ -31,15 +32,17 @@ class TestBorderDecorator(TestBaseThing):
 
         # Add a border around an scene
         Block(pos)
+        # Block(Vec3(pos.x+1,  pos.y, pos.z))
         p = Pyramid(pos)
         p.height = 5
         House(pos)
-        init_scene = World.scenes[0]
+        init_scene = World.first_scene()
         init_scene.build()
 
         # Add a Railway around the scene
         border = BorderDecorator
         border.block = mcpi.block.RAIL
+        border.margin = 5
         init_scene.add_decorator(border)
         init_scene.decorate()
 

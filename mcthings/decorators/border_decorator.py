@@ -28,30 +28,32 @@ class BorderDecorator(Decorator):
         :return:
         """
 
-        width = thing.end_position.x - thing.position.x + cls.margin
-        large = thing.end_position.z - thing.position.z + cls.margin
+        (min_pos, max_pos) = thing.find_bounding_box()
 
-        init_pos = Vec3(thing.position.x - cls.margin, thing.position.y, thing.position.z - cls.margin)
-        end_pos = Vec3(thing.position.x + cls.margin, thing.position.y, thing.position.z + cls.margin)
+        border_width = (max_pos.x - min_pos.x) + 1 + 2 * cls.margin + 2 * 1
+        border_large = (max_pos.z - min_pos.z) + 1 + 2 * cls.margin + 2 * 1
+
+        init_pos = Vec3(min_pos.x - (cls.margin + 1), min_pos.y, min_pos.z - (cls.margin + 1))
+        end_pos = Vec3(min_pos.x + (cls.margin + 1), min_pos.y, min_pos.z + (cls.margin + 1))
 
         # Create the four borders of the Thing
         # Block by block with pre-clean so railways work
         init = init_pos
-        end = Vec3(init_pos.x + 2 * width, init_pos.y, init_pos.z)
-        for x in range(0, 2 * width):
+        end = Vec3(init_pos.x + border_width - 1, init_pos.y, init_pos.z)
+        for x in range(0, border_width - 1):
             World.server.setBlock(init.x + x, init.y, init.z, cls.block)
 
         init = end
-        end = Vec3(init.x, init.y, init.z + 2 * large )
-        for z in range(0, 2 * large):
+        end = Vec3(init.x, init.y, init.z + border_large - 1)
+        for z in range(0, border_large - 1):
             World.server.setBlock(init.x, init.y, init.z + z, cls.block)
 
         init = end
-        end = Vec3(init.x - 2 * width, init.y, init.z)
-        for x in range(0, 2 * width):
+        end = Vec3(init.x - (border_width - 1), init.y, init.z)
+        for x in range(0, border_width - 1):
             World.server.setBlock(init.x - x, init.y, init.z, cls.block)
 
         init = end
-        end = Vec3(init.x, init.y, init.z - 2 * large)
-        for z in range(0, 2 * large):
+        end = Vec3(init.x, init.y, init.z - (border_large - 1))
+        for z in range(0, border_large - 1):
             World.server.setBlock(init.x, init.y, init.z - z, cls.block)
