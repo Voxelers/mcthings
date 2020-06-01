@@ -15,6 +15,7 @@ from mcthings.decorators.border_decorator import BorderDecorator
 from mcthings.fence import Fence
 from mcthings.house import House
 from mcthings.pyramid import Pyramid
+from mcthings.river import River
 from mcthings.scene import Scene
 from mcthings.town import Town
 from mcthings.world import World
@@ -36,6 +37,8 @@ class TestBorderDecorator(TestBaseThing):
         p = Pyramid(pos)
         p.height = 5
         House(pos)
+        river = River(pos)
+        river.length = 5
         init_scene = World.first_scene()
         init_scene.build()
 
