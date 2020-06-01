@@ -6,6 +6,8 @@
 import logging
 import unittest
 
+from mcpi.vec3 import Vec3
+
 from mcthings.river import River
 from mcthings.world import World
 from tests.base import TestBaseThing
@@ -28,7 +30,8 @@ class TestRiver(TestBaseThing):
         river.build()
         river.unbuild()
 
-        river = River(river.end_position)
+        pos = river.end_position
+        river = River(Vec3(pos.x, self.pos.y, pos.z))
         river.depth = 3
         river.build()
 

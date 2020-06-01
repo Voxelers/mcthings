@@ -43,7 +43,7 @@ class Thing:
                 Scene()  # Scene add itself to the World
 
             """ Use the default  Scene """
-            self._scene = World.scenes[0]
+            self._scene = World.first_scene()
 
         # Add then thing built to the scene
         if parent is None:

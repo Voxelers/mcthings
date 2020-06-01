@@ -27,30 +27,8 @@ class TestFence(TestBaseThing):
         World.server.postToChat("Building a walled town")
 
         pos = self.pos
-        pos.x += 2
 
-        # Add a Fence around an scene
-        Block(pos)
-        p = Pyramid(pos)
-        p.height = 5
-        House(pos)
-        init_scene = World.scenes[0]
-        init_scene.build()
-
-        # The fence for the Scene must be in a different Scene
-        fence = Fence(None, scene=Scene())
-        fence.thing = init_scene
-        fence.block = mcpi.block.RAIL
-        fence.fence_space = 1
-        fence.height = 1
-        # Fix the railway with a decorator
-        border = BorderDecorator
-        border.block = mcpi.block.RAIL
-        fence.add_decorator(border)
-        fence.build()
-        fence.decorate()
-
-        pos.x += 50
+        pos.x += 10
 
         town = Town(pos)
         town.houses = 3
@@ -65,7 +43,7 @@ class TestFence(TestBaseThing):
         fence.block = mcpi.block.GOLD_BLOCK
         fence.thing = town
         fence.thick = 4
-        fence.height = 10
+        fence.height = 5
         fence.build()
 
         pos.x += 30

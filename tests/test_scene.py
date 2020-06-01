@@ -29,7 +29,7 @@ class TestScene(TestBaseThing):
         block.build()
 
         pos.y += 1
-        World.scenes[0].move(pos)
+        World.first_scene().move(pos)
 
 
 if __name__ == "__main__":
