@@ -63,10 +63,6 @@ class Scene:
         :return:
         """
 
-        if self._end_position is None:
-            (min_pos, max_pos) = self.find_bounding_box()
-            self._end_position = max_pos
-
         for decorator in self._decorators:
             decorator.decorate(self)
 

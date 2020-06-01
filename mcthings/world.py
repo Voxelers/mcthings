@@ -26,6 +26,11 @@ class World:
         cls.scenes.append(scene)
 
     @classmethod
+    def first_scene(cls):
+        """ Return the first scene used be default """
+        return cls.scenes[0]
+
+    @classmethod
     def build(cls):
         """ Build all the scenes inside the world """
         for scene in cls.scenes:

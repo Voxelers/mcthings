@@ -137,3 +137,8 @@ class Thing:
             decorator.decorate(self)
             for child in self._children:
                 decorator.decorate(child)
+
+    def find_bounding_box(self):
+        """ Compute the bounding box of the Thing """
+
+        return self.position, self.end_position
