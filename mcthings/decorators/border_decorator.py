@@ -29,9 +29,14 @@ class BorderDecorator(Decorator):
         """
 
         (min_pos, max_pos) = thing.find_bounding_box()
+        # The min height is always the floor of the thing position
+        if min_pos.y < thing.position.y:
+            min_pos.y = thing.position.y
 
         border_width = (max_pos.x - min_pos.x) + 1 + 2 * cls.margin + 2 * 1
+        border_width = math.ceil(border_width)
         border_large = (max_pos.z - min_pos.z) + 1 + 2 * cls.margin + 2 * 1
+        border_large = math.ceil(border_large)
 
         init_pos = Vec3(min_pos.x - (cls.margin + 1), min_pos.y, min_pos.z - (cls.margin + 1))
         end_pos = Vec3(min_pos.x + (cls.margin + 1), min_pos.y, min_pos.z + (cls.margin + 1))
