@@ -1,6 +1,6 @@
 # McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings)
 
-A Python programming framework for building Scenes in Minecraft. Scenes are compositions of Things (Python objects) implemented using the
+A Python programming framework for building a World of Scenes in Minecraft. Scenes are compositions of Things (Python objects) implemented using the
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
 [API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html) (which also works in [Minetest](https://github.com/arpruss/raspberryjammod-minetest)). It is based
 on [mcpi library](https://github.com/martinohanlon/mcpi). 
@@ -13,11 +13,14 @@ and may others. All the Things share the [Thing API](mcthings/thing.py).
 A Thing can be [decorated](https://twitter.com/acstw/status/1265510248892239873)
 using existing decorators like [LightDecorator](mcthings/decorators/light_decorator.py) 
 or you can create your own one. A [decorated house](https://github.com/juntosdesdecasa/mcthings_extra/blob/develop/tests/test_entity.py#L40).
+Scenes can also be decorated [like this sample](https://twitter.com/acstw/status/1267591965169811456)
+with a railway ([BorderDecorator](mcthings/decorators/border_decorator.py)) around a Scene.
 
 There is also a repository for experimental, incubating or with extra dependencies Things
 at [McThings Extra](https://github.com/juntosdesdecasa/mcthings_extra).
 
-A [Scene is a list](mcthings/scene.py) of Things built in a specific position and order. Scenes can be shared
+A [World](mcthings/world.py) is a list of Scenes placed in concrete positions. 
+And a [Scene is a list](mcthings/scene.py) of Things built in a specific position and order. Scenes can be shared
 loading and saving them to files. Scenes can be also saved as Schematics
 and converted with [Mineways](http://www.realtimerendering.com/erich/minecraft/public/mineways/) 
 to be used for [3D rendering and printing](https://twitter.com/acstw/status/1262944914234540032). 
