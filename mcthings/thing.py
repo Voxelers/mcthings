@@ -1,5 +1,7 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
+import logging
+import math
 
 import mcpi.block
 import mcpi.vec3
@@ -7,7 +9,7 @@ import mcpi.vec3
 from ._version import __version__
 from .scene import Scene
 
-from .utils import build_schematic_nbt
+from .utils import build_schematic_nbt, extract_region
 from .world import World
 
 
@@ -106,6 +108,47 @@ class Thing:
         self.unbuild()
         self._position = position
         self.build()
+
+    def rotate(self, degrees):
+        """
+        Rotate the thing in the x,z space. Blocks data is not preserved.
+
+        :param degrees: degrees to rotate (90, 180, 270)
+        :return:
+        """
+
+        cos_degrees = math.cos(math.radians(degrees))
+        sin_degrees = math.sin(math.radians(degrees))
+
+        def rotate_x(pos_x, pos_z):
+            return pos_x * cos_degrees - pos_z * sin_degrees
+
+        def rotate_z(pos_x, pos_z):
+            return pos_z * cos_degrees + pos_x * sin_degrees
+
+        # Rotate all the blocks in the Thing
+        min_pos, max_pos = self.find_bounding_box()
+        size_x = max_pos.x - min_pos.x + 1
+        size_y = max_pos.y - min_pos.y + 1
+        size_z = max_pos.z - min_pos.z + 1
+
+        # Get all blocks to be rotated
+        blocks_to_rotate, data = extract_region(min_pos, max_pos)
+
+        # Remove all blocks
+        self.unbuild()
+
+        # Add the rotated blocks
+        for y in range(0, size_y):
+            for z in range(0, size_z):
+                for x in range(0, size_x):
+                    i = x + size_x * z + (size_x * size_z) * y
+                    b = blocks_to_rotate[i]
+                    if b != 0:
+                        rotated_x = min_pos.x + rotate_x(x, z)
+                        rotated_z = min_pos.z + rotate_z(x, z)
+                        World.server.setBlock(rotated_x, min_pos.y + y, rotated_z, b)
+
 
     def to_schematic(self, file_path, blocks_data=False):
         """
