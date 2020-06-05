@@ -80,7 +80,7 @@ class Schematic(Thing):
                         if self.rotate_degrees != 0:
                             rotated_x = init_x + rotate_x(x, z)
                             rotated_z = init_z + rotate_z(x, z)
-                            World.server.setBlock(rotated_x, init_y + y, rotated_z, b)
+                            World.server.setBlock(rotated_x, init_y + y, rotated_z, b, d)
                             self._end_position = mcpi.vec3.Vec3(rotated_x, init_y + y, rotated_z)
                         else:
                             mc.setBlock(init_x + x, init_y + y, init_z + z, b, d)
