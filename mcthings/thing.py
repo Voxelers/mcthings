@@ -131,6 +131,9 @@ class Thing:
         def rotate_z(pos_x, pos_z):
             return pos_z * cos_degrees + pos_x * sin_degrees
 
+        if self.end_position is None:
+            self.build()
+
         # Rotate all the blocks in the Thing
         min_pos, max_pos = self.find_bounding_box()
         size_x = max_pos.x - min_pos.x + 1
