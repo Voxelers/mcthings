@@ -15,7 +15,7 @@ class TestRotateSchematic(TestBaseThing):
     """Test to rotate an Schematic """
 
     def test_build(self):
-        World.server.postToChat("Building two blocks")
+        World.server.postToChat("Building rotated pirate boats")
 
         pos = self.pos
 
@@ -24,22 +24,17 @@ class TestRotateSchematic(TestBaseThing):
         boat.file_path = "schematics/pirate-boat.schematic"
         boat.build()
 
-        pos.x += 50
         rot_boat = Schematic(pos)
         rot_boat.file_path = "schematics/pirate-boat.schematic"
-        rot_boat.build()
+        rot_boat.find_bounding_box()  # Detect the size of the schematic
         rot_boat.rotate(90)
 
-        pos.x += 30
         rot_boat = Schematic(pos)
         rot_boat.file_path = "schematics/pirate-boat.schematic"
-        rot_boat.build()
         rot_boat.rotate(180)
 
-        pos.x += 30
         rot_boat = Schematic(pos)
         rot_boat.file_path = "schematics/pirate-boat.schematic"
-        rot_boat.build()
         rot_boat.rotate(270)
 
 
