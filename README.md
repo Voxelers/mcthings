@@ -16,6 +16,9 @@ or you can create your own one. A [decorated house](https://github.com/juntosdes
 Scenes can also be decorated [like this sample](https://twitter.com/acstw/status/1267591965169811456)
 with a railway ([BorderDecorator](mcthings/decorators/border_decorator.py)) around a Scene.
 
+And Things can also be rotated. For example, in this scene [the castle is rotated
+180 degrees](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/notebooks/scene0_42.ipynb) so the portal is accessible from the town ways.
+
 There is also a repository for experimental, incubating or with extra dependencies Things
 at [McThings Extra](https://github.com/juntosdesdecasa/mcthings_extra).
 
