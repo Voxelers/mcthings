@@ -153,7 +153,7 @@ class Thing:
                         rotated_x = min_pos.x + rotate_x(x, z)
                         rotated_z = min_pos.z + rotate_z(x, z)
                         World.server.setBlock(rotated_x, min_pos.y + y, rotated_z, b)
-
+                        self._end_position = mcpi.vec3.Vec3(rotated_x, min_pos.y + y, rotated_z)
 
     def to_schematic(self, file_path, blocks_data=False):
         """

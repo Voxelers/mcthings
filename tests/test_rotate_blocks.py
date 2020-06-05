@@ -38,6 +38,18 @@ class TestRotateBlock(TestBaseThing):
         blocks.build()
         blocks.rotate(90)
 
+        # Check that the blocks start and end point are correct
+        init_blocks = Blocks(blocks.position)
+        init_blocks.height = 5
+        init_blocks.width = 1
+        init_blocks.length = 1
+        init_blocks.build()
+        end_blocks = Blocks(blocks.end_position)
+        end_blocks.height = 5
+        end_blocks.width = 1
+        end_blocks.length = 1
+        end_blocks.build()
+
         try:
             blocks.rotate(45)
         except RuntimeError:
