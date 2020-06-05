@@ -38,6 +38,11 @@ class TestRotateBlock(TestBaseThing):
         blocks.build()
         blocks.rotate(90)
 
+        try:
+            blocks.rotate(45)
+        except RuntimeError:
+            logging.info("Detected right Exception for invalid %s degrees", str(45))
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')

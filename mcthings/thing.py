@@ -117,6 +117,11 @@ class Thing:
         :return:
         """
 
+        valid_degrees = [90, 180, 270]
+
+        if degrees not in [90, 180, 270]:
+            raise RuntimeError("Invalid degrees: %s (valid: %s) " % (degrees, valid_degrees))
+
         cos_degrees = math.cos(math.radians(degrees))
         sin_degrees = math.sin(math.radians(degrees))
 
