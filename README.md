@@ -1,4 +1,4 @@
-# McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings)
+# McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings) [![Twitter](docs/img/twitter.png)](https://twitter.com/McthingsP)
 
 A Python programming framework for building a World of Scenes in Minecraft. Scenes are compositions of Things (Python objects) implemented using the
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
