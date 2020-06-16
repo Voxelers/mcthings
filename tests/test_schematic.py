@@ -6,6 +6,8 @@
 import logging
 import unittest
 
+import mcpi.block
+
 from mcthings.schematic import Schematic
 from mcthings.world import World
 from tests.base import TestBaseThing
@@ -24,9 +26,8 @@ class TestSchematic(TestBaseThing):
         # 2017: https://www.minecraft-schematics.com/schematic/9676/
         # schematic.file_path = "schematics/chateau-fairmont.schematic"
         # schematic.file_path = "schematics/pyramid_hollow.schematic"
-        schematic.file_path = "schematics/zanabot.schematic"
+        schematic.change_blocks = {mcpi.block.ICE.id: mcpi.block.GLASS.id}
         schematic.build()
-        schematic.to_schematic("schematics/zanabot-exported.schematic", blocks_data=False)
 
 
 if __name__ == "__main__":

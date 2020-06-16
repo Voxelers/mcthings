@@ -3,6 +3,7 @@
 import math
 
 import mcpi
+import mcpi.block
 from nbt import nbt
 
 from mcpi.vec3 import Vec3
@@ -18,6 +19,8 @@ class Schematic(Thing):
     """ file path for the schematic file """
     rotate_degrees = 0
     """ rotate the schematic """
+    change_blocks = {mcpi.block.AIR.id: mcpi.block.AIR.id}
+    """ Change a block with other """
 
     def find_bounding_box(self):
         """ In a Schematic the bounding box is inside the file data """
@@ -76,6 +79,9 @@ class Schematic(Thing):
                             # Cleaning the schematic
                             b = 0
                         d = data[i] & 0b00001111  # lower 4 bits
+
+                        if b in self.change_blocks:
+                            b = self.change_blocks[b]
 
                         if self.rotate_degrees != 0:
                             rotated_x = init_x + rotate_x(x, z)
