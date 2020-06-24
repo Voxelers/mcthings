@@ -9,7 +9,7 @@ from mcpi.minecraft import Minecraft
 from minecraftstuff import MinecraftDrawing
 
 from .renderer import Renderer
-from ..blocks_memory import BlocksMemory
+from mcthings.blocks_memory import BlocksMemory
 
 
 class _Server:
