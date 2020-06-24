@@ -37,6 +37,12 @@ class Thing:
         self._scene = scene
 
         if position:
+            if not (isinstance(position.x, int) and
+                    isinstance(position.y, int) and
+                    isinstance(position.z, int)):
+                raise RuntimeError("Bad position for Thing",
+                                   position.x, position.y, position.z)
+
             self._position = mcpi.vec3.Vec3(position.x, position.y, position.z)
 
         if scene is None:
