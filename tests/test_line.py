@@ -23,10 +23,9 @@ class TestLine(TestBaseThing):
 
         pos.x += 1
         line = Line(pos)
-        line.width = 2
         line.block = mcpi.block.SAND
-        line.length = 10
-        line.width = 1
+        line.length = 2
+        line.width = -1
         line.build()
 
         line = Line(line.end_position)

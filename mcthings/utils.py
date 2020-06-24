@@ -157,9 +157,9 @@ def find_min_max_cuboid_vertex(vertex, vertex_opposite):
 
     vertex_min = vertex_max = None
 
-    width = abs(vertex_opposite.x - vertex.x) + 1
-    height = abs(vertex_opposite.y - vertex.y) + 1
-    length = abs(vertex_opposite.z - vertex.z) + 1
+    width = abs(vertex_opposite.x - vertex.x)
+    height = abs(vertex_opposite.y - vertex.y)
+    length = abs(vertex_opposite.z - vertex.z)
 
     # Find all vertex in the up face: up1 and up3 are already known
     up1 = vertex_opposite
@@ -169,15 +169,15 @@ def find_min_max_cuboid_vertex(vertex, vertex_opposite):
         up3 = Vec3(vertex_opposite.x, vertex.y, vertex_opposite.z)
     # Now we need to find the two other vertexes up2, up4
     # Looking at up1 there are two options for up2 and up4
-    up1x1 = Vec3(up1.x + (width - 1), up1.y, up1.z)
-    up1x2 = Vec3(up1.x - (width - 1), up1.y, up1.z)
-    up1z1 = Vec3(up1.x, up1.y, up1.z + (length - 1))
-    up1z2 = Vec3(up1.x, up1.y, up1.z - (length - 1))
+    up1x1 = Vec3(up1.x + width, up1.y, up1.z)
+    up1x2 = Vec3(up1.x - width, up1.y, up1.z)
+    up1z1 = Vec3(up1.x, up1.y, up1.z + length)
+    up1z2 = Vec3(up1.x, up1.y, up1.z - length)
     # Looking at up3 there are two options for up2 and up4
-    up3x1 = Vec3(up3.x + (width - 1), up3.y, up3.z)
-    up3x2 = Vec3(up3.x - (width - 1), up3.y, up3.z)
-    up3z1 = Vec3(up3.x, up3.y, up3.z + (length - 1))
-    up3z2 = Vec3(up3.x, up3.y, up3.z - (length - 1))
+    up3x1 = Vec3(up3.x + width, up3.y, up3.z)
+    up3x2 = Vec3(up3.x - width, up3.y, up3.z)
+    up3z1 = Vec3(up3.x, up3.y, up3.z + length)
+    up3z2 = Vec3(up3.x, up3.y, up3.z - length)
     # The right vertex is the common one for up2 and up4
     if up1x1 == up3z1 or up1x1 == up3z2:
         up2 = up1x1
@@ -188,7 +188,7 @@ def find_min_max_cuboid_vertex(vertex, vertex_opposite):
     if up1z1 == up3x1 or up1z1 == up3x2:
         up4 = up1z1
     elif up1z2 == up3x1 or up1z2 == up3x2:
-        up4 = up1z1
+        up4 = up1z2
     else:
         raise RuntimeError("Bad min an max vertex for cuboid")
 
@@ -204,7 +204,7 @@ def find_min_max_cuboid_vertex(vertex, vertex_opposite):
     # And now select the min and max vertex
     for v in [up1, up2, up3, up4]:
         if v.x == x_min and v.z == z_min:
-            vertex_min = Vec3(v.x, v.y - (height - 1), v.z)
+            vertex_min = Vec3(v.x, v.y - height, v.z)
         if v.x == x_max and v.z == z_max:
             vertex_max = Vec3(v.x, v.y, v.z)
 
