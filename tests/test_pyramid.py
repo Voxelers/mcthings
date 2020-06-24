@@ -13,7 +13,7 @@ from mcthings.pyramid import Pyramid, PyramidHollow
 from mcthings.world import World
 from tests.base import TestBaseThing
 
-FLAT_WORLD_GROUND_HEIGHT = 4
+FLAT_WORLD_GROUND_HEIGHT = 0
 
 
 class TestPyramid(TestBaseThing):

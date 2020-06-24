@@ -38,6 +38,7 @@ class PyramidHollow(Thing):
         outer = Pyramid(self.position, self)
         outer.height = self.height
         outer.block = self.block
+        self.add_child(outer)
         outer.create()
         self._end_position = outer.end_position
         inner_x = self.position.x + self.thick
@@ -46,4 +47,5 @@ class PyramidHollow(Thing):
         inner = Pyramid(Vec3(inner_x, inner_y, inner_z), self)
         inner.block = mcpi.block.AIR
         inner.height = self.height - self.thick
+        self.add_child(inner)
         inner.create()
