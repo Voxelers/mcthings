@@ -1,6 +1,6 @@
 # McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings) [![Twitter](docs/img/twitter.png)](https://twitter.com/McthingsP)
 
-A Python programming framework for building a World of Scenes in Minecraft. Scenes are compositions of Things (Python objects) implemented using the
+A Python programming framework for building a 3D World of Scenes in Minecraft ([Procedural](https://en.wikipedia.org/wiki/Procedural_modeling) [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry)). Scenes are compositions of Things (Python objects) implemented using the
 [Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
 [API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html) (which also works in [Minetest](https://github.com/arpruss/raspberryjammod-minetest)). It is based
 on [mcpi library](https://github.com/martinohanlon/mcpi). 
