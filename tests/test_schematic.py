@@ -27,6 +27,7 @@ class TestSchematic(TestBaseThing):
         # schematic.file_path = "schematics/chateau-fairmont.schematic"
         # schematic.file_path = "schematics/pyramid_hollow.schematic"
         schematic.change_blocks = {mcpi.block.ICE.id: mcpi.block.GLASS.id}
+        schematic.file_path = "schematics/vxs.schematic"
         schematic.build()
 
 

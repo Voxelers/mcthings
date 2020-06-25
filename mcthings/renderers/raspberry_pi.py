@@ -81,6 +81,9 @@ class RaspberryPi(Renderer):
     def get_block(self, pos):
         return self.server.mc.getBlock(pos.x, pos.y, pos.z)
 
+    def get_block_with_data(self, pos):
+        return self.server.mc.getBlockWithData(pos.x, pos.y, pos.z)
+
     def get_blocks(self, init_pos, end_pos):
         return self.server.mc.getBlocks(init_pos.x, init_pos.y, init_pos.z, end_pos.x, end_pos.y, end_pos.z)
 

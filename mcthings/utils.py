@@ -83,7 +83,8 @@ def extract_region_with_data(init_pos, end_pos):
         for z in range(0, size.z):
             for x in range(0, size.x):
                 block_pos = mcpi.vec3.Vec3(init_pos.x + x, init_pos.y + y, init_pos.z + z)
-                block = World.server.getBlockWithData(block_pos.x, block_pos.y, block_pos.z)
+                block = World.renderer.get_block_with_data(
+                    Vec3(block_pos.x, block_pos.y, block_pos.z))
                 blocks_bytes.append(block.id)
                 data_bytes.append(block.data)
 

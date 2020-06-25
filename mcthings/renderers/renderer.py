@@ -31,7 +31,14 @@ class Renderer:
         """
         Get the rendered block at the given position
         :param position:
-        :return:
+        :return: int with the block id
+        """
+
+    def get_block_with_data(self, position):
+        """
+        Get the rendered block at the given position
+        :param position:
+        :return: mcpi.block.Block with the id and data
         """
 
     def get_blocks(self, init_pos, end_pos):
