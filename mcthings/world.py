@@ -20,10 +20,9 @@ class World:
     def set_renderer(cls, renderer):
         cls.renderer = renderer
 
-        # TODO: Hack for Minecraft renderer
+        # TODO: Hack for Minecraft renderer to use McDrawing
         from mcthings.renderers.raspberry_pi import RaspberryPi
         if isinstance(renderer, RaspberryPi):
-            World.server = renderer.mc
             World.drawing = renderer.drawing
 
     @classmethod

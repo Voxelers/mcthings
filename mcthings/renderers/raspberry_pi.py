@@ -1,7 +1,6 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
 import logging
-import math
 import sys
 
 import mcpi
@@ -84,3 +83,7 @@ class RaspberryPi(Renderer):
 
     def get_blocks(self, init_pos, end_pos):
         return self.server.mc.getBlocks(init_pos.x, init_pos.y, init_pos.z, end_pos.x, end_pos.y, end_pos.z)
+
+    def get_pos(self, entity):
+        return self.server.mc.entity.getTilePos(
+            self.server.mc.getPlayerEntityId(entity))

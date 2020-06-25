@@ -41,3 +41,10 @@ class Renderer:
         :param end_pos:
         :return:
         """
+
+    def get_pos(self, entity):
+        """
+        Get the position of the entity in the World
+        :param entity:
+        :return: the position in Vec3 format
+        """
