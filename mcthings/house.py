@@ -23,12 +23,12 @@ class House(Thing):
         init_y = self.position.y
         init_z = self.position.z
 
-        end_x = init_x + self.length
+        end_x = init_x + self.length - 1
         if self.mirror:
             end_x = init_x
-            init_x = init_x - self.length
-        end_y = init_y + self.height
-        end_z = init_z + self.width
+            init_x = init_x - (self.length - 1)
+        end_y = init_y + self.height - 1
+        end_z = init_z + self.width - 1
 
         self.set_blocks(
             Vec3(init_x, init_y, init_z),
@@ -49,7 +49,10 @@ class House(Thing):
         if self.mirror:
             init_door_x = end_x
         init_door = Vec3(init_door_x, init_y, init_z + self.wall_width)
-        end_door = Vec3(init_door_x + self.wall_width, init_y + self.door_size + 1, init_z + self.wall_width + self.door_size)
+        end_door_x = init_door_x + self.wall_width - 1
+        end_door_y = init_y + self.door_size
+        end_door_z = init_z + self.wall_width + self.door_size - 1
+        end_door = Vec3(end_door_x, end_door_y, end_door_z)
         self.set_blocks(init_door, end_door, mcpi.block.AIR.id)
 
         self._end_position = Vec3(end_x, end_y, end_z)
