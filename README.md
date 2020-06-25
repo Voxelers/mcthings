@@ -1,9 +1,13 @@
 # McThings [![Documentation Status](https://readthedocs.org/projects/mcthings/badge/?version=latest)](https://mcthings.readthedocs.io/en/latest/?badge=latest) [![PyPI version](https://badge.fury.io/py/mcthings.svg)](https://badge.fury.io/py/mcthings) [![Twitter](docs/img/twitter.png)](https://twitter.com/McthingsP)
 
-A Python programming framework for building a 3D World of Scenes in Minecraft ([Procedural](https://en.wikipedia.org/wiki/Procedural_modeling) [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry)). Scenes are compositions of Things (Python objects) implemented using the
-[Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/)
-[API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html) (which also works in [Minetest](https://github.com/arpruss/raspberryjammod-minetest)). It is based
-on [mcpi library](https://github.com/martinohanlon/mcpi). 
+A Python programming framework for building a 3D World of Scenes in Minecraft ([Procedural](https://en.wikipedia.org/wiki/Procedural_modeling) [CSG](https://en.wikipedia.org/wiki/Constructive_solid_geometry)). 
+Scenes are compositions of Things (Python objects), created and transformed in memory and rendered 
+using the
+[Raspberry PI Minecraft](https://www.minecraft.net/en-us/edition/pi/) [renderer](mcthings/renderers/raspberry_pi.py) implemented using the
+[API](https://www.stuffaboutcode.com/p/minecraft-api-reference.html) (which also works in [Minetest](https://github.com/arpruss/raspberryjammod-minetest)). 
+This renderer is based
+on [mcpi library](https://github.com/martinohanlon/mcpi). More renderers are planned. It follows the pipeline: create and transform in memory (model in memory) and then render.
+ 
 [This is the reference notebook](https://github.com/juntosdesdecasa/minecraft/blob/develop/server/data/python/scene0_10.ipynb)
 with a complete sample. And there is a [intro video tutorial](https://www.youtube.com/watch?v=p6NUFdUbcYk&t=2s) and [a more complete one](https://www.youtube.com/watch?v=teGjAXomBVs&t=4s).
 
