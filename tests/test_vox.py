@@ -31,6 +31,12 @@ class TestVox(TestBaseThing):
         vox.create()
         vox.render()
 
+        # Old format vox converted to new one with MV
+        vox = Vox(Vec3(self.pos.x + 20, self.pos.y, self.pos.z))
+        vox.file_path = "vox/alien_engi1a_flip.vox"
+        vox.create()
+        vox.render()
+
         # Wool colors
         vox = Vox(Vec3(self.pos.x + 5, self.pos.y, self.pos.z + 10))
         vox.file_path = "vox/minecraft_wool.vox"

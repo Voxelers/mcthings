@@ -12,8 +12,8 @@ from mcthings.world import World
 from tests.base import TestBaseThing
 
 
-class TestRotateBlock(TestBaseThing):
-    """ Test to rotate Blocks """
+class TestFlipBlock(TestBaseThing):
+    """ Test to flip Blocks """
 
     def test_build(self):
         World.renderer.post_to_chat("Building two blocks")
@@ -22,36 +22,20 @@ class TestRotateBlock(TestBaseThing):
 
         pos.x += 3
         blocks = Collage(pos)
-        blocks.width = 7
-        blocks.height = 2
-        blocks.length = 3
-        blocks.build()
-
-        pos.x += 15
-        blocks = Collage(pos)
-        blocks.width = 7
-        blocks.height = 2
-        blocks.length = 5
+        blocks.width = 2
+        blocks.height = 1
+        blocks.length = 2
         blocks.create()
-        blocks.rotate(90)
         blocks.render()
 
-        # Check that the blocks start and end point are correct
-        init_blocks = Blocks(blocks.position)
-        init_blocks.height = 5
-        init_blocks.width = 1
-        init_blocks.length = 1
-        init_blocks.build()
-        end_blocks = Blocks(blocks.end_position)
-        end_blocks.height = 5
-        end_blocks.width = 1
-        end_blocks.length = 1
-        end_blocks.build()
-
-        try:
-            blocks.rotate(45)
-        except RuntimeError:
-            logging.info("Detected right Exception for invalid %s degrees", str(45))
+        pos.x += 6
+        blocks = Collage(pos)
+        blocks.width = 2
+        blocks.height = 1
+        blocks.length = 2
+        blocks.create()
+        blocks.flip_x()
+        blocks.render()
 
 
 if __name__ == "__main__":

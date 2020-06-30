@@ -158,6 +158,20 @@ class Thing:
         self._position = init_pos
         self._end_position = end_pos
 
+    def flip_x(self):
+        """
+        Flip x-axis the things using the blocks memory.
+
+        :return:
+        """
+
+        self._blocks_memory.flip_x(self.position)
+
+        # Update the position and end_position after the rotation
+        init_pos, end_pos = self._blocks_memory.find_init_end_pos()
+        self._position = init_pos
+        self._end_position = end_pos
+
     def to_schematic(self, file_path, blocks_data=False):
         """
         Convert the Thing to a Schematic Object

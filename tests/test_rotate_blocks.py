@@ -16,7 +16,7 @@ class TestRotateBlock(TestBaseThing):
     """ Test to rotate Blocks """
 
     def test_build(self):
-        World.renderer.post_to_chat("Building two blocks")
+        World.renderer.post_to_chat("Rotating cuboids")
 
         pos = self.pos
 

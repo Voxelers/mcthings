@@ -97,6 +97,22 @@ class BlocksMemory:
 
         return equal
 
+    def flip_x(self, position):
+        """
+        Flip based on x-axis the blocks in memory using position as base position from which to rotate
+        :param position: base position from which to rotate
+        :return:
+        """
+
+        for block in self.blocks:
+            # Find the x position and flip it
+            width = abs(block.pos.x - position.x)
+            # TODO: the flip could be done in two directions (left or right)
+            # This one the the flip to the right
+            x_flipped = position.x - width
+            block.pos.x = x_flipped
+
+
     def rotate(self, degrees, position):
         """
         Rotate degrees the blocks in memory using position as base position from which to rotate
