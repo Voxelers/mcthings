@@ -7,6 +7,7 @@ import logging
 import unittest
 
 import mcpi.block
+from mcpi.vec3 import Vec3
 
 from mcthings.schematic import Schematic
 from mcthings.world import World
@@ -29,6 +30,20 @@ class TestSchematic(TestBaseThing):
         schematic.change_blocks = {mcpi.block.ICE.id: mcpi.block.GLASS.id}
         schematic.file_path = "schematics/vxs.schematic"
         schematic.build()
+
+        schematic = Schematic(Vec3(pos.x+4, pos.y, pos.z))
+        schematic.file_path = "vox/vxs.schematic"
+        schematic.build()
+
+        schematic = Schematic(Vec3(pos.x+10, pos.y, pos.z))
+        schematic.file_path = "vox/veh_ambulance_mc.schematic"
+        schematic.build()
+
+        schematic = Schematic(Vec3(pos.x+30, pos.y, pos.z))
+        schematic.file_path = "schematics/obj_house6.schematic"
+        schematic.build()
+
+
 
 
 if __name__ == "__main__":

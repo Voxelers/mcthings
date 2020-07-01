@@ -91,13 +91,15 @@ def extract_region_with_data(init_pos, end_pos):
     return blocks_bytes, data_bytes
 
 
-def build_schematic_nbt(init_pos, end_pos, block_data=False):
+def build_schematic_nbt(init_pos, end_pos, block_data=False, memory_data=None):
     """
     Creates a NBT Object with the schematic data
 
     :param init_pos: initial position for extracting the Schematic
     :param end_pos: end position for extracting the Schematic
     :param block_data: extract blocks ids and data (much slower)
+    :param memory_data: get blocks from memory
+
 
     :return: The NBT object with the Schematic
     """
@@ -132,10 +134,13 @@ def build_schematic_nbt(init_pos, end_pos, block_data=False):
     nbtfile.tags.append(tile_entities_list)
 
     # Collect all blocks
-    if block_data:
-        (blocks_bytes, data_bytes) = extract_region_with_data(init_pos, end_pos)
+    if not memory_data:
+        if block_data:
+            (blocks_bytes, data_bytes) = extract_region_with_data(init_pos, end_pos)
+        else:
+            (blocks_bytes, data_bytes) = extract_region(init_pos, end_pos)
     else:
-        (blocks_bytes, data_bytes) = extract_region(init_pos, end_pos)
+        (blocks_bytes, data_bytes) = memory_data.to_nbt()
 
     nbt_blocks.value = blocks_bytes
     nbt_data.value = data_bytes

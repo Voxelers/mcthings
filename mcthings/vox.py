@@ -196,19 +196,7 @@ class Vox(Thing):
         n_voxels = int.from_bytes(n_voxels_bytes, "little")
         for i in range(0, n_voxels):
             self.voxels.append(Voxel(xyzi_chunk.read(4)))
-        """
-        -------------------------------------------------------------------------------
-        # Bytes  | Type       | Value
-        -------------------------------------------------------------------------------
-        4 x 256  | int        | (R, G, B, A) : 1 byte for each component
-                              | * <NOTICE>
-                              | * color [0-254] are mapped to palette index [1-255], e.g : 
-                              | 
-                              | for ( int i = 0; i <= 254; i++ ) {
-                              |     palette[i + 1] = ReadRGBA(); 
-                              | }
-        -------------------------------------------------------------------------------        
-        """
+        # Transform or palette chunk
         transform_chunk = chunk.Chunk(vox_file, bigendian=False)
         if transform_chunk.chunkname.decode("utf-8") == "nTRN":
             vox_file.seek(vox_file.tell() + 4)  # number of children chunks

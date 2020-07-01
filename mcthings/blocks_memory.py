@@ -1,11 +1,12 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author (©): Alvaro del Castillo
-
+import logging
 import math
 
 from mcpi.vec3 import Vec3
+import mcpi.block
 
-from mcthings.utils import size_region, find_min_max_cuboid_vertex
+from mcthings.utils import size_region, find_min_max_cuboid_vertex, build_schematic_nbt
 
 
 class BlockMemory:
@@ -24,6 +25,7 @@ class BlocksMemory:
     def __init__(self):
 
         self.blocks = []
+        self._blocks_pos = {}
 
     def order_blocks(self):
         """ Several operations needs that the blocks are ordered in memory """
@@ -112,7 +114,6 @@ class BlocksMemory:
             x_flipped = position.x - width
             block.pos.x = x_flipped
 
-
     def rotate(self, degrees, position):
         """
         Rotate degrees the blocks in memory using position as base position from which to rotate
@@ -173,3 +174,74 @@ class BlocksMemory:
                 for x in range(0, width):
                     block_pos = Vec3(vertex_min.x + x, vertex_min.y + y, vertex_min.z + z)
                     self.set_block(block_pos, block_id, block_data)
+
+    def _create_blocks_pos(self):
+        logging.info("Creating the memory cache with positions")
+        for block in self.blocks:
+            self._blocks_pos[str(block.pos)] = block
+        logging.info("Done memory cache with positions")
+
+    def find_block_at_pos(self, pos):
+        """
+        Find a block in memory give its position
+        TODO: Improve performance
+
+        :param pos: position for the block
+        :return: the block found or None
+        """
+
+        if not self._blocks_pos:
+            self._create_blocks_pos()
+
+        block_found = None
+        if str(pos) in self._blocks_pos:
+            block_found = self._blocks_pos[str(pos)]
+
+        return block_found
+
+    def to_nbt(self):
+        """
+        Convert the blocks of memory to NBT format for exporting as Schematic
+        The NBT must be a complete cuboid with air in the positions where
+        there are no data in blocks memory.
+
+
+        :return: bytearrays for blocks ids and block data
+        """
+
+        init_pos, end_pos = self.find_init_end_pos()
+
+        size = size_region(init_pos, end_pos)
+
+        blocks_bytes = bytearray()
+        data_bytes = bytearray()
+
+        # Use the same loop than reading Schematic format: x -> z -> y
+        for y in range(0, size.y):
+            for z in range(0, size.z):
+                for x in range(0, size.x):
+                    block_data = 0
+                    block_id = mcpi.block.AIR.id
+                    block_pos = Vec3(init_pos.x + x, init_pos.y + y, init_pos.z + z)
+                    # Find if there is a block at block_pos
+                    mem_block = self.find_block_at_pos(block_pos)
+                    if mem_block:
+                        block_id = mem_block.id
+                        block_data = mem_block.data
+                    blocks_bytes.append(block_id)
+                    data_bytes.append(block_data)
+
+        return blocks_bytes, data_bytes
+
+    def to_schematic(self, file_path):
+        """
+        Convert the blocks memory to a Schematic Object
+
+        :file_path: file in which to export the memory in Schematic format
+        :return: the Schematic object
+        """
+
+        init_pos, end_pos = self.find_init_end_pos()
+
+        build_schematic_nbt(init_pos, end_pos, memory_data=self).write_file(file_path)
+
