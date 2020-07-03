@@ -20,12 +20,28 @@ class TestSchematic(TestBaseThing):
 
     def test_build(self):
 
+
+        # Old format vox converted to new one with MV
+        vox = Vox(Vec3(self.pos.x + 30, self.pos.y, self.pos.z))
+        vox.file_path = "vox/veh_ambulance_mc.vox"
+        vox.create()
+        vox.render()
+
+        return
+
         # New format vox
         vox = Vox(self.pos)
         vox.file_path = "vox/vxs.vox"
         vox.create()
         vox.render()
         vox.to_schematic("schematics/vxs.schematic", True)
+
+        # Old format with default palette
+        vox = Vox(self.pos)
+        vox.file_path = "vox/chr_beardo3-default-palette.schematic"
+        vox.create()
+        vox.flip_x()
+        vox.render()
 
         # Old format vox
         vox = Vox(Vec3(self.pos.x + 10, self.pos.y, self.pos.z))
