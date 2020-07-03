@@ -50,5 +50,8 @@ setup(
         'minecraftstuff',
         'nbt'
     ],
-    python_requires='>=3.4'
+    scripts=[
+          'bin/vox2schematic'
+    ],
+    python_requires='>=3.5'
 )
