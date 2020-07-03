@@ -8,18 +8,14 @@ import unittest
 
 import mcpi
 import mcpi.block
-from mcpi.vec3 import Vec3
 
 from mcthings.block import Block
 from mcthings.decorators.border_decorator import BorderDecorator
-from mcthings.fence import Fence
 from mcthings.house import House
 from mcthings.pyramid import Pyramid
 from mcthings.river import River
-from mcthings.scene import Scene
-from mcthings.town import Town
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestBorderDecorator(TestBaseThing):

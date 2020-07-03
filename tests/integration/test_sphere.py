@@ -11,7 +11,7 @@ import mcpi
 from mcthings.sphere import Sphere
 from mcthings.sphere import SphereHollow
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestSphere(TestBaseThing):

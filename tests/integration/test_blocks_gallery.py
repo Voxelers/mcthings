@@ -6,28 +6,23 @@
 import logging
 import unittest
 
-import mcpi
-
-from mcthings.circle import Circle
+from mcthings.blocks_gallery import BlocksGallery
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
-class TestCircle(TestBaseThing):
-    """Test Circle Thing"""
+class TestBlocksGallery(TestBaseThing):
+    """Test  Thing"""
 
     def test_build(self):
-        World.renderer.post_to_chat("Building a circle")
+        World.renderer.post_to_chat("Building a blocks gallery with all available blocks")
 
         pos = self.pos
 
-        radius = 10
-        pos.z += 20
+        pos.x += 1
 
-        circle = Circle(pos)
-        circle.radius = radius
-        circle.block = mcpi.block.BEDROCK
-        circle.build()
+        gallery = BlocksGallery(pos)
+        gallery.build()
 
 
 if __name__ == "__main__":

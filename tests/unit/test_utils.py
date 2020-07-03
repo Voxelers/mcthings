@@ -6,16 +6,12 @@
 import logging
 import unittest
 
-import mcpi
 from mcpi.vec3 import Vec3
 
-from mcthings.line import Line
 from mcthings.utils import find_min_max_cuboid_vertex
-from mcthings.world import World
-from tests.base import TestBaseThing
 
 
-class TestUtils(TestBaseThing):
+class TestUtils(unittest.TestCase):
     """ Test for the utils library """
 
     def test_cuboid_vertexes(self):

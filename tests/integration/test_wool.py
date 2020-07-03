@@ -6,23 +6,23 @@
 import logging
 import unittest
 
-from mcthings.blocks_gallery import BlocksGallery
+from mcthings.wool import Wool
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
-class TestBlocksGallery(TestBaseThing):
-    """Test  Thing"""
+class TestWool(TestBaseThing):
+    """Test Wool Thing"""
 
     def test_build(self):
-        World.renderer.post_to_chat("Building a blocks gallery with all available blocks")
+        World.renderer.post_to_chat("Building all wool colors")
 
         pos = self.pos
 
         pos.x += 1
 
-        gallery = BlocksGallery(pos)
-        gallery.build()
+        wool = Wool(pos)
+        wool.build()
 
 
 if __name__ == "__main__":

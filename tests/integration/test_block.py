@@ -6,17 +6,18 @@
 import logging
 import unittest
 
+from mcpi.vec3 import Vec3
+
 from mcthings.block import Block
-from mcthings.scene import Scene
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
-class TestScene(TestBaseThing):
-    """Test Scene Thing"""
+class TestBlock(TestBaseThing):
+    """Test Block Thing"""
 
     def test_build(self):
-        World.renderer.post_to_chat("Building a scene")
+        World.renderer.post_to_chat("Building two blocks")
 
         pos = self.pos
 
@@ -24,12 +25,14 @@ class TestScene(TestBaseThing):
         block = Block(pos)
         block.build()
 
-        pos.x += 2
+        assert len(block._blocks_memory.blocks) == 1
+
+        pos.x += 3
         block = Block(pos)
         block.build()
+        block.unbuild()
 
-        pos.y += 1
-        World.first_scene().move(pos)
+        block.move(Vec3(pos.x+5, pos.y, pos.z))
 
 
 if __name__ == "__main__":

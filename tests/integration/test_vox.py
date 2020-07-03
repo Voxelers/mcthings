@@ -6,15 +6,17 @@
 import logging
 import unittest
 
+import mcpi.block
 from mcpi.vec3 import Vec3
 
-from base import TestBaseThing
+from mcthings.schematic import Schematic
 from mcthings.vox import Vox
 from mcthings.world import World
+from integration.base import TestBaseThing
 
 
-class TestVox(TestBaseThing):
-    """Test Vox Thing"""
+class TestSchematic(TestBaseThing):
+    """Test Schematic Thing"""
 
     def test_build(self):
 
@@ -23,7 +25,7 @@ class TestVox(TestBaseThing):
         vox.file_path = "vox/vxs.vox"
         vox.create()
         vox.render()
-        World.first_scene().to_schematic("schematics/vxs.schematic", True)
+        vox.to_schematic("schematics/vxs.schematic", True)
 
         # Old format vox
         vox = Vox(Vec3(self.pos.x + 10, self.pos.y, self.pos.z))

@@ -10,7 +10,7 @@ import mcpi
 
 from mcthings.bridge import Bridge
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestBridge(TestBaseThing):

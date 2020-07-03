@@ -6,12 +6,11 @@
 import logging
 import unittest
 
-from mcpi.block import Block
 from mcpi.vec3 import Vec3
 
 from mcthings.collage import Collage
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestBlocks(TestBaseThing):

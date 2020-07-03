@@ -6,10 +6,9 @@
 import logging
 import unittest
 
-from mcthings.blocks import Blocks
 from mcthings.collage import Collage
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestFlipBlock(TestBaseThing):

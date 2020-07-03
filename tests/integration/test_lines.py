@@ -10,7 +10,7 @@ import mcpi
 
 from mcthings.block import Block
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestLines(TestBaseThing):

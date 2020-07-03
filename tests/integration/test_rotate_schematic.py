@@ -8,7 +8,7 @@ import unittest
 
 from mcthings.schematic import Schematic
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestRotateSchematic(TestBaseThing):

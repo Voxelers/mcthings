@@ -11,7 +11,7 @@ from mcpi.vec3 import Vec3
 
 from mcthings.schematic import Schematic
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestSchematic(TestBaseThing):
@@ -32,18 +32,8 @@ class TestSchematic(TestBaseThing):
         schematic.build()
 
         schematic = Schematic(Vec3(pos.x+4, pos.y, pos.z))
-        schematic.file_path = "vox/vxs.schematic"
+        schematic.file_path = "schematics/veh_ambulance_mc.schematic"
         schematic.build()
-
-        schematic = Schematic(Vec3(pos.x+10, pos.y, pos.z))
-        schematic.file_path = "vox/veh_ambulance_mc.schematic"
-        schematic.build()
-
-        schematic = Schematic(Vec3(pos.x+30, pos.y, pos.z))
-        schematic.file_path = "schematics/obj_house6.schematic"
-        schematic.build()
-
-
 
 
 if __name__ == "__main__":

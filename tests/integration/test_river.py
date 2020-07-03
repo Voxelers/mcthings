@@ -10,7 +10,7 @@ from mcpi.vec3 import Vec3
 
 from mcthings.river import River
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestRiver(TestBaseThing):

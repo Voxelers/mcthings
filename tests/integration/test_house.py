@@ -4,14 +4,13 @@
 # Author (©): Alvaro del Castillo
 
 import logging
-import sys
 import unittest
 
 
 from mcthings.house import House
 from mcthings.decorators.light_decorator import LightDecorator
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestHouse(TestBaseThing):

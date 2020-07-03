@@ -11,7 +11,7 @@ from mcpi.vec3 import Vec3
 
 from mcthings.pyramid import Pyramid, PyramidHollow
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 FLAT_WORLD_GROUND_HEIGHT = 0
 

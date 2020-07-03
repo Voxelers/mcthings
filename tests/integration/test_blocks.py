@@ -4,7 +4,6 @@
 # Author (©): Alvaro del Castillo
 
 import logging
-import sys
 import unittest
 
 import mcpi.block
@@ -13,7 +12,7 @@ from mcpi.vec3 import Vec3
 from mcthings.block import Block
 from mcthings.blocks import Blocks
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class Ve3(object):

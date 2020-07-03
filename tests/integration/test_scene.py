@@ -6,23 +6,29 @@
 import logging
 import unittest
 
-from mcthings.wool import Wool
+from mcthings.block import Block
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
-class TestWool(TestBaseThing):
-    """Test Wool Thing"""
+class TestScene(TestBaseThing):
+    """Test Scene Thing"""
 
     def test_build(self):
-        World.renderer.post_to_chat("Building all wool colors")
+        World.renderer.post_to_chat("Building a scene")
 
         pos = self.pos
 
         pos.x += 1
+        block = Block(pos)
+        block.build()
 
-        wool = Wool(pos)
-        wool.build()
+        pos.x += 2
+        block = Block(pos)
+        block.build()
+
+        pos.y += 1
+        World.first_scene().move(pos)
 
 
 if __name__ == "__main__":

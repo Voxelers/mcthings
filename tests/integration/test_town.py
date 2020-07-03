@@ -12,7 +12,7 @@ from mcthings.decorators.light_decorator import LightDecorator
 
 from mcthings.town import Town
 from mcthings.world import World
-from tests.base import TestBaseThing
+from integration.base import TestBaseThing
 
 
 class TestTown(TestBaseThing):
