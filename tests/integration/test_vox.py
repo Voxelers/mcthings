@@ -23,8 +23,9 @@ class TestSchematic(TestBaseThing):
 
         # Old format vox converted to new one with MV
         vox = Vox(Vec3(self.pos.x + 5, self.pos.y, self.pos.z))
-        vox.file_path = "vox/alien_engi1a.vox"
+        vox.file_path = "vox/obj_house6.vox"
         vox.create()
+        vox.flip_x()
         vox.render()
 
         return

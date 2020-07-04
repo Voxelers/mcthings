@@ -267,7 +267,7 @@ class Vox(Thing):
         self.parse_vox_file()
 
         for voxel in self.voxels:
-            voxel_color = self.palette[voxel.color_index]
+            voxel_color = self.palette[voxel.color_index+1]
             minecraft_color = voxel_color.minecraft()
 
             # y, z are the reverse in vox format
