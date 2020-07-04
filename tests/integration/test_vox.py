@@ -22,8 +22,8 @@ class TestSchematic(TestBaseThing):
 
 
         # Old format vox converted to new one with MV
-        vox = Vox(Vec3(self.pos.x + 30, self.pos.y, self.pos.z))
-        vox.file_path = "vox/veh_ambulance_mc.vox"
+        vox = Vox(Vec3(self.pos.x + 5, self.pos.y, self.pos.z))
+        vox.file_path = "vox/alien_engi1a.vox"
         vox.create()
         vox.render()
 

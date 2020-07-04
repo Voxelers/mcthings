@@ -1,6 +1,8 @@
 # Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
 # Author/s (©): Alvaro del Castillo
 
+from math import sqrt
+
 import chunk
 import logging
 
@@ -20,9 +22,28 @@ class Voxel:
 
 class Color:
     """ RGBA format palette """
+    _color2minecraft = {}  # Cache to convert a color to minecraft color
 
     def __init__(self, hex_str):
         self.hex_str = hex_str
+
+    def rgb(self):
+        red = int(self.hex_str[0:2], 16)
+        green = int(self.hex_str[2:4], 16)
+        blue = int(self.hex_str[4:6], 16)
+
+        return red, green, blue
+
+    def compare(self, color):
+        # https://www.compuphase.com/cmetric.htm
+        r1, g1, b1 = self.rgb()
+        r2, g2, b2 = color.rgb()
+
+        read_mean = (r1 + r2) / 2
+        r = r1 - r2
+        g = g1 - g2
+        b = b1 - b2
+        return sqrt((round((512 + read_mean) * r * r) >> 8) + 4.0 * g * g + (round((767 - read_mean) * b * b) >> 8))
 
     def minecraft(self):
         # https://gaming.stackexchange.com/questions/47212/what-are-the-color-values-for-dyed-wool
@@ -46,29 +67,27 @@ class Color:
         ]
 
         mc_color_number = {}
-        mc_color_hex = {}
+        mc_colors_hex = {}
         for i in range(0, len(mc_colors)):
-            mc_color_number[mc_colors[i][0]] = i
-            mc_color_hex[mc_colors[i][1]] = mc_colors[i][0]
+            mc_color_number[mc_colors[i][1]] = i
+            mc_colors_hex[mc_colors[i][1]] = mc_colors[i][0]
 
-        # TODO: Hack, simple mapping: R, G or B
-        red = int(self.hex_str[0:2], 16)
-        green = int(self.hex_str[2:4], 16)
-        blue = int(self.hex_str[4:6], 16)
-        if red > green and red > blue:
-            color = "Red"
-        elif green > red and green > blue:
-            color = "Green"
-        elif blue > red and blue > green:
-            color = "Blue"
-        else:
-            # All components are the same, let's select Red now
-            color = "Red"
-
-        # Direct mapping
+        # Find the closest Minecraft color
         rgb = self.hex_str[0:6]
-        if rgb in mc_color_hex:
-            color = mc_color_hex[rgb]
+        dist = float('inf')
+        if rgb in mc_colors_hex:
+            # Direct mapping
+            color = rgb
+        elif rgb in Color._color2minecraft:
+            # Color already mapped
+            color = Color._color2minecraft[rgb]
+        else:
+            for mc_color in mc_colors_hex:
+                cdist = self.compare(Color(mc_color))
+                if cdist < dist:
+                    dist = cdist
+                    color = mc_color
+            self._color2minecraft[rgb] = color
 
         return mc_color_number[color]
 
@@ -241,11 +260,10 @@ class Vox(Thing):
                 color = VoxDefaultPalette.palette[i]
                 self.palette.append(Color(str(color)))
 
-
         # Not need the rest of Chunks yet
-        # matt_chunk = chunk.Chunk(vox_file, bigendian=False)
 
     def create(self):
+
         self.parse_vox_file()
 
         for voxel in self.voxels:
