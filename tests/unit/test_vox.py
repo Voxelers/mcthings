@@ -26,6 +26,17 @@ class TestSchematic(unittest.TestCase):
         vox.file_path = "vox/chr_beardo3-default-palette.schematic"
         vox.create()
 
+    # Legacy and actual format
+    #   Number of blocks read
+    #   Palette read correctly
+    #   Block color correct
+    #   Block position correct
+
+
+    # Colors
+    #   comparison
+    #   conversion to minecraft
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')

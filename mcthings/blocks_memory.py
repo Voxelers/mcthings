@@ -27,9 +27,6 @@ class BlocksMemory:
         self.blocks = []
         self._blocks_pos = {}
 
-    def order_blocks(self):
-        """ Several operations needs that the blocks are ordered in memory """
-        # TODO
 
     def add(self, block_memory):
         """
