@@ -207,7 +207,7 @@ class Vox(Thing):
             transform_chunk = chunk.Chunk(vox_file, bigendian=False)
         except EOFError:
             transform_chunk = None
-            logging.info("Legacy vox file with default paletter")
+            logging.info("Legacy vox file with default palette")
         if transform_chunk and transform_chunk.chunkname.decode("utf-8") == "nTRN":
             vox_file.seek(vox_file.tell() + 4)  # number of children chunks
             transform_chunk.skip()
@@ -249,6 +249,7 @@ class Vox(Thing):
             vox_file.seek(vox_file.tell() + 4)  # number of children chunks
         else:
             rgba_chunk = transform_chunk
+            vox_file.seek(vox_file.tell() + 4)  # notice
         if rgba_chunk:
             for i in range(0, round(rgba_chunk.getsize()/4)):
                 # RGBA
@@ -267,7 +268,7 @@ class Vox(Thing):
         self.parse_vox_file()
 
         for voxel in self.voxels:
-            voxel_color = self.palette[voxel.color_index+1]
+            voxel_color = self.palette[voxel.color_index]
             minecraft_color = voxel_color.minecraft()
 
             # y, z are the reverse in vox format
