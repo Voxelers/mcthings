@@ -32,9 +32,9 @@ class Schematic(Thing):
         init_y = self.position.y
         init_z = self.position.z
 
-        self._end_position = Vec3(init_x + size_x,
-                                  init_y + size_y,
-                                  init_z + size_z)
+        self._end_position = Vec3(init_x + size_x - 1,
+                                  init_y + size_y - 1,
+                                  init_z + size_z - 1)
 
         return self.position, self.end_position
 
@@ -59,3 +59,5 @@ class Schematic(Thing):
                     if block_id in self.change_blocks:
                         block_id = self.change_blocks[block_id]
                     self.set_block(block_pos, block_id, block_data)
+
+        init_pos, self._end_position = self.find_bounding_box()

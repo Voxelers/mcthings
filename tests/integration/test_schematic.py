@@ -9,6 +9,7 @@ import unittest
 import mcpi.block
 from mcpi.vec3 import Vec3
 
+from mcthings.blocks import Blocks
 from mcthings.schematic import Schematic
 from mcthings.world import World
 from integration.base import TestBaseThing
@@ -20,6 +21,20 @@ class TestSchematic(TestBaseThing):
     def test_build(self):
         World.renderer.post_to_chat("Loading and building a schematic")
         pos = self.pos
+
+        schematic = Schematic(pos)
+        # 2012: https://www.minecraft-schematics.com/schematic/68/
+        schematic.file_path = "schematics/alien_engi1a.schematic"
+        schematic.build()
+
+        end_blocks = Blocks(schematic.end_position)
+        end_blocks.height = 5
+        end_blocks.width = 1
+        end_blocks.length = 1
+        end_blocks.build()
+
+        return
+
 
         schematic = Schematic(pos)
         # 2012: https://www.minecraft-schematics.com/schematic/68/

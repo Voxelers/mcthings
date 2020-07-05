@@ -23,7 +23,7 @@ class TestSchematic(unittest.TestCase):
 
         # Old format with default palette
         vox = Vox(Vec3(0, 0 ,0))
-        vox.file_path = "vox/chr_beardo3-default-palette.schematic"
+        vox.file_path = "vox/chr_beardo3-default-palette.vox"
         vox.create()
 
     # Legacy and actual format
