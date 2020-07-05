@@ -48,6 +48,10 @@ Things can be built using [MinecraftDrawing](https://minecraft-stuff.readthedocs
 ![Pyramids with Spheres](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/notebooks/img/scene_sphere_circle_pyramid.png)
 
 And Things can also be built from [Schematics](https://www.minecraft-schematics.com/) (there are thousands!). 
-There is a [sample notebook](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/notebooks/Schematics.ipynb).
+There is a [sample notebook](https://github.com/juntosdesdecasa/mcthings_scenes/tree/develop/notebooks/Schematics.ipynb). 
 
 ![Schematic inside McThings](https://raw.githubusercontent.com/juntosdesdecasa/mcthings_scenes/develop/notebooks/img/schematic.png)
+
+And Things can also be created from MagicaVoxel models.
+
+![MagicaVoxel model inside McThings](docs/img/ambulance_mc.png)
