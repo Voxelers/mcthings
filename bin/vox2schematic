@@ -38,6 +38,10 @@ def load_vox_file(vox_file):
     return voxels
 
 
+def print_error(str):
+    sys.stderr.write(str + "\n")
+
+
 def main():
     logging.basicConfig(level=logging.DEBUG, format="[%(asctime)s] - %(message)s")
 
@@ -52,9 +56,14 @@ def main():
     logging.info("Vox input file: %s", vox_file)
     logging.info("Schematic output file: %s", schematic_file)
 
-    voxels = load_vox_file(vox_file)
-    # TODO: Reimplement Thing to schematic to worl always from memory?
-    voxels._blocks_memory.to_schematic(schematic_file)
+    try:
+        voxels = load_vox_file(vox_file)
+        # TODO: Reimplement Thing to schematic to worl always from memory?
+        voxels._blocks_memory.to_schematic(schematic_file)
+    except FileNotFoundError as ex:
+        print_error(str(ex))
+    except RuntimeError as ex:
+        print_error(str(ex))
 
 
 if __name__ == '__main__':
@@ -62,5 +71,5 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         s = "\n\nReceived Ctrl-C or other break signal. Exiting.\n"
-        sys.stderr.write(s)
+        print_error(s)
         sys.exit(0)

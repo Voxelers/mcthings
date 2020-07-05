@@ -166,11 +166,11 @@ class Vox(Thing):
         vox_file = open(self.file_path, "rb")
         vox_chunk = chunk.Chunk(vox_file, bigendian=False)
         chunk_name = vox_chunk.getname().decode("utf-8")
+        if chunk_name != 'VOX ':
+            raise RuntimeError('File %s is not a VOX file' % self.file_path)
         version = vox_chunk.chunksize
         if version != 150:
             raise RuntimeError('File %s has a not supported VOX version %i' % (self.file_path, version))
-        if chunk_name != 'VOX ':
-            raise RuntimeError('File %s is not a VOX file' % self.file_path)
         # Let's read chunks
         """
         2. Chunk Structure
@@ -269,6 +269,8 @@ class Vox(Thing):
             rgba_chunk = transform_chunk
             vox_file.seek(vox_file.tell() + 4)  # notice
         if rgba_chunk:
+            if rgba_chunk.getname().decode("utf-8") != 'RGBA':
+                raise RuntimeError('VOX format not supported (multimodel?)')
             for i in range(0, round(rgba_chunk.getsize()/4)):
                 # RGBA
                 color_bytes = rgba_chunk.read(1) + rgba_chunk.read(1) + rgba_chunk.read(1) + rgba_chunk.read(1)

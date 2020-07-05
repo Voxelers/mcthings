@@ -29,7 +29,7 @@ class TestSchematic(TestBaseThing):
 
         # Old format with default palette
         vox = Vox(self.pos)
-        vox.file_path = "vox/chr_beardo3-default-palette.schematic"
+        vox.file_path = "vox/chr_beardo3-default-palette.vox"
         vox.create()
         vox.flip_x()
         vox.render()
