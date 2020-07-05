@@ -19,22 +19,8 @@ class TestSchematic(TestBaseThing):
     """Test Schematic Thing"""
 
     def test_build(self):
-        World.renderer.post_to_chat("Loading and building a schematic")
+        World.renderer.post_to_chat("Create and render schematics")
         pos = self.pos
-
-        schematic = Schematic(pos)
-        # 2012: https://www.minecraft-schematics.com/schematic/68/
-        schematic.file_path = "schematics/alien_engi1a.schematic"
-        schematic.build()
-
-        end_blocks = Blocks(schematic.end_position)
-        end_blocks.height = 5
-        end_blocks.width = 1
-        end_blocks.length = 1
-        end_blocks.build()
-
-        return
-
 
         schematic = Schematic(pos)
         # 2012: https://www.minecraft-schematics.com/schematic/68/
@@ -44,11 +30,18 @@ class TestSchematic(TestBaseThing):
         # schematic.file_path = "schematics/pyramid_hollow.schematic"
         schematic.change_blocks = {mcpi.block.ICE.id: mcpi.block.GLASS.id}
         schematic.file_path = "schematics/vxs.schematic"
-        schematic.build()
+        schematic.create()
+        schematic.render()
 
         schematic = Schematic(Vec3(pos.x+4, pos.y, pos.z))
         schematic.file_path = "schematics/veh_ambulance_mc.schematic"
         schematic.build()
+
+        schematic = Schematic(Vec3(pos.x-4, pos.y, pos.z))
+        schematic.file_path = "schematics/alien_engi1a.schematic"
+        schematic.create()
+        schematic.flip_x()
+        schematic.render()
 
 
 if __name__ == "__main__":

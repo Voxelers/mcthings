@@ -6,7 +6,7 @@ import math
 from mcpi.vec3 import Vec3
 import mcpi.block
 
-from mcthings.utils import size_region, find_min_max_cuboid_vertex, build_schematic_nbt
+from mcthings.utils import size_region, find_min_max_cuboid_vertex
 
 
 class BlockMemory:
@@ -26,7 +26,6 @@ class BlocksMemory:
 
         self.blocks = []
         self._blocks_pos = {}
-
 
     def add(self, block_memory):
         """
@@ -78,15 +77,14 @@ class BlocksMemory:
 
         return cuboid
 
-    @classmethod
-    def memory_equal(cls, memory):
+    def memory_equal(self):
         """ Check if all the blocks in the memory are equal """
         equal = True
 
-        if memory.blocks:
-            last_block = memory.blocks[0]
+        if self.blocks:
+            last_block = self.blocks[0]
 
-            for block in memory.blocks:
+            for block in self.blocks:
                 if block.id != last_block.id or block.data != last_block.data:
                     equal = False
                     break
@@ -196,7 +194,7 @@ class BlocksMemory:
 
         return block_found
 
-    def to_nbt(self):
+    def to_nbt(self, init_pos, end_pos):
         """
         Convert the blocks of memory to NBT format for exporting as Schematic
         The NBT must be a complete cuboid with air in the positions where
@@ -205,8 +203,6 @@ class BlocksMemory:
 
         :return: bytearrays for blocks ids and block data
         """
-
-        init_pos, end_pos = self.find_init_end_pos()
 
         size = size_region(init_pos, end_pos)
 
@@ -230,6 +226,11 @@ class BlocksMemory:
 
         return blocks_bytes, data_bytes
 
+    def build_schematic(self):
+        init_pos, end_pos = self.find_init_end_pos()
+
+        return self.to_nbt(init_pos, end_pos, self)
+
     def to_schematic(self, file_path):
         """
         Convert the blocks memory to a Schematic Object
@@ -238,7 +239,5 @@ class BlocksMemory:
         :return: the Schematic object
         """
 
-        init_pos, end_pos = self.find_init_end_pos()
-
-        build_schematic_nbt(init_pos, end_pos, memory_data=self).write_file(file_path)
+        self.build_schematic().write_file(file_path)
 

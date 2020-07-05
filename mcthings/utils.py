@@ -140,7 +140,7 @@ def build_schematic_nbt(init_pos, end_pos, block_data=False, memory_data=None):
         else:
             (blocks_bytes, data_bytes) = extract_region(init_pos, end_pos)
     else:
-        (blocks_bytes, data_bytes) = memory_data.to_nbt()
+        (blocks_bytes, data_bytes) = memory_data.to_nbt(init_pos, end_pos)
 
     nbt_blocks.value = blocks_bytes
     nbt_data.value = data_bytes

@@ -44,7 +44,7 @@ class TestUtils(unittest.TestCase):
         size_x = data["Width"].value
         size_y = data["Height"].value
         size_z = data["Length"].value
-        expected_size = Vec3(size_x, size_y, size_z)  # wrong +1 addition
+        expected_size = Vec3(size_x, size_y, size_z)
 
         assert expected_size == size
 
@@ -58,6 +58,7 @@ class TestUtils(unittest.TestCase):
         size = size_region(blocks.position, blocks.end_position)
         assert expected_size == size
 
+    # build_schematic_nbt, extract_region and extract_region_with_data all need the renderer: not unit testing
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')

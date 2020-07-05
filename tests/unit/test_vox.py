@@ -11,31 +11,60 @@ from mcpi.vec3 import Vec3
 from mcthings.vox import Vox
 
 
-class TestSchematic(unittest.TestCase):
-    """Test Schematic Thing"""
+class TestVox(unittest.TestCase):
+    """Test Vox Thing"""
 
-    def test_create(self):
+    def test_parse_vox_file(self):
 
         # Old format
         vox = Vox(Vec3(0, 0 ,0))
         vox.file_path = "vox/alien_engi1a.vox"
-        vox.create()
+        vox.parse_vox_file()
+        assert len(vox.voxels) == 180
+        assert len(vox.palette) == 256
 
         # Old format with default palette
-        vox = Vox(Vec3(0, 0 ,0))
-        vox.file_path = "vox/chr_beardo3-default-palette.vox"
-        vox.create()
+        vox1 = Vox(Vec3(0, 0 ,0))
+        vox1.file_path = "vox/chr_beardo3-default-palette.vox"
+        vox1.parse_vox_file()
+        assert len(vox1.voxels) == 299
+        assert len(vox1.palette) == 255  # 1 color less than before? bug?
 
-    # Legacy and actual format
-    #   Number of blocks read
-    #   Palette read correctly
-    #   Block color correct
-    #   Block position correct
+        # New format
+        vox2 = Vox(Vec3(0, 0 ,0))
+        vox2.file_path = "vox/vxs.vox"
+        vox2.parse_vox_file()
+        assert len(vox2.voxels) == 3
+        assert len(vox2.palette) == 256
 
+    def test_voxel_position(self):
+        vox2 = Vox(Vec3(0, 0 ,0))
+        vox2.file_path = "vox/vxs.vox"
+        vox2.parse_vox_file()
 
-    # Colors
-    #   comparison
-    #   conversion to minecraft
+        # initial position of the voxelers logo
+        #    *  *
+        #     *
+        # Base V block
+        assert vox2.voxels[0].x == 1
+        assert vox2.voxels[0].y == vox2.voxels[0].z == 0
+        # Left V block
+        assert vox2.voxels[1].x == vox2.voxels[1].y == 0
+        assert vox2.voxels[1].z == 1
+        # Right V block
+        assert vox2.voxels[2].x == 2
+        assert vox2.voxels[2].y == 0
+        assert vox2.voxels[2].z == 1
+
+    def test_voxel_color(self):
+        vox2 = Vox(Vec3(0, 0 ,0))
+        vox2.file_path = "vox/vxs.vox"
+        vox2.parse_vox_file()
+
+        # red color: ee0000ff
+        color = vox2.palette[vox2.voxels[0].color_index]
+        assert color.hex_str == 'ee0000ff'
+        assert color.minecraft() == 14  # red
 
 
 if __name__ == "__main__":

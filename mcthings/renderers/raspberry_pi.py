@@ -70,7 +70,7 @@ class RaspberryPi(Renderer):
                 self.server.mc.setBlock(block.pos.x, block.pos.y, block.pos.z, block.id)
 
     def render(self, blocks_memory):
-        if BlocksMemory.memory_equal(blocks_memory) and blocks_memory.is_cuboid():
+        if blocks_memory.memory_equal() and blocks_memory.is_cuboid():
             self.render_cuboid_memory(blocks_memory)
         else:
             self.render_memory(blocks_memory)
