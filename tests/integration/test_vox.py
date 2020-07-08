@@ -25,7 +25,7 @@ class TestSchematic(TestBaseThing):
         vox.file_path = "vox/vxs.vox"
         vox.create()
         vox.render()
-        # vox.to_schematic("schematics/vxs.schematic", True)
+        vox.to_schematic("schematics/vxs.schematic", True)
 
         # Old format with default palette
         vox = Vox(self.pos)
