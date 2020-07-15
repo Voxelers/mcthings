@@ -55,3 +55,6 @@ There is a [sample notebook](https://github.com/juntosdesdecasa/mcthings_scenes/
 And Things can also be created from MagicaVoxel models.
 
 ![MagicaVoxel model inside McThings](docs/img/ambulance_mc.png)
+
+[Minecraft](https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-tools/3020985-mcthings-a-framework-for-creating-scenes-using) 
+and [Minetest](https://forum.minetest.net/viewtopic.php?t=24719) forums pages.
