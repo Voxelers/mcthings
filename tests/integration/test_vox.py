@@ -20,6 +20,12 @@ class TestSchematic(TestBaseThing):
 
     def test_build(self):
 
+        # Glass sphere with the voxelers logo inside: convert to glass block in Minecraft
+        vox = Vox(Vec3(self.pos.x, self.pos.y, self.pos.z-20))
+        vox.file_path = "vox/vxs_glass_ball.vox"
+        vox.create()
+        vox.render()
+
         # New format vox
         vox = Vox(self.pos)
         vox.file_path = "vox/vxs.vox"

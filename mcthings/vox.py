@@ -154,6 +154,7 @@ class Vox(Thing):
     def __init__(self, pos):
         self.voxels = []
         self.palette = []
+        self.materials = []
 
         super().__init__(pos)
 
@@ -204,7 +205,7 @@ class Vox(Thing):
         x = size_chunk.read(4)
         y = size_chunk.read(4)
         z = size_chunk.read(4)
-        # vox_file.seek(vox_file.tell() + 4)  # children chunks
+
         # XYZI voxels
         """
         -------------------------------------------------------------------------------
@@ -271,7 +272,7 @@ class Vox(Thing):
         if rgba_chunk:
             if rgba_chunk.getname().decode("utf-8") != 'RGBA':
                 raise RuntimeError('VOX format not supported (multimodel?)')
-            for i in range(0, round(rgba_chunk.getsize()/4)):
+            for i in range(0, round(rgba_chunk.getsize() / 4)):
                 # RGBA
                 color_bytes = rgba_chunk.read(1) + rgba_chunk.read(1) + rgba_chunk.read(1) + rgba_chunk.read(1)
                 self.palette.append(Color(color_bytes.hex()))
@@ -283,7 +284,53 @@ class Vox(Thing):
                 color = color[::-1]
                 self.palette.append(Color(color))
 
-        # Not need the rest of Chunks yet
+        # Read the materials palette
+        """
+        (4) Material Chunk : "MATL"
+
+        int32	: material id
+        DICT	: material properties
+                    (_type : str) _diffuse, _metal, _glass, _emit
+                    (_weight : float) range 0 ~ 1
+                    (_rough : float)
+                    (_spec : float)
+                    (_ior : float)
+                    (_att : float)
+                    (_flux : float)
+                    (_plastic)
+        """
+        # One material per each color
+        for i in range(0, len(self.palette)):
+            try:
+                materials_chunk = chunk.Chunk(vox_file, bigendian=False)
+                if materials_chunk.getname().decode("utf-8") != 'MATL':
+                    logging.info("Material data not found")
+                    break
+                else:
+                    vox_file.seek(vox_file.tell() + 4)  # number of children chunks
+                    material_id = int.from_bytes(materials_chunk.read(4), "little")
+                    dict_entries_len = int.from_bytes(materials_chunk.read(4), "little")
+                    # Read the _type key from dict
+                    key_str_len = int.from_bytes(materials_chunk.read(4), "little")
+                    key_str = materials_chunk.read(key_str_len).decode('utf-8')
+                    value_str_len = int.from_bytes(materials_chunk.read(4), "little")
+                    value_str = materials_chunk.read(value_str_len).decode('utf-8')
+                    self.materials.append(value_str)
+                    materials_chunk.skip()
+                    if materials_chunk.tell() > materials_chunk.getsize():
+                        vox_file.seek(vox_file.tell() - 1)  # Hack: not sure why skip goes 1 byte more
+            except EOFError:
+                logging.info("Material data not found")
+                break
+
+    @classmethod
+    def find_minecraft_material(cls, material):
+        mc_material = None
+        if material == '_glass':
+            mc_material = mcpi.block.GLASS
+        elif material == '_metal':
+            mc_material = mcpi.block.IRON_BLOCK
+        return mc_material
 
     def create(self):
 
@@ -291,14 +338,21 @@ class Vox(Thing):
 
         for voxel in self.voxels:
             voxel_color = self.palette[voxel.color_index]
+            minecraft_material = None
+            if self.materials:
+                minecraft_material = self.find_minecraft_material(self.materials[voxel.color_index])
             minecraft_color = voxel_color.minecraft()
 
             # y, z are the reverse in vox format
-            self.set_block(Vec3(self.position.x + voxel.x,
-                                self.position.y + voxel.z,
-                                self.position.z + voxel.y
-                                ),
-                                mcpi.block.WOOL.id, minecraft_color)
+            pos = Vec3(self.position.x + voxel.x,
+                       self.position.y + voxel.z,
+                       self.position.z + voxel.y
+                      )
+
+            if minecraft_material:
+                self.set_block(pos, minecraft_material.id)
+            else:
+                self.set_block(pos, mcpi.block.WOOL.id, minecraft_color)
 
         init_pos, end_pos = self._blocks_memory.find_init_end_pos()
         self._end_position = end_pos
