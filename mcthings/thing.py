@@ -125,7 +125,7 @@ class Thing:
         :return:
         """
 
-        self._blocks_memory.unbuild(self._block_empty)
+        self._blocks_memory.fill(self._block_empty)
         self.render()
         self._blocks_memory.blocks = []
 
