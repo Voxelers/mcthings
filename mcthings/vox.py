@@ -151,16 +151,13 @@ class Vox(Thing):
     file_path = None
     """ file path for the MagicaVoxel vox file """
 
-    def __init__(self, pos):
-        self.voxels = []
-        self.palette = []
-        self.materials = []
-
-        super().__init__(pos)
-
     def parse_vox_file(self):
         if not self.file_path:
             RuntimeError("Missing file_path param")
+
+        self.voxels = []
+        self.palette = []
+        self.materials = []
 
         # Read the vox data in RIFF format
         # https://github.com/python/cpython/blob/3.8/Lib/chunk.py
@@ -349,7 +346,9 @@ class Vox(Thing):
                        self.position.z + voxel.y
                       )
 
-            if minecraft_material:
+            if self.block == self._block_empty:
+                self.set_block(pos, self._block_empty)
+            elif minecraft_material:
                 self.set_block(pos, minecraft_material.id)
             else:
                 self.set_block(pos, mcpi.block.WOOL.id, minecraft_color)

@@ -20,18 +20,24 @@ class TestSchematic(TestBaseThing):
 
     def test_build(self):
 
+        # New format vox
+        vox = Vox(Vec3(self.pos.x, self.pos.y, self.pos.z-5))
+        vox.file_path = "vox/vxs.vox"
+        vox.create()
+        assert len(vox._blocks_memory.blocks) == 3
+        vox.render()
+        vox.unbuild()
+        assert len(vox._blocks_memory.blocks) == 0
+        vox.build()
+        assert len(vox._blocks_memory.blocks) == 3
+        vox.to_schematic("schematics/vxs.schematic", True)
+
+
         # Glass sphere with the voxelers logo inside: convert to glass block in Minecraft
         vox = Vox(Vec3(self.pos.x, self.pos.y, self.pos.z-20))
         vox.file_path = "vox/vxs_glass_ball.vox"
         vox.create()
         vox.render()
-
-        # New format vox
-        vox = Vox(self.pos)
-        vox.file_path = "vox/vxs.vox"
-        vox.create()
-        vox.render()
-        vox.to_schematic("schematics/vxs.schematic", True)
 
         # Old format with default palette
         vox = Vox(self.pos)

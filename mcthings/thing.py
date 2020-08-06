@@ -129,6 +129,7 @@ class Thing:
         self.block = self._block_empty
         self._blocks_memory.blocks = []
         self.build()
+        self._blocks_memory.blocks = []
         self.block = block
 
     def move(self, position):
