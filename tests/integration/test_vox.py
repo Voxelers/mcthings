@@ -32,6 +32,12 @@ class TestSchematic(TestBaseThing):
         assert len(vox._blocks_memory.blocks) == 3
         vox.to_schematic("schematics/vxs.schematic", True)
 
+        # Rotate the vox model
+        vox.unbuild()
+        vox.create()
+        vox.rotate(90)
+        vox.render()
+        vox.unbuild()
 
         # Glass sphere with the voxelers logo inside: convert to glass block in Minecraft
         vox = Vox(Vec3(self.pos.x, self.pos.y, self.pos.z-20))

@@ -125,12 +125,9 @@ class Thing:
         :return:
         """
 
-        block = self.block
-        self.block = self._block_empty
+        self._blocks_memory.unbuild(self._block_empty)
+        self.render()
         self._blocks_memory.blocks = []
-        self.build()
-        self._blocks_memory.blocks = []
-        self.block = block
 
     def move(self, position):
         """

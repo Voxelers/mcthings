@@ -109,6 +109,19 @@ class BlocksMemory:
             x_flipped = position.x - width
             block.pos.x = x_flipped
 
+    def unbuild(self, block_empty):
+        """
+        Set block_empty to all blocks in memory in order to
+        unbuild things
+
+        :param block_empty: empty block to be used
+        :return:
+        """
+
+        for block in self.blocks:
+            block.id = block_empty.id
+            block.data = block_empty.data
+
     def rotate(self, degrees, position):
         """
         Rotate degrees the blocks in memory using position as base position from which to rotate
